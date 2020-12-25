@@ -1,11 +1,13 @@
 ---
 name: Ticket
-about: Creating a ticket
+about: Create ticket
 title: ''
 labels: ''
 assignees: ''
 
 ---
+
+* All ticket should be small enough that they can be completed in less than four hours. If not, the ticket should be broken up into smaller tickets
 
 # Description
 
