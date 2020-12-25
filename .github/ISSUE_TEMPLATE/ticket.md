@@ -7,11 +7,10 @@ assignees: ''
 
 ---
 
-* All ticket should be small enough that they can be completed in less than four hours. If not, the ticket should be broken up into smaller tickets
-
 # Description
 
 A description of the ticket
+*All ticket should be small enough that they can be completed in less than four hours. If not, the ticket should be broken up into smaller tickets
 
 # Acceptance Criteria
 
