@@ -1,3 +1,23 @@
+# Volunteer Drivers App - Front-End
+
+## Git Structure
+
+We're going to be using (gitflow)[https://github.com/nvie/gitflow] structure for creating branches and merging. We'll be creating all of our branches off of develop.
+```
+git checkout develop
+``` 
+
+When we want to start working on a ticket
+```
+git checkout develop
+git checkout -b feature/10     (where 10 is the issue number)
+```
+
+Once the feature is completed, you create a pull request to merge into the develop branch.
+
+## Nextjs
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
