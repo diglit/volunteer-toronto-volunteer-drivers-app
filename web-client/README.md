@@ -13,7 +13,19 @@ git checkout develop
 git checkout -b feature/10     (where 10 is the issue number)
 ```
 
-Once the feature is completed, you create a pull request to merge into the develop branch.
+Once the feature is completed, you add to branch
+```
+git add .
+git commit -am 'commit message'
+git push
+```
+
+And then go to https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/pulls and create pull request
+
+Make sure the pull request passes all required tests
+
+## Authors
+Leigh Silverstein
 
 ## Nextjs
 
