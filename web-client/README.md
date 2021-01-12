@@ -27,6 +27,11 @@ Make sure the pull request passes all required tests
 ## Authors
 Leigh Silverstein
 
+## Pull Requests
+
+When you complete tickets and create a pull request for your work, you'll want to add two reviewers from the team, and the dev manager. When the ticket is approved by all three people, you can merge it in.
+
+
 ## Nextjs
 
 
