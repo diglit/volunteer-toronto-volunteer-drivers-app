@@ -3,23 +3,27 @@
 ## Git Structure
 
 We're going to be using (gitflow)[https://github.com/nvie/gitflow] structure for creating branches and merging. We'll be creating all of our branches off of develop.
+
 ```
 git checkout develop
-``` 
+```
 
 When we want to start working on a ticket
+
 ```
 git checkout develop
 git checkout -b feature/10     (where 10 is the issue number)
 ```
 
 Once the feature is completed, you add to branch
+
 ```
 git add .
 git commit -am '#number - commit message'
 git push
 ```
-*#number refers to ticket number*
+
+_#number refers to ticket number_
 
 And then go to https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/pulls and create pull request
 
@@ -28,42 +32,41 @@ Make sure the pull request passes all required tests
 ## Folder Structure
 
 ### Components
+
 /ComponentName
-  index.tsx
-  index.test.tx
-  styles.css
-  utils.ts
-  /ChildComponentName
-    index.tsx
-    ...
+index.tsx
+index.test.tx
+styles.css
+utils.ts
+/ChildComponentName
+index.tsx
+...
 
 /features
-  /featureName
-    /ComponentName
-
+/featureName
+/ComponentName
 
 ## Key Technologies
 
 ### Application State
 
-* redux
-* react-redux
-* @reduxjs/toolkit
+- redux
+- react-redux
+- @reduxjs/toolkit
 
 ### UI
 
-* @material-ui/core
+- @material-ui/core
 
 ## Authors
-Leigh Silverstein
+
+Leigh Silverstein; Wendy Chen
 
 ## Pull Requests
 
 When you complete tickets and create a pull request for your work, you'll want to add two reviewers from the team, and the dev manager. When the ticket is approved by all three people, you can merge it in.
 
-
 ## Nextjs
-
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
