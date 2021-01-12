@@ -25,6 +25,35 @@ And then go to https://github.com/diglit/volunteer-toronto-volunteer-drivers-app
 
 Make sure the pull request passes all required tests
 
+## Folder Structure
+
+### Components
+/ComponentName
+  index.tsx
+  index.test.tx
+  styles.css
+  utils.ts
+  /ChildComponentName
+    index.tsx
+    ...
+
+/features
+  /featureName
+    /ComponentName
+
+
+## Key Technologies
+
+### Application State
+
+* redux
+* react-redux
+* @reduxjs/toolkit
+
+### UI
+
+* @material-ui/core
+
 ## Authors
 Leigh Silverstein
 
