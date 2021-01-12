@@ -60,6 +60,7 @@ Make sure the pull request passes all required tests
 
 ## Authors
 Leigh Silverstein
+Oksana Samokhvalova
 
 ## Pull Requests
 
