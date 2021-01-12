@@ -16,9 +16,10 @@ git checkout -b feature/10     (where 10 is the issue number)
 Once the feature is completed, you add to branch
 ```
 git add .
-git commit -am 'commit message'
+git commit -am '#number - commit message'
 git push
 ```
+*#number refers to ticket number*
 
 And then go to https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/pulls and create pull request
 
