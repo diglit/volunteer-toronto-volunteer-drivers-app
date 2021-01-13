@@ -63,7 +63,8 @@ Make sure the pull request passes all required tests
 Leigh Silverstein \
 Oksana Samokhvalova \
 Wendy Chen \
-Chris Cottier
+Chris Cottier\
+Yinyin Lu
 
 ## Pull Requests
 
