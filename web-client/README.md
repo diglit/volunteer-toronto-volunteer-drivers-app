@@ -68,6 +68,12 @@ Oksana Samokhvalova
 
 When you complete tickets and create a pull request for your work, you'll want to add two reviewers from the team, and the dev manager. When the ticket is approved by all three people, you can merge it in.
 
+## Forms
+
+We're going to be using react-hook-form with yup to handle form submissions
+
+https://react-hook-form.com/
+
 ## Tests
 
 For testing, we're using jest with testing-library (react version). Unlike other testing libraries, it's very opinionated. 
