@@ -43,6 +43,8 @@ Make sure the pull request passes all required tests
   /redux
     /storeKeyName
       index.ts
+      selectors.ts
+      (actions.ts optional)
 
 
 
@@ -86,6 +88,12 @@ https://redux-toolkit.js.org/introduction/quick-start
 https://redux-toolkit.js.org/tutorials/basic-tutorial
 https://redux-toolkit.js.org/usage/usage-guide
 https://redux-toolkit.js.org/usage/usage-with-typescript
+
+### Selectors
+
+We'll be using reselect library to grab data from the redux store. It's useful if you need to modify the data from the store before using it to display information to the end user. It's also a useful tool to make grabbing data from the store a little more consistent.
+
+https://github.com/reduxjs/reselect
 
 ### Middleware
 
