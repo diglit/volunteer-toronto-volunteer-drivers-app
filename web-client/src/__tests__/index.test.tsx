@@ -7,7 +7,7 @@ describe('Index Page', () => {
   test('should render a welcome message', () => {
     const { getByText } = render(<IndexPage />);
 
-    const title = getByText(/welcome/i);
+    const title = getByText('Lightly Opinionated Next App Starter');
 
     expect(title).toBeInTheDocument;
   });

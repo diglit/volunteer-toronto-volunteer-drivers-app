@@ -59,13 +59,45 @@ Make sure the pull request passes all required tests
 * @material-ui/core
 
 ## Authors
-Leigh Silverstein
+
+Leigh Silverstein \
+Oksana Samokhvalova \
+Wendy Chen \
+Chris Cottier\
 Yinyin Lu
 
 ## Pull Requests
 
 When you complete tickets and create a pull request for your work, you'll want to add two reviewers from the team, and the dev manager. When the ticket is approved by all three people, you can merge it in.
 
+## Tests
+
+For testing, we're using jest with testing-library (react version). Unlike other testing libraries, it's very opinionated. 
+
+Generally, I would *avoid* using classnames to find elements, as they're more likely to change. I also find that it's helpful to load as much of the app as possible, which means we're doing mostly integration tests as opposed to unit tests.
+
+https://kentcdodds.com/blog/common-mistakes-with-react-testing-library
+https://testing-library.com/docs/react-testing-library/cheatsheet/
+https://testing-library.com/docs/guide-which-query/
+
+## Redux
+
+I think the guys working on redux toolkit know what's up, so lean heavily on their helper functions. 
+
+Namely createSlice
+
+https://redux-toolkit.js.org/introduction/quick-start
+https://redux-toolkit.js.org/tutorials/basic-tutorial
+https://redux-toolkit.js.org/usage/usage-guide
+https://redux-toolkit.js.org/usage/usage-with-typescript
+
+### Middleware
+
+I've added redux-thunk for api requests
+https://github.com/reduxjs/redux-thunk
+
+and redux-devtools
+https://github.com/reduxjs/redux-devtools
 
 ## Nextjs
 
