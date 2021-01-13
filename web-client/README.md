@@ -59,7 +59,8 @@ Make sure the pull request passes all required tests
 * @material-ui/core
 
 ## Authors
-Leigh Silverstein; Yinyin Lu
+Leigh Silverstein
+Yinyin Lu
 
 ## Pull Requests
 
