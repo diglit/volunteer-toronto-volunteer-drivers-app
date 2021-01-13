@@ -8,7 +8,7 @@ const Home: NextPage = () => {
       <Head>
         <title>Lightly Opinionated Next App Starter</title>
       </Head>
-
+      <h1>Lightly Opinionated Next App Starter</h1>
     </>
   );
 };
