@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import React, {useState} from 'react';
 
+import NavigationButtons from 'shared/components/drivers-registration/NavigationButtons';
 import DriversRegistrationCurrentSlide from '../shared/components/drivers-registration/CurrentSlide';
 
 const DriverRegistration: NextPage = () => {
@@ -31,6 +32,12 @@ const DriverRegistration: NextPage = () => {
             </Head>
             <Container>
                 <DriversRegistrationCurrentSlide currentSlide={currentSlide} />
+                <NavigationButtons
+                currentSlide={currentSlide}
+                numberOfSlides={numberOfSlides}
+                nextSlide={nextSlide}
+                prevSlide={prevSlide} 
+                />
                 {/* Navigation buttons component: conditional Previous/Next/Submit buttons*/}
             </Container>
         </>
