@@ -13,7 +13,8 @@
     "lint:code": "eslint . --ext ts --ext tsx --ext js",
     "lint:css": "stylelint '**/*.ts'",
     "test": "jest",
-    "test-all": "npm-run-all lint type-check test"
+    "test:coverage": "jest --coverage",
+    "test-all": "npm-run-all lint type-check"
   },
   "husky": {
     "hooks": {
