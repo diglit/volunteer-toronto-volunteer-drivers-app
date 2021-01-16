@@ -1,7 +1,7 @@
 const COVERAGE = 80; // test coverage threshold set to 80% 
 
 module.exports = {
-  collectCoverage: true,
+  collectCoverage: false,
   collectCoverageFrom: [
     'src/**/*.{js,ts,tsx}',
     '!**/node_modules/**',

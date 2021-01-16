@@ -14,7 +14,7 @@
     "lint:css": "stylelint '**/*.ts'",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test-all": "npm-run-all lint type-check"
+    "test-all": "npm-run-all lint type-check test"
   },
   "husky": {
     "hooks": {
