@@ -13,3 +13,6 @@ export const store = configureStore({
   devTools: true,
   middleware: [reduxThunk]
 })
+
+// Create RootState type in Root Reducer.
+export type RootState = ReturnType<typeof reducer>

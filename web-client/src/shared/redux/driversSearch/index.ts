@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export interface Driver {
   id: number;
   name: string;
+  email: string;
   licenceClass: string;
   vehicleType: string;
   policeCheck: string;
@@ -19,13 +20,14 @@ export interface DriversSearch {
 const mockDriverData: Driver = {
   id: 1,
   name: 'Pam Lutz',
+  email: '',
   licenceClass: 'A-Z',
   vehicleType: 'Truck',
   policeCheck: 'Last 12 months',
   drivingAbstract: 'Last 12 months',
   willingToLift: 'Up to 50lbs',
   packingAndSorting: 'Yes',
-  riskComfortLevel: ['Contactless Deliveries', 'Low Risk', 'High RIsk'],
+  riskComfortLevel: ['Contactless Deliveries', 'Low Risk', 'High Risk'],
 }
 
 const initialState: DriversSearch = {
