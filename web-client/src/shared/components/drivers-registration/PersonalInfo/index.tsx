@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PersonalInfo = () => {
+const PersonalInfo = (): React.ReactElement => {
     return (
         <div>First Name</div>
     )

@@ -9,7 +9,7 @@ interface Props {
     prevSlide(event: React.MouseEvent): void,
 }
 
-const NavigationButtons = ({currentSlide, numberOfSlides, nextSlide, prevSlide}: Props) => {
+const NavigationButtons = ({currentSlide, numberOfSlides, nextSlide, prevSlide}: Props): React.ReactElement => {
 
     return (
         <>
