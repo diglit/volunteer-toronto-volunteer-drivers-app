@@ -19,7 +19,7 @@ const NavigationButtons = ({currentSlide, numberOfSlides, nextSlide, prevSlide}:
                 color="secondary"
                 variant="contained"
                 onClick={prevSlide}
-                >Previous
+                >Back
                 </Button>
                 :<></> }
 
