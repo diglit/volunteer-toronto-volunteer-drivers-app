@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DriversSearchList = React.memo(function DriversSearchList(){
+const DriversSearchList = React.memo(function DriversSearchList() {
   return null;
 });
 

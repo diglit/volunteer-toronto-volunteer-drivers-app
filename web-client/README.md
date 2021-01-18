@@ -43,6 +43,8 @@ Make sure the pull request passes all required tests
   /redux
     /storeKeyName
       index.ts
+      selectors.ts
+      (actions.ts optional)
 
 
 
@@ -70,6 +72,12 @@ Yinyin Lu
 
 When you complete tickets and create a pull request for your work, you'll want to add two reviewers from the team, and the dev manager. When the ticket is approved by all three people, you can merge it in.
 
+## Forms
+
+We're going to be using react-hook-form with yup to handle form submissions
+
+https://react-hook-form.com/
+
 ## Tests
 
 For testing, we're using jest with testing-library (react version). Unlike other testing libraries, it's very opinionated. 
@@ -90,6 +98,12 @@ https://redux-toolkit.js.org/introduction/quick-start
 https://redux-toolkit.js.org/tutorials/basic-tutorial
 https://redux-toolkit.js.org/usage/usage-guide
 https://redux-toolkit.js.org/usage/usage-with-typescript
+
+### Selectors
+
+We'll be using reselect library to grab data from the redux store. It's useful if you need to modify the data from the store before using it to display information to the end user. It's also a useful tool to make grabbing data from the store a little more consistent.
+
+https://github.com/reduxjs/reselect
 
 ### Middleware
 

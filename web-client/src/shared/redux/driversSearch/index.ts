@@ -4,9 +4,9 @@ const driversSearchSlice = createSlice({
   name: 'driversSearch',
   initialState: {},
   reducers: {
-    increment: state => state,
-    decrement: state => state
-  }
-})
+    increment: (state) => state,
+    decrement: (state) => state,
+  },
+});
 
-export default driversSearchSlice
+export default driversSearchSlice;

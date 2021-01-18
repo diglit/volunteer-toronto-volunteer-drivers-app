@@ -5,11 +5,11 @@ import reduxThunk from 'redux-thunk';
 import driversSearchSlice from './driversSearch';
 
 const reducer = combineReducers({
-  driversSearch: driversSearchSlice.reducer
-})
+  driversSearch: driversSearchSlice.reducer,
+});
 
 export const store = configureStore({
   reducer,
   devTools: true,
-  middleware: [reduxThunk]
-})
+  middleware: [reduxThunk],
+});
