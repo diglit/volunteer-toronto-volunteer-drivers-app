@@ -38,7 +38,6 @@ const DriversSearchList = React.memo(function DriversSearchList() {
   const driversList: Driver[] = useSelector(
     (state: RootState) => state.driversSearch.drivers,
   );
-  console.log(driversList);
 
   return (
     <div>
