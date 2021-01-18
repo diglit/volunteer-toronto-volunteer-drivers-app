@@ -94,14 +94,14 @@ const LoginPage: NextPage = () => {
           </Grid>
           <Grid item xs={12}>
             <Typography>
-              <Link href="#" onClick={e => { e.target.preventDefault }}>
+              <Link href="#">
                 Forget your password?
                 </Link>
             </Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography>
-              <Link href="/signup" onClick={e => { e.target.preventDefault }}>
+              <Link href="/signup">
                 Apply to Drive!
                 </Link>
             </Typography>
