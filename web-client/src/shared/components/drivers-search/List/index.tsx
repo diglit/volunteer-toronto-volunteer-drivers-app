@@ -11,8 +11,6 @@ type DriverCardProps = {
 };
 
 const DriverCard = ({ driverInfo }: DriverCardProps): JSX.Element => {
-  console.log(driverInfo);
-  console.log(driverInfo.name);
   return (
     <Card>
       <CardContent>
