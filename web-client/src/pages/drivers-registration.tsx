@@ -14,12 +14,12 @@ const DriverRegistration: NextPage = () => {
     const [currentSlide,setCurrentSlide] = useState(1);
     const numberOfSlides = 5;
 
-    const nextSlide = (event: React.ChangeEvent): void =>{
+    const nextSlide = (event: React.MouseEvent): void =>{
         event.stopPropagation();
         setCurrentSlide(currentSlide + 1);
     }
 
-    const prevSlide = (event: React.ChangeEvent): void =>{
+    const prevSlide = (event: React.MouseEvent): void =>{
         event.stopPropagation();
         setCurrentSlide(currentSlide - 1);
     }
@@ -38,7 +38,6 @@ const DriverRegistration: NextPage = () => {
                 nextSlide={nextSlide}
                 prevSlide={prevSlide} 
                 />
-                {/* Navigation buttons component: conditional Previous/Next/Submit buttons*/}
             </Container>
         </>
     )
