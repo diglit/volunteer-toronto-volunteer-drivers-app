@@ -21,7 +21,7 @@ const NavigationButtons = ({currentSlide, numberOfSlides, nextSlide, prevSlide}:
                 onClick={prevSlide}
                 >Back
                 </Button>
-                :<></> }
+                :null }
 
                 {currentSlide < numberOfSlides ? 
                 <Button
@@ -30,13 +30,13 @@ const NavigationButtons = ({currentSlide, numberOfSlides, nextSlide, prevSlide}:
                 onClick={nextSlide}
                 >Next
                 </Button>
-                : <></> }
+                : null }
 
                 {currentSlide === numberOfSlides ?
                 <Button
 
                 >Submit</Button>
-                :<></> }
+                : null }
 
                 
 
