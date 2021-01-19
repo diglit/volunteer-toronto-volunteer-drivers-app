@@ -25,8 +25,9 @@ require('../../../../../public/mocks/index');
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchDrivers,
-  selectDrivers,
-} from '../../../redux/driversSearch/drivers';
+  selectDrivers
+} from '../../../redux/driversSearch';
+
 
 const DriversSearchFilters: NextPage = React.memo(function DriversSearchFilters() {
   const dispatch = useDispatch();
@@ -61,7 +62,7 @@ const DriversSearchFilters: NextPage = React.memo(function DriversSearchFilters(
     console.log('has errors');
   }
   // OKSANA: State originating from redux store after POST update REST request 
-  console.log(drivers, 'drivers');
+  console.log(drivers, 'drivers list');
 
   // ALL FILTERS
   // OKSANA TO DO: to pack all filters in one piece of state
