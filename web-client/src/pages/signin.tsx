@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 import React from 'react';
-import SignInPage from "../shared/components/sigin-in-page/SignInPage/SignInPage";
+import SignInPage from "../shared/components/SignInPage";
 
 const Home: NextPage = () => {
   return (
