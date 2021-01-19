@@ -3,9 +3,12 @@ import { combineReducers } from 'redux';
 import reduxThunk from 'redux-thunk';
 
 import driversSearchSlice from './driversSearch';
+import driversSlice from './driversSearch/drivers';
 
 const reducer = combineReducers({
   driversSearch: driversSearchSlice.reducer,
+  //OKSANA: this slice is making an API call
+  driversSlice,
 });
 
 export const store = configureStore({

@@ -1,14 +1,17 @@
-import React, { ReactNode } from 'react'
-import Link from 'next/link'
-import Head from 'next/head'
-import { Container } from '@material-ui/core'
+import React, { ReactNode } from 'react';
+import Link from 'next/link';
+import Head from 'next/head';
+import { Container } from '@material-ui/core';
 
 type Props = {
-    children?: ReactNode
-    title?: string
-}
+    children?: ReactNode;
+    title?: string;
+};
 
-const Layout: React.FunctionComponent<Props> = ({ children, title = 'Drivers App(default title)' }: Props) => {
+const Layout: React.FunctionComponent<Props> = ({
+    children,
+    title = 'Drivers App(default title)',
+}: Props) => {
     return (
         <div>
             <Head>
@@ -27,15 +30,13 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'Drivers App
                         </Link>
                     </nav>
                 </header>
-                <main>
-                    {children}
-                </main>
+                <main>{children}</main>
                 <footer>
                     <span>I am a stylish footer</span>
                 </footer>
             </Container>
         </div>
-    )
-}
+    );
+};
 
-export default Layout
+export default Layout;

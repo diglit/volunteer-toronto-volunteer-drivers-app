@@ -67,7 +67,28 @@ export const languageFilterdata = [
     { G: false }
   ];
 
+  export const vehicleTypeFilterdata = [
+    { "Car": false },
+    { "Truck": false },
+    { "Van": false },
+    { "Cargo Van": false },
+    { "Cube Van": false }
+  ];
+
+  export const insurancePolicyFilterdata = [
+    { "Up to $1 Million": false },
+    { "Up to $2 Million": false },
+  ];
+
+
+  export const willingToLiftFilterdata = [
+    { "Up to 30lb": false },
+    { "Up to 50lb": false },
+  ];
+
+
   export const packingSortingFilterdata = [
     { "Packing": false },
-    { "Sorting": false }
+    { "Sorting": false },
+    { "Both": false }
   ];

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 // import { Container } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
@@ -7,46 +7,52 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
-import FormLabel from "@material-ui/core/FormLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 interface FilterState {
-    // item: boolean,
     [index: number]: { item: boolean };
 }
 
 type Props = {
-    title?: string,
-    state: FilterState[],
-    handleChange?: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void
-}
+    title?: string;
+    state: FilterState[];
+    handleChange?: (
+        event: React.ChangeEvent<HTMLInputElement>,
+        checked: boolean,
+    ) => void;
+};
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             width: '70%',
-            // border: "1px black solid"
         },
         heading: {
             fontSize: theme.typography.pxToRem(15),
             fontWeight: theme.typography.fontWeightRegular,
         },
-        listItem: {
+        accSummary: {
             backgroundColor: '#DDDDDD',
-            borderRadius: "5px",
-            margin: "10px"
+            borderRadius: '5px',
+            width: '500px',
+            margin: '10px',
         },
         button: {
-            width: "100%",
-            borderRadius: "0px"
+            width: '100%',
+            borderRadius: '0px',
         },
     }),
 );
 
-const FilterAccordion: React.FunctionComponent<Props> = ({ title, state, handleChange }: Props) => {
+// OKSANA TO DO: change Accordion to a controlled accordion
+const FilterAccordion: React.FunctionComponent<Props> = ({
+    title,
+    state,
+    handleChange,
+}: Props) => {
     const classes = useStyles();
 
     return (
@@ -55,6 +61,7 @@ const FilterAccordion: React.FunctionComponent<Props> = ({ title, state, handleC
                 <Accordion>
                     <FormLabel component="legend">
                         <AccordionSummary
+                            className={classes.accSummary}
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
@@ -65,7 +72,7 @@ const FilterAccordion: React.FunctionComponent<Props> = ({ title, state, handleC
                     <FormGroup>
                         <AccordionDetails>
                             <ul>
-                                {state.map((item: any) => {
+                                {state.map((item: any) => { // eslint-disable-line
                                     const language = Object.keys(item)[0];
                                     const isChecked = item[language];
                                     return (
@@ -92,8 +99,7 @@ const FilterAccordion: React.FunctionComponent<Props> = ({ title, state, handleC
                 </Accordion>
             </FormControl>
         </>
-    )
+    );
+};
 
-}
-
-export default FilterAccordion
+export default FilterAccordion;
