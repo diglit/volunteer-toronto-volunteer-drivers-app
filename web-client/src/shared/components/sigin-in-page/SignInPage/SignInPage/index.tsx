@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useForm } from 'react-hook-form';
 // MUI Core
 import { Typography, Link, TextField, Grid, Container, Button } from '@material-ui/core';
-
+import styles from './SignInPage.module.scss'
 
 interface FormData {
   username: string;
@@ -36,8 +36,9 @@ const SignInPage: NextPage = () => {
   })
 
   return (
-    <Container maxWidth="xs">
-      <Grid container spacing={3}>
+    <Container className={styles.container} maxWidth="xs">
+
+      <Grid className={styles.header} container spacing={3} >
         <Grid item xs>
           <Typography variant='h6'>
             Welcome to Volunteer Driver Search
@@ -54,7 +55,7 @@ const SignInPage: NextPage = () => {
       <form onSubmit={onSubmit}>
         <Grid container spacing={3}>
           <Grid item xs>
-            <Grid container spacing={3}>
+            <Grid container spacing={1}>
               <Grid item xs={12}>
                 <Typography >
                   Sign in
@@ -91,20 +92,24 @@ const SignInPage: NextPage = () => {
             >
               Sign In
             </Button>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography>
-              <Link href="#">
-                Forget your password?
+          </Grid >
+          <Grid className={styles.links} container >
+
+
+            <Grid item xs={12}>
+              <Typography>
+                <Link href="#">
+                  Forget your password?
                 </Link>
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography>
-              <Link href="/signup">
-                Apply to Drive!
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography>
+                <Link href="/signup">
+                  Apply to Drive!
                 </Link>
-            </Typography>
+              </Typography>
+            </Grid>
           </Grid>
         </Grid>
       </form>
