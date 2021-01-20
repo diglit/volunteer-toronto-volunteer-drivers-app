@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NextPage } from 'next';
 // data for populating checkboxes
 import {
+  DefaultValue,
   languageFilterdata,
   locationFilterdata,
   availabilityFilterdata,
@@ -13,7 +14,7 @@ import {
   packingSortingFilterdata,
   insurancePolicyFilterdata,
   willingToLiftFilterdata,
-} from './filterData';
+} from './defaultValues';
 // Material UI components
 import Button from '@material-ui/core/Button';
 // Components
@@ -98,7 +99,7 @@ const DriversSearchFilters: NextPage = React.memo(function DriversSearchFilters(
 
   const handleFilterChange = (
     event: React.ChangeEvent<HTMLInputElement>,
-    state: any, // eslint-disable-line
+    state: DefaultValue[],
     setState: any, // eslint-disable-line
   ) => {
     const newState = [...state];
