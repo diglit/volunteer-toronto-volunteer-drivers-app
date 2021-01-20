@@ -10,9 +10,10 @@
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write **/*.{js,ts,tsx}",
     "lint": "npm-run-all lint:code lint:css",
-    "lint:code": "eslint . --ext ts --ext tsx --ext js",
+    "lint:code": "eslint . --ext ts --ext tsx --ext js --max-warnings=0",
     "lint:css": "stylelint '**/*.ts'",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "test-all": "npm-run-all lint type-check test"
   },
   "husky": {

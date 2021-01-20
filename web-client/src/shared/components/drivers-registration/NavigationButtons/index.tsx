@@ -1,0 +1,50 @@
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup'; 
+
+interface Props {
+    currentSlide: number,
+    numberOfSlides: number,
+    nextSlide(event: React.MouseEvent): void,
+    prevSlide(event: React.MouseEvent): void,
+}
+
+const NavigationButtons = ({currentSlide, numberOfSlides, nextSlide, prevSlide}: Props): React.ReactElement => {
+
+    return (
+        <>
+            <ButtonGroup size="large">
+                {currentSlide > 1 ?
+                <Button
+                color="secondary"
+                variant="contained"
+                onClick={prevSlide}
+                >Back
+                </Button>
+                :null }
+
+                {currentSlide < numberOfSlides ? 
+                <Button
+                color="primary"
+                variant="contained"
+                onClick={nextSlide}
+                >Next
+                </Button>
+                : null }
+
+                {currentSlide === numberOfSlides ?
+                <Button
+
+                >Submit</Button>
+                : null }
+
+                
+
+
+
+            </ButtonGroup>
+        </>
+    )
+}
+
+export default NavigationButtons;
