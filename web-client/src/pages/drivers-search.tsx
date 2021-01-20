@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Hello drivers</title>
+        <title>Search for volunteer drivers</title>
       </Head>
       <Container>
         <DriversSearchFilters />
