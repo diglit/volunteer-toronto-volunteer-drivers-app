@@ -1,5 +1,29 @@
 # Volunteer Drivers App - Front-End
 
+## Developer Environment
+
+### Operating System
+
+We recommend developing on a mac, or a linux based operating system like Ubuntu or Mint, or setting up WSL on your windows computer.
+
+WSL: https://docs.microsoft.com/en-us/windows/wsl/install-win10
+Dual Boot: https://itsfoss.com/install-ubuntu-1404-dual-boot-mode-windows-8-81-uefi/
+
+### IDE
+
+We recommend using vscode as your interactive development environment (IDE).
+
+https://code.visualstudio.com/download
+
+
+### Shell Scripts
+
+You can use what ever you want here to run shell scripts. It can be your operating system's base terminal system, or something else (I use iterm2 on my mac).
+
+One thing I like to setup is git autocomplete to make it easier to switch branches.
+
+Mac zsh: https://oliverspryn.medium.com/adding-git-completion-to-zsh-60f3b0e7ffbc
+
 ## Git Structure
 
 We're going to be using (gitflow)[https://github.com/nvie/gitflow] structure for creating branches and merging. We'll be creating all of our branches off of develop.
