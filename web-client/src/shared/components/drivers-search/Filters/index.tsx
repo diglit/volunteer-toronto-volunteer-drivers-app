@@ -19,7 +19,6 @@ import {
 import Button from '@material-ui/core/Button';
 // Components
 import FilterAccordion from '../FilterAccordion';
-import Layout from '../Layout';
 // API mock file necessary for the API call to run
 require('../../../../../public/mocks/index');
 // REDUX
@@ -188,95 +187,93 @@ const DriversSearchFilters: NextPage = React.memo(function DriversSearchFilters(
   return (
     // OKSANA TO DO: refactor this to map over one global state with all filters
     <>
-      <Layout>
-        <h1>Driver Filters</h1>
-        <ul>
-          <li>
-            <FilterAccordion
-              handleChange={handleLanguageChange}
-              state={languageFilter}
-              title="Language(s)"
-            />
-          </li>
-          <li>
-            <FilterAccordion
-              handleChange={handleLocationChange}
-              state={locationFilter}
-              title="Location"
-            />
-          </li>
-          <li>
-            <FilterAccordion
-              handleChange={handleAvailabilityChange}
-              state={availabilityFilter}
-              title="Availability"
-            />
-          </li>
-          <li>
-            <FilterAccordion
-              handleChange={handleComfortLevelChange}
-              state={comfortLevelFilter}
-              title="Comfort Level"
-            />
-          </li>
-          <li>
-            <FilterAccordion
-              handleChange={handlePoliceCheckChange}
-              state={policeCheckFilter}
-              title="Police Check"
-            />
-          </li>
-          <li>
-            <FilterAccordion
-              handleChange={handleDrivingAbstractChange}
-              state={drivingAbstractFilter}
-              title="Driving Abstract"
-            />
-          </li>
-          <li>
-            <FilterAccordion
-              handleChange={handleLicenseClassChange}
-              state={licenseClassFilter}
-              title="License Class"
-            />
-          </li>
-          <li>
-            <FilterAccordion
-              handleChange={handleVehicleTypeChange}
-              state={vehicleTypeFilter}
-              title="Vehicle Type"
-            />
-          </li>
-          <li>
-            <FilterAccordion
-              handleChange={handleInsurancePolicyChange}
-              state={insurancePolicyFilter}
-              title="Insurance Policy"
-            />
-          </li>
-          <li>
-            <FilterAccordion
-              handleChange={handleWillingToLiftChange}
-              state={willingToLiftFilter}
-              title="Willing to Lift"
-            />
-          </li>
-          <li>
-            <FilterAccordion
-              handleChange={handlePackingSortingChange}
-              state={packingSortingFilter}
-              title="Packing and Sorting"
-            />
-          </li>
-        </ul>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleDriverSearch}
-        >
-          Search
-        </Button>
-      </Layout>
+      <h1>Driver Filters</h1>
+      <ul>
+        <li>
+          <FilterAccordion
+            handleChange={handleLanguageChange}
+            state={languageFilter}
+            title="Language(s)"
+          />
+        </li>
+        <li>
+          <FilterAccordion
+            handleChange={handleLocationChange}
+            state={locationFilter}
+            title="Location"
+          />
+        </li>
+        <li>
+          <FilterAccordion
+            handleChange={handleAvailabilityChange}
+            state={availabilityFilter}
+            title="Availability"
+          />
+        </li>
+        <li>
+          <FilterAccordion
+            handleChange={handleComfortLevelChange}
+            state={comfortLevelFilter}
+            title="Comfort Level"
+          />
+        </li>
+        <li>
+          <FilterAccordion
+            handleChange={handlePoliceCheckChange}
+            state={policeCheckFilter}
+            title="Police Check"
+          />
+        </li>
+        <li>
+          <FilterAccordion
+            handleChange={handleDrivingAbstractChange}
+            state={drivingAbstractFilter}
+            title="Driving Abstract"
+          />
+        </li>
+        <li>
+          <FilterAccordion
+            handleChange={handleLicenseClassChange}
+            state={licenseClassFilter}
+            title="License Class"
+          />
+        </li>
+        <li>
+          <FilterAccordion
+            handleChange={handleVehicleTypeChange}
+            state={vehicleTypeFilter}
+            title="Vehicle Type"
+          />
+        </li>
+        <li>
+          <FilterAccordion
+            handleChange={handleInsurancePolicyChange}
+            state={insurancePolicyFilter}
+            title="Insurance Policy"
+          />
+        </li>
+        <li>
+          <FilterAccordion
+            handleChange={handleWillingToLiftChange}
+            state={willingToLiftFilter}
+            title="Willing to Lift"
+          />
+        </li>
+        <li>
+          <FilterAccordion
+            handleChange={handlePackingSortingChange}
+            state={packingSortingFilter}
+            title="Packing and Sorting"
+          />
+        </li>
+      </ul>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleDriverSearch}
+      >
+        Search
+      </Button>
     </>
   );
 });
