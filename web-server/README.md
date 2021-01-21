@@ -6,7 +6,7 @@ BEFORE YOU DO ANYTHING ELSE: Please read the README.md file in the root director
 
 ## Dev Setup
 
-Make sure python and poetry are installed.
+Make sure python, black and poetry are installed. Set up your text editor / IDE to run black on save for consistency
 
 - `cd` into the project directory
 - `poetry install`
