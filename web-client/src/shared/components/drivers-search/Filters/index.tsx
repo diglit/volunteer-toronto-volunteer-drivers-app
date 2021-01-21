@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NextPage } from 'next';
 // data for populating checkboxes
 import {
-  DefaultValue,
+  DefaultValues,
   languageFilterdata,
   locationFilterdata,
   availabilityFilterdata,
@@ -98,15 +98,13 @@ const DriversSearchFilters: NextPage = React.memo(function DriversSearchFilters(
 
   const handleFilterChange = (
     event: React.ChangeEvent<HTMLInputElement>,
-    state: DefaultValue[],
+    state: DefaultValues,
     setState: any, // eslint-disable-line
   ) => {
-    const newState = [...state];
-    newState.forEach((object) => {
-      return Object.keys(object)[0] === event.target.name
-        ? (object[event.target.name] = event.target.checked)
-        : null;
-    });
+    const newState = { ...state };
+    for (const prop in newState) {
+      prop === event.target.name ? (newState[prop] = event.target.checked) : null
+    }
     setState(newState);
   };
 

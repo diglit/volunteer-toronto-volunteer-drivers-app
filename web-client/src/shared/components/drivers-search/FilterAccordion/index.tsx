@@ -11,20 +11,19 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { DefaultValue } from '../Filters/defaultValues'
+import { DefaultValues } from '../Filters/defaultValues'
 
-// interface FilterState {
-//     [index: number]: { item: boolean };
-// }
 
 type Props = {
     title: string;
-    state: DefaultValue[];
+    state: DefaultValues;
     handleChange: (
         event: React.ChangeEvent<HTMLInputElement>,
         checked: boolean,
     ) => void;
 };
+
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -73,11 +72,11 @@ const FilterAccordion: React.FunctionComponent<Props> = ({
                     <FormGroup>
                         <AccordionDetails>
                             <ul>
-                                {state.map((item: any) => { // eslint-disable-line
-                                    const language = Object.keys(item)[0];
-                                    const isChecked = item[language];
+                                {Object.keys(state).map((item: string) => {
+                                    const property = item;
+                                    const isChecked = state[property];
                                     return (
-                                        <li key={language}>
+                                        <li key={property}>
                                             <FormControlLabel
                                                 control={
                                                     <Checkbox
@@ -85,11 +84,11 @@ const FilterAccordion: React.FunctionComponent<Props> = ({
                                                         onChange={handleChange}
                                                         inputProps={{ 'aria-label': 'primary checkbox' }}
                                                         color="primary"
-                                                        name={language}
-                                                        value={language}
+                                                        name={property}
+                                                        value={property}
                                                     />
                                                 }
-                                                label={language}
+                                                label={property}
                                             />
                                         </li>
                                     );
