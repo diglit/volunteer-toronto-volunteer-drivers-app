@@ -41,7 +41,7 @@ const initialState: DriversState = {
 
 
 // A slice for drivers with three reducers
-const driversSlice = createSlice({
+const driversSearchSlice = createSlice({
   name: 'drivers',
   initialState,
   reducers: {
@@ -61,10 +61,10 @@ const driversSlice = createSlice({
 });
 
 // Actions generated from the drivers slice
-export const { getDrivers, getDriversSuccess, getDriversFailure } = driversSlice.actions;
+export const { getDrivers, getDriversSuccess, getDriversFailure } = driversSearchSlice.actions;
 
 // Export state for using in useSelector 
-export const selectDrivers = (state: any) => state.driversSlice; // eslint-disable-line
+export const selectDrivers = (state: any) => state.driversSearchSlice; // eslint-disable-line
 
 export const fetchDrivers = createAsyncThunk(
   'drivers/fetchDrivers',
@@ -89,4 +89,4 @@ export const fetchDrivers = createAsyncThunk(
   }
 );
 
-export default driversSlice.reducer;
+export default driversSearchSlice.reducer;
