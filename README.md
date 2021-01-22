@@ -1,7 +1,7 @@
 
 # Installation of Swagger/drf-yasg REQUIRED
 
-	[Full instructions ](https://github.com/axnsan12/drf-yasg)
+	Full instructions: https://github.com/axnsan12/drf-yasg
 	Quick Start
 		1. pip install -U drf-yasg
 		
