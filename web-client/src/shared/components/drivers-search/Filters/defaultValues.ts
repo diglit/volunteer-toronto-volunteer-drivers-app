@@ -1,8 +1,9 @@
 export interface DefaultValues {
   [name: string]: boolean | undefined
 }
-
-
+export interface AllFilters {
+  [name: string]: DefaultValues
+}
 
 export const languageFilterdata: DefaultValues = {
   English: false,
@@ -98,3 +99,18 @@ export const packingSortingFilterdata: DefaultValues = {
   "Sorting": false,
   "Both": false
 };
+
+
+export const globalFilterData: AllFilters = {
+  "Language(s)": languageFilterdata,
+  "Location": locationFilterdata,
+  "Availability": availabilityFilterdata,
+  "Comfort Level": comfortLevelFilterdata,
+  "Police Check": policeCheckFilterdata,
+  "Driving Abstract": drivingAbstractFilterdata,
+  "License Class": licenseClassFilterdata,
+  "Vehicle Type": vehicleTypeFilterdata,
+  "Insurance Policy": insurancePolicyFilterdata,
+  "Willing to Lift": willingToLiftFilterdata,
+  "Packing and Sorting": packingSortingFilterdata,
+}
