@@ -4,6 +4,6 @@
 	Quick Start
 		1. pip install -U drf-yasg
 		
-# Acces 
+# Access 
 	[YOUR_ALLOWED_HOST]/swagger
 	ex: http://192.168.2.26:8000/swagger/

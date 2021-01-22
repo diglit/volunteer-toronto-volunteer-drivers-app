@@ -24,7 +24,13 @@ schema_view = get_schema_view(
     openapi.Info(
         title="Snippets API",
         default_version='v1',
-        description="Test description",
+        description=
+            "Swagger is a tool used to understand the capabilities of the "+ 
+            "service without access to source code, documentation, or through "+
+            "network traffic inspection. In simple terms, with swagger you "+
+            "can see what all API end points are available for a web "+
+            "application. You can use swagger for testing the requests and "+
+            "responses of the API endpoints.",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="contact@snippets.local"),
         license=openapi.License(name="BSD License"),
@@ -37,5 +43,5 @@ urlpatterns = [
     path("admin/", admin.site.urls), path("", include("driving.urls")),
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),    
+    url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
