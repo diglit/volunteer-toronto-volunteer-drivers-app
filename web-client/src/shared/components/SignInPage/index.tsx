@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useForm } from 'react-hook-form';
 // MUI Core
 import { Typography, Link, TextField, Grid, Container, Button } from '@material-ui/core';
-import styles from './SignInPage.module.scss'
+import styles from './index.module.scss'
 
 interface FormData {
   username: string;
@@ -65,6 +65,7 @@ const SignInPage: NextPage = () => {
                   inputRef={register({ required: true })}
                   label="Username"
                   name="username"
+                  id="username"
                   variant="filled"
                 />
               </Grid>
@@ -77,6 +78,7 @@ const SignInPage: NextPage = () => {
                   inputRef={register({ required: true })}
                   label="Password"
                   name="password"
+                  id="password"
                   type="password"
                   variant="filled"
                 />
