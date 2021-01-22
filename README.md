@@ -1,3 +1,4 @@
+
 # Installation of Swagger/drf-yasg REQUIRED
 
 	[Full instructions ](https://github.com/axnsan12/drf-yasg)
