@@ -1,53 +1,8 @@
 # Volunteer Drivers App - Front-End
 
-## Developer Environment
+## General Principles
 
-### Operating System
-
-We recommend developing on a mac, or a linux based operating system like Ubuntu or Mint, or setting up WSL on your windows computer.
-
-WSL: https://docs.microsoft.com/en-us/windows/wsl/install-win10
-Dual Boot: https://itsfoss.com/install-ubuntu-1404-dual-boot-mode-windows-8-81-uefi/
-
-### IDE
-
-We recommend using vscode as your interactive development environment (IDE).
-
-https://code.visualstudio.com/download
-
-
-### Shell Scripts
-
-You can use what ever you want here to run shell scripts. It can be your operating system's base terminal system, or something else (I use iterm2 on my mac).
-
-One thing I like to setup is git autocomplete to make it easier to switch branches.
-
-Mac zsh: https://oliverspryn.medium.com/adding-git-completion-to-zsh-60f3b0e7ffbc
-
-## Git Structure
-
-We're going to be using (gitflow)[https://github.com/nvie/gitflow] structure for creating branches and merging. We'll be creating all of our branches off of develop.
-```
-git checkout develop
-``` 
-
-When we want to start working on a ticket
-```
-git checkout develop
-git checkout -b feature/10     (where 10 is the issue number)
-```
-
-Once the feature is completed, you add to branch
-```
-git add .
-git commit -am '#number - commit message'
-git push
-```
-*#number refers to ticket number*
-
-And then go to https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/pulls and create pull request
-
-Make sure the pull request passes all required tests
+BEFORE YOU DO ANYTHING ELSE: Please read the README.md file in the root directory (../README.md) or https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/blob/develop/README.md
 
 ## Folder Structure
 
@@ -70,8 +25,6 @@ Make sure the pull request passes all required tests
       selectors.ts
       (actions.ts optional)
 
-
-
 ## Key Technologies
 
 ### Application State
@@ -84,23 +37,13 @@ Make sure the pull request passes all required tests
 
 * @material-ui/core
 
-## Authors
-
-Leigh Silverstein \
-Oksana Samokhvalova \
-Wendy Chen \
-Chris Cottier\
-Yinyin Lu
-
-## Pull Requests
-
-When you complete tickets and create a pull request for your work, you'll want to add two reviewers from the team, and the dev manager. When the ticket is approved by all three people, you can merge it in.
-
 ## Forms
 
 We're going to be using react-hook-form with yup to handle form submissions
-
 https://react-hook-form.com/
+
+We'll be using the yup implementation of this hook system.
+https://github.com/react-hook-form/resolvers#yup
 
 ## Tests
 
@@ -150,8 +93,6 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-
-
 ### Getting Started
 
 First, run the development server:
@@ -166,3 +107,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
+## Authors
+
+Leigh Silverstein \
+Oksana Samokhvalova \
+Wendy Chen \
+Chris Cottier\
+Yinyin Lu
