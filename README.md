@@ -23,6 +23,14 @@ When you start on the project, there are a few mandatory tickets that will alrea
 
 4) When the ticket is approved by 2 developers and a dev manager, you can merge it in. After you merge, move your ticket to done in the kanban board. That's a finished ticket!
 
+## Asking Questions
+
+We all want to help each other out, but we don't always have the time to do so. So if you have any questions, first I'd like to point you to this website: https://jvns.ca/blog/good-questions/ .
+
+Second, I'd like you to try to think like a developer. If you're stuck, try to find keywords that point to why something isn't working, and search those keywords on Google, or Stackoverflow.
+
+If you're still stuck, please open an issue with the label *help*. The title of the issue should be what your question is, and the description should include revelant details. Opening issues is important for two reasons. First, the issues will be documented so that if anyone else has the same problem, they'll be able to find the answer quickly. Second of all, if you create an issue, it's possible some of the other developers have already solved that issue and will be able to help you.
+
 ## Developer Environment
 
 ### Operating System
