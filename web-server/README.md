@@ -1,8 +1,15 @@
 # Vounteer Toronto Driving App
 
+## General Principles
+
+BEFORE YOU DO ANYTHING ELSE: Please read the README.md file in the root directory (../README.md) or https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/blob/develop/README.md
+
+## Kanban Board
+https://github.com/orgs/diglit/projects/1?card_filter_query=label%3Abackend
+
 ## Dev Setup
 
-Make sure python and poetry are installed.
+Make sure python, black and poetry are installed. Set up your text editor / IDE to run black on save for consistency
 
 - `cd` into the project directory
 - `poetry install`
