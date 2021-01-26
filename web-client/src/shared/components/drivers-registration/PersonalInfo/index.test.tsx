@@ -44,7 +44,7 @@ describe('Personal Info', () => {
 
     fireEvent.change(phoneNumberInput, {target: {value: 2805284619}});
 
-    expect(phoneNumberInput.value).toEqual(2805284619)
+    expect(Number.parseInt(phoneNumberInput.value)).toEqual(2805284619)
   });
   
   test('should allow users to select languages spoken.', () => {
