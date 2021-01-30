@@ -33,8 +33,9 @@ schema_view = get_schema_view(
             "application. You can use swagger for testing the requests and "+
             "responses of the API endpoints.",
         terms_of_service="https://www.google.com/policies/terms/",
-        contact=openapi.Contact(email="contact@snippets.local"),
-        license=openapi.License(name="BSD License"),
+        contact=openapi.Contact(email="info@diglit.com"),
+        license=openapi.License(name="SAP Individual Contributor License Agreement"),
+            #https://gist.github.com/CLAassistant/bd1ea8ec8aa0357414e8
     ),
    public=True,
    permission_classes=[permissions.AllowAny],
