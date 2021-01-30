@@ -32,7 +32,7 @@ schema_view = get_schema_view(
             "can see what all API end points are available for a web "+
             "application. You can use swagger for testing the requests and "+
             "responses of the API endpoints.",
-        terms_of_service="https://www.google.com/policies/terms/",
+        terms_of_service="",
         contact=openapi.Contact(email="info@diglit.com"),
         license=openapi.License(name="SAP Individual Contributor License Agreement"),
             #https://gist.github.com/CLAassistant/bd1ea8ec8aa0357414e8
