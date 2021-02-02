@@ -1,11 +1,12 @@
 import React from 'react';
 
 import FormInput from './FormInput';
+import CheckboxFormInput from './CheckboxFormInput';
 
 
 const PersonalInfo = (): React.ReactElement => {
 
-    const languages = ["English", "French", "Tagalog",]
+    const languages = ["English", "French", "Tagalog", "Portuguese", "Spanish", "Chinese"]
 
     return (
         <form>
@@ -35,6 +36,12 @@ const PersonalInfo = (): React.ReactElement => {
             fieldName="Phone Number"
             fieldAria = "phone-number"
             type="number"
+            />
+
+            <CheckboxFormInput 
+            options={languages}
+            optionCategory="language"
+            fieldName="Languages Spoken"
             />
 
         </form>
