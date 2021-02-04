@@ -91,3 +91,5 @@ Mac zsh: https://oliverspryn.medium.com/adding-git-completion-to-zsh-60f3b0e7ffb
 ## Coding Principles
 
 Don't make your code too DRY: https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction
+
+Code Review: Best Practices: https://medium.com/palantir/code-review-best-practices-19e02780015f
