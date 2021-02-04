@@ -16,4 +16,5 @@ export const store = configureStore({
   middleware: [reduxThunk]
 })
 
+// Create RootState type in Root Reducer.
 export type RootState = ReturnType<typeof reducer>

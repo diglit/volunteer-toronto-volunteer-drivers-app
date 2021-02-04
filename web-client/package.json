@@ -23,19 +23,21 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
+    "@netlify/plugin-nextjs": "^1.1.1",
     "@reduxjs/toolkit": "^1.5.0",
     "@types/react-redux": "^7.1.15",
+    "fishery": "^1.2.0",
     "next": "10.0.3",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "sass": "^1.32.4",
     "styled-components": "^5.2.1",
     "styled-reset": "^4.3.1"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^1.0.6",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@types/jest": "^26.0.16",
