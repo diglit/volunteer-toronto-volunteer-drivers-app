@@ -11,28 +11,28 @@ const PersonalInfo = (): React.ReactElement => {
     return (
         <form>
             <FormInput
-            id="firstName"
+            stateField="firstName"
             fieldName="First Name"
             fieldAria = "first-name"
             type="string"
             />
 
             <FormInput
-            id="lastName"
+            stateField="lastName"
             fieldName="Last Name"
             fieldAria = "last-name"
             type="string"
             />
 
             <FormInput
-            id="emailAddress"
+            stateField="emailAddress"
             fieldName="Email Address"
             fieldAria = "email"
             type="string"
             />
 
             <FormInput
-            id="phoneNumber"
+            stateField="phoneNumber"
             fieldName="Phone Number"
             fieldAria = "phone-number"
             type="number"

@@ -14,7 +14,7 @@ interface Props {
 const CheckboxFormInput = ({fieldName, options, optionCategory} : Props): React.ReactElement => {
 
 
-    const handleClick = (event: React.MouseEvent) => {
+    const handleClick = () => {
 
         //add languages to store, check for inclusion in store to display
         //if they are checked or not

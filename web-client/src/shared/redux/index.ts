@@ -7,7 +7,7 @@ import driversRegistrationSlice from './driverRegistration';
 
 const reducer = combineReducers({
   driversSearch: driversSearchSlice.reducer,
-  driversRegistration: driversSearchSlice.reducer
+  driversRegistration: driversRegistrationSlice.reducer
 })
 
 export const store = configureStore({
@@ -15,3 +15,5 @@ export const store = configureStore({
   devTools: true,
   middleware: [reduxThunk]
 })
+
+export type RootState = ReturnType<typeof reducer>

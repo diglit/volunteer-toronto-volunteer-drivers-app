@@ -1,11 +1,13 @@
 import { render } from '@testing-library/react';
 import React from 'react';
+import { Provider } from 'react-redux';
 
+import { store } from 'shared/redux';
 import CurrentSlide from './index';
 
 describe('Current Slide', () => {
   test('should render Personal Info slide first.', () => {
-    const { getByText } = render(<CurrentSlide currentSlide={1}/>);
+    const { getByText } = render(<Provider store={store}><CurrentSlide currentSlide={1}/></Provider>);
 
     const firstNameLabel = getByText('First Name');
 

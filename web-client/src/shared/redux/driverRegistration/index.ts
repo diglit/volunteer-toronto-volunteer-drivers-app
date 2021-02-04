@@ -4,7 +4,7 @@ export interface PersonalInfo {
     firstName: string,
     lastName: string,
     emailAddress: string,
-    phoneNumber: number,
+    phoneNumber: string,
     languagesSpoken: string[]
 
 }
@@ -13,8 +13,8 @@ const mockPersonalInfo: PersonalInfo = {
     firstName: 'Jonathan',
     lastName: 'Saunders',
     emailAddress: 'jsaunders@gmail.com',
-    phoneNumber: 2805284619,
-    languagesSpoken: ['english']
+    phoneNumber: "2805284619",
+    languagesSpoken: ['English']
 }
 
 interface RegistrationState {
@@ -39,4 +39,4 @@ const driversRegistrationSlice = createSlice({
 
 export const {setPersonalInfo} = driversRegistrationSlice.actions;
 
-export default driversRegistrationSlice
+export default driversRegistrationSlice;

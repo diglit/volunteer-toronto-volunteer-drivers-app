@@ -1,7 +1,9 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
+import { Provider } from 'react-redux';
 
-import DriverRegistration from '../../../../pages/drivers-registration';
+import { store } from 'shared/redux';
+import DriverRegistration from 'pages/drivers-registration';
 
 // const setUp = () => {
 //     const screen = render(<DriverRegistration />);
@@ -11,7 +13,7 @@ import DriverRegistration from '../../../../pages/drivers-registration';
 describe('Personal Info', () => {
 
   test('should allow users to enter their first name.', () => {
-    const screen = render(<DriverRegistration />);
+    const screen = render(<Provider store={store}><DriverRegistration /></Provider>);
     const firstNameInput = screen.getByLabelText('first-name') as HTMLInputElement;
     if (firstNameInput === null) return;
 
@@ -21,7 +23,7 @@ describe('Personal Info', () => {
   });
 
   test('should allow users to enter their last name.', () => {
-    const screen = render(<DriverRegistration />);
+    const screen = render(<Provider store={store}><DriverRegistration /></Provider>);
     const lastNameInput = screen.getByLabelText('last-name')  as HTMLInputElement;
 
     fireEvent.change(lastNameInput, {target: {value: 'Saunders'}});
@@ -30,7 +32,7 @@ describe('Personal Info', () => {
   });
 
   test('should allow users to enter their email.', () => {
-    const screen = render(<DriverRegistration />);
+    const screen = render(<Provider store={store}><DriverRegistration /></Provider>);
     const emailInput = screen.getByLabelText('email')  as HTMLInputElement;
 
     fireEvent.change(emailInput, {target: {value: 'jsaunders@gmail.com'}});
@@ -39,7 +41,7 @@ describe('Personal Info', () => {
   });
 
   test('should allow users to enter their phone number.', () => {
-    const screen = render(<DriverRegistration />);
+    const screen = render(<Provider store={store}><DriverRegistration /></Provider>);
     const phoneNumberInput = screen.getByLabelText('phone-number')  as HTMLInputElement;
 
     fireEvent.change(phoneNumberInput, {target: {value: 2805284619}});
@@ -48,7 +50,7 @@ describe('Personal Info', () => {
   });
   
   test('should allow users to select languages spoken.', () => {
-    const screen = render(<DriverRegistration />);
+    const screen = render(<Provider store={store}><DriverRegistration /></Provider>);
     const englishCheckBox = screen.getByLabelText('language-english') as HTMLInputElement;
     const chineseCheckBox = screen.getByLabelText('language-chinese') as HTMLInputElement;
 
@@ -64,7 +66,7 @@ describe('Personal Info', () => {
   });
 
   test('should allow users to deselect languages spoken.', () => {
-    const screen = render(<DriverRegistration />);
+    const screen = render(<Provider store={store}><DriverRegistration /></Provider>);
     const englishCheckBox = screen.getByLabelText('language-english') as HTMLInputElement;
 
     expect(englishCheckBox.checked).toEqual(false);
