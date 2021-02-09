@@ -22,7 +22,7 @@ The way you take a ticket is you assign it to yourself. Do not assign tickets to
 After you've assigned the ticket to yourself, go to the kanban board (listed above), and move the ticket into *In Progress*.
 
 #### 3) Peer Review
-When you complete the ticket, create a pull request for your work, add everyone on the team as reviewers, including the dev manager. Make sure to link the pull request to your ticket in the sidebar. Lastly, go to the kanban board and move your ticket to *Peer Review*
+When you complete the ticket, create a pull request for your work, add everyone on the team as reviewers, including the dev manager. Make sure to link the pull request to your ticket in the sidebar. Lastly, go to the kanban board and move your ticket to *Peer Review* (This might happen automatically if you link your issue, not sure yet).
 
 #### 4) Back to In Progress
 After your code has been reviewed, if it requires changes, the dev manager (or whoever asked for the changes) will move the ticket back to *In Progress*. When the developer completes those changes, they move the ticket back to *Peer Review*
@@ -37,6 +37,14 @@ We all want to help each other out, but we don't always have the time to do so. 
 Second, I'd like you to try to think like a developer. If you're stuck, try to find keywords that point to why something isn't working, and search those keywords on Google, or Stackoverflow.
 
 If you're still stuck, please open an issue with the label *help*. The title of the issue should be what your question is, and the description should include revelant details. Opening issues is important for two reasons. First, the issues will be documented so that if anyone else has the same problem, they'll be able to find the answer quickly. Second of all, if you create an issue, it's possible some of the other developers have already solved that issue and will be able to help you.
+
+## WIP
+
+If you want people to look at your code, but it's not fully ready to be reviewed for merge consideration, prefix for pull request with WIP like so:
+
+````
+WIP: feature/22 Add dancing monkey to the signup page
+````
 
 ## Developer Environment
 
