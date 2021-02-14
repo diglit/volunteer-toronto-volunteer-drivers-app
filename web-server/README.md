@@ -29,6 +29,21 @@ From here, you should be able to go to `http://127.0.0.1:8000/exampledrivers/` a
 
 [DRF](https://www.django-rest-framework.org/) Provides a lot of functionality that makes writing REST apps easier, like better auth, more flexible serialization/deserialization. If you're not sure how to do something, start with the DRF documentation.
 
+### Swagger
+
+"_Swagger is a tool used to understand the capabilities of the service without access to source code, documentation, or through network traffic inspection. In simple terms, with swagger you can see what all API end points are available for a web application. You can use swagger for testing the requests and responses of the API endpoints._"
+
+Swagger will allow us to see, use, test and understand all our API endpoints (their requests and responses). It provides a Web UI for us to navigate between end points for ease of use.
+
+#### Installation of Swagger/drf-yasg REQUIRED
+
+    Full instructions: https://github.com/axnsan12/drf-yasg
+    Quick Start
+        1. pip install -U drf-yasg
+        
+#### Access 
+    [YOUR_ALLOWED_HOST]/swagger
+    ex: http://192.168.2.26:8000/swagger/
 
 ## TODO
 
@@ -39,3 +54,5 @@ This is basic setup stuff, nothing app specific yet:
 - Switch this over to postgres or another "real" DB
 - Document stuff better
 - Finish this TODO, I'm probably missing all sorts of stuff
+
+
