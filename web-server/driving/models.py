@@ -41,14 +41,14 @@ class Driver(models.Model):
     second_match = models.TextField()
     community = models.CharField(max_length=3, choices=COMMUNITIES)
     other = models.TextField()
-    # availability
+    # TODO: add availability
     contactless = models.BooleanField()
     high_risk_contact = models.BooleanField()
     up_to_thirty = models.BooleanField()
     up_to_fifty = models.BooleanField()
     packaging_sorting = models.BooleanField()
-    # policecheck/willing
-    # driversabstract/willing
+    # TODO: add policecheck/willing
+    # TODO: add driversabstract/willing
     car_access = models.BooleanField()
     van_truck_access = models.BooleanField()
     one_mill_insurance = models.BooleanField()
