@@ -1,7 +1,7 @@
 import React from 'react';
 
 import PersonalInfo from '../PersonalInfo/index'
-
+import PreScreenRequirements from '../PreScreenRequirements/index';
 interface Props {
     currentSlide: number
 }
@@ -15,6 +15,7 @@ const DriversRegistrationCurrentSlide = ({currentSlide}: Props ): React.ReactEle
             case 2:
                 return <div>Your Needs</div>; //holdover until registration components are made, see case 1
             case 3:
+                return <PreScreenRequirements />;
                 return <div>Pre-Screen Requirements</div>; //holdover until registration components are made, see case 1
             case 4:
                 return <div>Agreement</div>; //holdover until registration components are made, see case 1
