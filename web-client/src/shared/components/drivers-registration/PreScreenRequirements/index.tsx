@@ -1,16 +1,25 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from '../../../redux/index'
 
-import { TextField, FormControl, FormLabel, Checkbox, FormControlLabel, FormGroup } from '@material-ui/core';
+// import { useForm } from 'react-hook-form';
+// import { yupResolver } from '@hookform/resolvers/yup';
+// import * as yup from 'yup';
+
+import { TextField, FormControl, FormLabel, FormGroup } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
+import FormCheckbox, { CheckboxInputs } from "./FormCheckbox";
+import { setPreScreenRequirement } from 'shared/redux/driverRegistration';
 
-const schema = yup.object().shape({
-  policeRecordCheckReq: yup.string().required(),
-  age: yup.number().required(),
-});
+// const schema = yup.object().shape({
+//   policeRecordsCheckRequirements: yup.array(),
+//   policeRecordsCheckDate: yup.date(),
+//   policeRecordsCheckType: yup.string(),
+//   drivingAbstractRequirements: yup.array(),
+//   drivingAbstractDate: yup.date(),
+//   VehicleAndLicense: yup.array()
+// });
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'block',
     },
     formControl: {
-      margin: theme.spacing(3),
+      margin: theme.spacing(2),
     },
     textField: {
       marginLeft: theme.spacing(1),
@@ -30,13 +39,39 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const PreScreenRequirements = (): React.ReactElement => {
 
-  const { register, handleSubmit } = useForm({
-    resolver: yupResolver(schema),
-  });
+  const dispatch = useDispatch()
+  const preScreenRequirement = useSelector((state: RootState) => state.driversRegistration.preScreenRequirement)
+
+  // const { register } = useForm({
+  //   resolver: yupResolver(schema),
+  //   defaultValues: { preScreenRequirement }
+  // });
 
   const classes = useStyles();
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
+  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   console.log(event.target.value);
+  // }
+
+  const mockOptions = [
+    'I have completed a police records check in the last 6 months',
+    'I have completed a police records check in the last 12 months',
+    'I am willing to complete a police records check in order to volunteer as a driver',
+    'I am NOT willing to complete a police records check in order to volunteer as a driver',
+  ]
+
+  const mockChecks = [
+    'I have completed a police records check in the last 12 months',
+    'I am willing to complete a police records check in order to volunteer as a driver',
+  ]
+
+  const handlePoliceCheck = (checkboxInputs: CheckboxInputs) => {
+    // console.log(checkboxInputs.data);
+
+    const newState = {...preScreenRequirement, policeRecordsCheckRequirements: checkboxInputs.data}
+    dispatch(setPreScreenRequirement(newState))
+    // console.log(newState);
+    
+    return null
   }
 
   return (
@@ -47,22 +82,7 @@ const PreScreenRequirements = (): React.ReactElement => {
           <FormControl component="fieldset" className={classes.formControl}>
             <FormLabel component="legend">Police Records Check Requirements (Choose all that apply)</FormLabel>
             <FormGroup>
-              <FormControlLabel
-                control={<Checkbox  onChange={handleChange} name="gilad" />}
-                label="I have completed a police records check in the last 6 months"
-              />
-              <FormControlLabel
-                control={<Checkbox  onChange={handleChange} name="jason" />}
-                label="I have completed a police records check in the last 12 months"
-              />
-              <FormControlLabel
-                control={<Checkbox  onChange={handleChange} name="antoine" />}
-                label="I am willing to complete a police records check in order to volunteer as a driver"
-              />
-              <FormControlLabel
-                control={<Checkbox  onChange={handleChange} name="antoine" />}
-                label="I am NOT willing to complete a police records check in order to volunteer as a driver"
-              />
+              <FormCheckbox seleted={mockChecks} options={mockOptions} handleCheck={handlePoliceCheck} />
             </FormGroup>
           </FormControl>
           {/* https://material-ui.com/components/pickers/ */}
@@ -87,17 +107,14 @@ const PreScreenRequirements = (): React.ReactElement => {
                 className={classes.textField}
               />
             </div>
-            </FormControl>
+          </FormControl>
         </div>
 
       </FormControl>
-      <form onSubmit={handleSubmit((d) => console.log(d))}>
-        <input name="name" ref={register} />
-        <input name="age" type="number" ref={register} />
-        <input type="submit" />
-      </form>
+
     </>
   );
 };
+
 
 export default PreScreenRequirements

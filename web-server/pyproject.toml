@@ -8,6 +8,7 @@ authors = ["Erik Derohanian <erik@erik-j.de>"]
 python = "^3.9"
 Django = "^3.1.4"
 djangorestframework = "^3.12.2"
+black = "^20.8b1"
 
 [tool.poetry.dev-dependencies]
 
