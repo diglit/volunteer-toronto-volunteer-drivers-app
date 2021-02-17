@@ -2,11 +2,11 @@ import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from '../../../redux/index'
 
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 // import { yupResolver } from '@hookform/resolvers/yup';
 // import * as yup from 'yup';
 
-import { Grid, FormControl, FormLabel, FormGroup } from '@material-ui/core';
+import { TextField, Grid, FormControl, FormLabel, FormGroup, makeStyles, Theme, createStyles } from '@material-ui/core';
 
 import FormCheckbox from "./FormCheckbox";
 import { PreScreenRequirement, setPreScreenRequirement } from 'shared/redux/driverRegistration';
@@ -20,7 +20,27 @@ import { PreScreenRequirement, setPreScreenRequirement } from 'shared/redux/driv
 //   VehicleAndLicense: yup.array()
 // });
 
+// yup.object({
+//   terms: yup
+//     .boolean()
+//     .oneOf([true], 'Must Accept Terms and Conditions'),
+// });
+
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    section: {
+      padding: theme.spacing(2),
+      marginTop: theme.spacing(2),
+    },
+  }),
+);
+
 const PreScreenRequirements = (): React.ReactElement => {
+  const classes = useStyles();
 
   const dispatch = useDispatch()
   const preScreenRequirement = useSelector((state: RootState) => state.driversRegistration.preScreenRequirement)
@@ -40,8 +60,8 @@ const PreScreenRequirements = (): React.ReactElement => {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl component="fieldset" >
-          <Grid>
-            <FormControl component="fieldset">
+          <Grid container className={classes.section}>
+            <FormControl component="fieldset" >
               <FormLabel component="legend">Police Records Check Requirements (Choose all that apply)</FormLabel>
               <FormGroup>
                 <FormCheckbox
@@ -52,37 +72,94 @@ const PreScreenRequirements = (): React.ReactElement => {
                 />
               </FormGroup>
             </FormControl>
-            {/* https://material-ui.com/components/pickers/
-            <FormControl component="fieldset" className={classes.formControl}>
-              <FormLabel component="legend">Police Records Check Requirements (Choose all that apply)</FormLabel>
-              <Grid>
-                <TextField
-                  id="date"
+          </Grid >
+
+          <Grid container className={classes.section}>
+            <FormControl component="fieldset" >
+              <FormLabel>If you have completed a police records check, please indicate the date and type of check completed</FormLabel>
+              <label></label>
+              <Grid item >
+                <Controller
+                  as={TextField}
                   type="date"
                   defaultValue={preScreenRequirement.policeRecordsCheckDate}
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={(e) => handleFormInput(e.target.value, 'policeRecordsCheckDate')}
+                  control={control}
+                  name='policeRecordsCheckDate'
                 />
               </Grid>
-              <Grid>
-                <TextField
-                  id="standard-basic"
+              <Grid item >
+                <Controller
+                  as={TextField}
                   label="Indicate the type of check here."
                   fullWidth
-                  className={classes.textField}
-                  onChange={(e) => handleFormInput(e.target.value, 'policeRecordsCheckType')}
-
+                  defaultValue={preScreenRequirement.policeRecordsCheckType}
+                  control={control}
+                  name='policeRecordsCheckType'
                 />
               </Grid>
-            </FormControl> */}
+            </FormControl>
           </Grid>
+
+          <Grid container className={classes.section}>
+            <FormControl component="fieldset">
+              <FormLabel component="legend">Driving Abstract requirements (Choose all that apply)</FormLabel>
+              <FormGroup>
+                <FormCheckbox
+                  data={preScreenRequirement}
+                  name='drivingAbstractRequirements'
+                  control={control}
+                  register={register}
+                />
+              </FormGroup>
+            </FormControl>
+          </Grid>
+
+          <Grid container className={classes.section}>
+            <FormControl component="fieldset" >
+              <FormLabel>If you have completed a drivig abstract, please indicate the date and type of check completed</FormLabel>
+              <label></label>
+              <Grid item >
+                <Controller
+                  as={TextField}
+                  type="date"
+                  defaultValue={preScreenRequirement.drivingAbstractDate}
+                  control={control}
+                  name='drivingAbstractDate'
+                />
+              </Grid>
+            </FormControl>
+          </Grid>
+
+          <Grid container className={classes.section}>
+            <FormControl component="fieldset">
+              <FormLabel component="label">Vehicle/License Requirements (Choose all that apply)</FormLabel>
+              <FormGroup>
+                <FormCheckbox
+                  data={preScreenRequirement}
+                  name='LicenseAndVehicle'
+                  control={control}
+                  register={register}
+                />
+              </FormGroup>
+
+              <Grid item >
+                <Controller
+                  as={TextField}
+                  label="Please indicate other license classes here."
+                  fullWidth
+                  defaultValue={preScreenRequirement.LicenseClassesOther}
+                  control={control}
+                  name='LicenseClassesOther'
+                />
+              </Grid>
+              
+            </FormControl>
+          </Grid>
+
+
           <button type="submit">pre submit</button>
         </FormControl>
       </form>
-
     </>
   );
 };

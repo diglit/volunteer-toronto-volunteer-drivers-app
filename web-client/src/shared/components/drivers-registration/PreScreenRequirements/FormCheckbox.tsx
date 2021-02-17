@@ -5,8 +5,6 @@ import { Controller, Control } from 'react-hook-form';
 import { Checkbox, FormControlLabel } from '@material-ui/core';
 import { CheckboxItem, PreScreenRequirement } from 'shared/redux/driverRegistration';
 
-// https://stackoverflow.com/questions/61475234/material-ui-react-form-hook-multiple-checkboxes-default-selected
-
 
 export interface CheckboxInputs {
     data: string[]
@@ -25,7 +23,7 @@ const FormCheckbox = ({ control, register, data, name }: Props): React.ReactElem
     return (
         <>
             {Object.keys(checkboxItems).map((key: keyof CheckboxItem) => {
-                // console.log(data[name]['I have completed a police records check in the last 6 months']);
+
                 return (
                     <FormControlLabel
                         control={
