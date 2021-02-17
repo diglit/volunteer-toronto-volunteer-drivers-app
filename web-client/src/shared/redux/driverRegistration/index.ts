@@ -17,20 +17,35 @@ const mockPersonalInfo: PersonalInfo = {
     languagesSpoken: ['English']
 }
 
+export type CheckboxItem = {
+    [key: string]: boolean
+}
+
 export interface PreScreenRequirement {
-    policeRecordsCheckRequirements: string[],
+    policeRecordsCheckRequirements: CheckboxItem,
     policeRecordsCheckDate: string,
     policeRecordsCheckType: string,
-    drivingAbstractRequirements: string[],
+    drivingAbstractRequirements: CheckboxItem,
     drivingAbstractDate: string,
     VehicleAndLicense: string[]
 }
 
 const initPreScreenRequirement: PreScreenRequirement = {
-    policeRecordsCheckRequirements: [],
+    //     policeRecordsCheckRequirements: [
+    //     { label: 'I have completed a police records check in the last 6 months', value: false },
+    //     { label: 'I have completed a police records check in the last 12 months', value: false },
+    //     { label: 'I am willing to complete a police records check in order to volunteer as a driver', value: false },
+    //     { label: 'I am NOT willing to complete a police records check in order to volunteer as a driver', value: false },
+    //   ],
+    policeRecordsCheckRequirements: {
+        'I have completed a police records check in the last 6 months': false,
+        'I have completed a police records check in the last 12 months': false,
+        'I am willing to complete a police records check in order to volunteer as a driver': false,
+        'I am NOT willing to complete a police records check in order to volunteer as a driver': false,
+    },
     policeRecordsCheckDate: '2021-01-01',
     policeRecordsCheckType: '',
-    drivingAbstractRequirements: [],
+    drivingAbstractRequirements: {},
     drivingAbstractDate: '2021-01-01',
     VehicleAndLicense: []
 }

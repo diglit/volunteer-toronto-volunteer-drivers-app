@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, Control } from 'react-hook-form';
 
 import { Checkbox, FormControlLabel } from '@material-ui/core';
+import { CheckboxItem, PreScreenRequirement } from 'shared/redux/driverRegistration';
 
 // https://stackoverflow.com/questions/61475234/material-ui-react-form-hook-multiple-checkboxes-default-selected
 
@@ -12,54 +13,45 @@ export interface CheckboxInputs {
 }
 
 interface Props {
-    seleted: string[],
-    options: string[],
-    handleCheck: (data: CheckboxInputs) => null
+    register: unknown,
+    control: Control<PreScreenRequirement>,
+    data: PreScreenRequirement
+    name: keyof PreScreenRequirement
 }
 
-const FormCheckbox = ({ seleted, options, handleCheck }: Props): React.ReactElement => {
-    const { control, handleSubmit } = useForm({
-        defaultValues: { data: seleted }
-    });
+const FormCheckbox = ({ control, register, data, name }: Props): React.ReactElement => {
 
-    const [checkedValues, setCheckedValues] = useState(seleted);
-
-    const handleSelect = (item: string): string[] => {
-        const newCheck = checkedValues
-            ?.includes(item)
-            ? checkedValues?.filter((v: string) => v !== item)
-            : [...(checkedValues ?? []), item];
-        setCheckedValues(newCheck);
-        console.log(newCheck);
-
-        return newCheck;
-    }
-
+    const checkboxItems = data[name] as CheckboxItem
     return (
-        <form onSubmit={handleSubmit(data => handleCheck(data))}>
-            {options.map(o => (
-                <FormControlLabel
-                    control={
-                        <Controller
-                            name='data'
-                            defaultValue={checkedValues}
-                            render={({ onChange: onCheckChange }) => {
-                                return (
-                                    <Checkbox
-                                        checked={checkedValues.includes(o)}
-                                        onChange={() => onCheckChange(handleSelect(o))}
-                                    />
-                                );
-                            }}
-                            control={control}
-                        />
-                    }
-                    key={o}
-                    label={o}
-                />
-            ))}
-            <button>Submit</button>
-        </form>
+        <>
+            {Object.keys(checkboxItems).map((key: keyof CheckboxItem) => {
+                // console.log(data[name]['I have completed a police records check in the last 6 months']);
+                return (
+                    <FormControlLabel
+                        control={
+                            <Controller
+                                name={`${name}.${key}`}
+                                defaultValue={key}
+                                value={checkboxItems[key]}
+                                render={({ onChange, value }) => {
+                                    return (
+                                        <Checkbox
+                                            checked={value.name}
+                                            onChange={(e) => onChange(e.target.checked)}
+                                        />
+                                    );
+                                }}
+                                control={control}
+                                register={register}
+                            />
+                        }
+                        key={key}
+                        label={key}
+                    />
+                )
+            }
+            )}
+        </>
     );
 };
 
