@@ -9,7 +9,7 @@ Tickets are simply github issues that have labels attached to them.
 There's two ways of looking at issues. 
 
 1) You can go to the issues tab in our github repo, and filter as needed.
-2) Checkout our project kanban board. https://github.com/orgs/diglit/projects
+2) Checkout our project kanban board. https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/projects/1
 
 ### Taking tickets
 
