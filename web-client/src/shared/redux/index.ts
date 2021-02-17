@@ -2,10 +2,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import reduxThunk from 'redux-thunk';
 
-import driversSearchSlice from './driversSearch';
+import driversSearchSlice from './driversSearch/index';
+import driversRegistrationSlice from './driversRegistration/index';
 
 const reducer = combineReducers({
-  driversSearch: driversSearchSlice.reducer
+  driversSearch: driversSearchSlice.reducer,
+  driversRegistration: driversRegistrationSlice.reducer,
 })
 
 export const store = configureStore({

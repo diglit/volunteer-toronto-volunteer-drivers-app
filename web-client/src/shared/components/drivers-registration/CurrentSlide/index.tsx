@@ -1,6 +1,7 @@
 import React from 'react';
 
-import PersonalInfo from '../PersonalInfo/index'
+import PersonalInfo from '../PersonalInfo/index';
+import YourNeedsSection from '../YourNeeds/index';
 
 interface Props {
     currentSlide: number
@@ -13,7 +14,7 @@ const DriversRegistrationCurrentSlide = ({currentSlide}: Props ): React.ReactEle
             case 1:
                 return <PersonalInfo />; 
             case 2:
-                return <div>Your Needs</div>; //holdover until registration components are made, see case 1
+                return <YourNeedsSection />; //holdover until registration components are made, see case 1
             case 3:
                 return <div>Pre-Screen Requirements</div>; //holdover until registration components are made, see case 1
             case 4:
