@@ -6,7 +6,7 @@ import { useForm, Controller } from 'react-hook-form';
 // import { yupResolver } from '@hookform/resolvers/yup';
 // import * as yup from 'yup';
 
-import { TextField, Grid, FormControl, FormLabel, FormGroup, makeStyles, Theme, createStyles } from '@material-ui/core';
+import { Button, TextField, Grid, FormControl, FormLabel, FormGroup, makeStyles, Theme, createStyles } from '@material-ui/core';
 
 import FormCheckbox from "./FormCheckbox";
 import { PreScreenRequirement, setPreScreenRequirement } from 'shared/redux/driverRegistration';
@@ -156,8 +156,8 @@ const PreScreenRequirements = (): React.ReactElement => {
             </FormControl>
           </Grid>
 
+          <Button type="submit" variant="contained">SAVE</Button>
 
-          <button type="submit">pre submit</button>
         </FormControl>
       </form>
     </>
