@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 // Components
 import FilterAccordion from '../FilterAccordion';
 // API mock file necessary for the API call to run
-require('../../../../../public/mocks/index');
+// require('../../../../../public/mocks/index');
 // REDUX
 import { useDispatch } from 'react-redux';
 import {
@@ -51,28 +51,62 @@ const DriversSearchFilters: NextPage = React.memo(function DriversSearchFilters(
   };
 
   const handleDriverSearch = async () => {
-    // languageFilter.forEach((item: any) => {
-    //     console.log(item);
-    //     // if (item[Object.keys(item)]) {
-    //     //     console.log(Object.keys(item));
-    //     // }
-    // });
-    // OKSANA TO DO: to provide filterData as an argument to make a POST request
-    // dispatch(fetchDrivers("here"));
-    // OKSANA fetching drivers from backend and saving them in Redux store
     const mockFilter: FilterRequest = {
-      language: ['English'],
-      location: ['Downtown Toronto'],
-      availability: ['Morning', 'Sunday'],
-      comfortLevel: ['Contactless Deliveries', 'Low Risk', 'High Risk'],
-      policeCheck: ['Willing to get one'],
-      drivingAbstract: ['Willing to get one'],
-      licenceClass: ['A'],
-      vehicleType: ['Truck'],
-      insurancePolicy: ['Up to $1 Million'],
-      willingToLift: ['Up to 50lbs'],
-      packingAndSorting: ['Both'],
+      language: [],
+      location: [],
+      availability: [],
+      comfortLevel: [],
+      policeCheck: [],
+      drivingAbstract: [],
+      licenceClass: [],
+      vehicleType: [],
+      insurancePolicy: [],
+      willingToLift: [],
+      packingAndSorting: [],
+    };
+
+    for (const filter in globalFilter) {
+      const newArr = Object.keys(globalFilter[filter]).filter(item => globalFilter[filter][item]);
+      switch (filter) {
+        case 'Language(s)':
+          mockFilter.language = newArr;
+          break;
+        case "Location":
+          mockFilter.location = newArr;
+          break;
+        case "Availability":
+          mockFilter.availability = newArr;
+          break;
+        case "Comfort Level":
+          mockFilter.comfortLevel = newArr;
+          break;
+        case "Police Check":
+          mockFilter.policeCheck = newArr;
+          break;
+        case "Driving Abstract":
+          mockFilter.drivingAbstract = newArr;
+          break;
+        case "License Class":
+          mockFilter.licenceClass = newArr;
+          break;
+        case "Vehicle Type":
+          mockFilter.vehicleType = newArr;
+          break;
+        case "Insurance Policy":
+          mockFilter.insurancePolicy = newArr;
+          break;
+        case "Willing to Lift":
+          mockFilter.willingToLift = newArr;
+          break;
+        case "Packing and Sorting":
+          mockFilter.packingAndSorting = newArr;
+          break;
+        default:
+          console.log(newArr);
+      }
     }
+    console.log(mockFilter, "new new mock filter");
+    // Sending a POST request to backend to fetch drivers based on filters and saving them in Redux store
     dispatch(fetchDrivers(mockFilter));
   };
 
