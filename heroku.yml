@@ -8,4 +8,4 @@ build:
   docker:
     web: web-server/Dockerfile
 run:
-  web: cd web-server && poetry install && python manage.py migrate && python -Wd manage.py runserver 0.0.0.0:80
+  web: poetry install && python manage.py migrate && python -Wd manage.py runserver 0.0.0.0:80

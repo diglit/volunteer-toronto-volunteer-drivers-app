@@ -31,7 +31,7 @@ RUN apt-get update \
   && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* \
   && pip install "poetry==$POETRY_VERSION" && poetry --version \
   && pip install psycopg2
-
+RUN pip install dj_database_url
 # set work directory
 WORKDIR /code
 COPY pyproject.toml poetry.lock /code/
