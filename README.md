@@ -91,6 +91,12 @@ And then go to https://github.com/diglit/volunteer-toronto-volunteer-drivers-app
 
 Make sure the pull request passes all required tests
 
+## Deployents
+
+### DEV
+Backend: http://vt-volunteer-drivers-app.herokuapp.com
+Front-end: https://compassionate-noyce-78eb25.netlify.app/
+
 ### Optional
 One thing I like to setup is git autocomplete to make it easier to switch branches.
 
