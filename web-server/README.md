@@ -45,6 +45,15 @@ Swagger will allow us to see, use, test and understand all our API endpoints (th
     [YOUR_ALLOWED_HOST]/swagger
     ex: http://192.168.2.26:8000/swagger/
 
+
+#### Docker
+
+rename temp.env.dev .env.dev (mv temp.env.dev .env.dev)
+docker-compose build
+docker-compose up
+
+go to localhost:8000
+
 ## TODO
 
 This is basic setup stuff, nothing app specific yet:
