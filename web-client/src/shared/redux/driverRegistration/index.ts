@@ -1,51 +1,35 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface PersonalInfo {
-    firstName: string,
-    lastName: string,
-    emailAddress: string,
-    phoneNumber: string,
-    languagesSpoken: string[]
-}
-
-
-const mockPersonalInfo: PersonalInfo = {
-    firstName: 'Jonathan',
-    lastName: 'Saunders',
-    emailAddress: 'jsaunders@gmail.com',
-    phoneNumber: "2805284619",
-    languagesSpoken: ['English']
-}
-
 export type CheckboxItem = {
     [key: string]: boolean
 }
 
-export interface PreScreenRequirement {
-    policeRecordsCheckRequirements: CheckboxItem,
+export interface PreScreen {
+    policeRecordsCheckOptions: string,
     policeRecordsCheckDate: string,
     policeRecordsCheckType: string,
-    drivingAbstractRequirements: CheckboxItem,
+    drivingAbstractOptions: string,
     drivingAbstractDate: string,
     LicenseAndVehicle: CheckboxItem
     LicenseClassesOther: string
 }
 
-const initPreScreenRequirement: PreScreenRequirement = {
-    policeRecordsCheckRequirements: {
-        'I have completed a police records check in the last 6 months': false,
-        'I have completed a police records check in the last 12 months': false,
-        'I am willing to complete a police records check in order to volunteer as a driver': false,
-        'I am NOT willing to complete a police records check in order to volunteer as a driver': false,
-    },
+const initPreScreen: PreScreen = {
+    // policeRecordsCheckOptions: {
+    //     'I have completed a police records check in the last 6 months': false,
+    //     'I have completed a police records check in the last 12 months': false,
+    //     'I am willing to complete a police records check in order to volunteer as a driver': false,
+    //     'I am NOT willing to complete a police records check in order to volunteer as a driver': false,
+    // },
+    policeRecordsCheckOptions:'',
     policeRecordsCheckDate: '2021-01-01',
+    // policeRecordsCheckType: {
+    //     'Criminal Record Checks': false,
+    //     'Criminal Record and Judicial Matters Checks': false,
+    //     'Vulnerable Sector Checks': false
+    // },
     policeRecordsCheckType: '',
-    drivingAbstractRequirements: {
-        'I have a clear drving abstract completed within the last 6 months': false,
-        'I have a clear driving abstract completed within the last 12 months': false,
-        'I am willing to complete a drving abstract in order to volunteer as a drvier': false,
-        'I am NOT willing to complete a driving abstract in order to volunteer as a driver': false
-    },
+    drivingAbstractOptions: '',
     drivingAbstractDate: '2021-01-01',
     LicenseAndVehicle: {
         'I have access to a car that is safe to drive for deliveries': false,
@@ -53,34 +37,29 @@ const initPreScreenRequirement: PreScreenRequirement = {
         'I have liability insurance of $ 2 Million': false,
         'I have a valid G license': false
     },
-    LicenseClassesOther: ''
+    LicenseClassesOther: 'None'
 }
 
 interface RegistrationState {
-    personalInfo: PersonalInfo,
-    preScreenRequirement: PreScreenRequirement
+    preScreen: PreScreen
 }
 
 
 
 const initialState = {
-    personalInfo: mockPersonalInfo,
-    preScreenRequirement: initPreScreenRequirement
+    preScreen: initPreScreen
 } as RegistrationState;
 
 const driversRegistrationSlice = createSlice({
-    name: 'driversSearch',
+    name: 'driversRegistration',
     initialState: initialState,
     reducers: {
-        setPersonalInfo: (state, { payload }: PayloadAction<PersonalInfo>) => {
-            state.personalInfo = payload;
-        },
-        setPreScreenRequirement: (state, { payload }: PayloadAction<PreScreenRequirement>) => {
-            state.preScreenRequirement = payload;
+        setPreScreen: (state, { payload }: PayloadAction<PreScreen>) => {
+            state.preScreen = payload;
         },
     }
 });
 
-export const { setPersonalInfo, setPreScreenRequirement } = driversRegistrationSlice.actions;
+export const { setPreScreen } = driversRegistrationSlice.actions;
 
 export default driversRegistrationSlice;
