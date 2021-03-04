@@ -83,7 +83,7 @@ const PreScreenRequirements = (): React.ReactElement => {
                   value={preScreen.policeRecordsCheckDate}
                   control={control}
                   labels={[]}
-                  formLabel='If you have completed a police records check, please indicate the date and type of check completed'
+                  formLabel='Please indicate the date and type of check completed'
                   name='policeRecordsCheckDate'
                 />
               </Grid>
@@ -120,7 +120,7 @@ const PreScreenRequirements = (): React.ReactElement => {
                   value={preScreen.drivingAbstractDate}
                   control={control}
                   labels={[]}
-                  formLabel='If you have completed a drivig abstract, please indicate the date and type of check completed'
+                  formLabel='Please indicate the date and type of check completed'
                   name='drivingAbstractDate'
                 />
               </Grid>
