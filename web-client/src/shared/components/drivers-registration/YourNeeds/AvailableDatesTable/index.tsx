@@ -26,6 +26,7 @@ const AvailableDatesTable = ({tableRows, handleTimeSelect}: DatesTable): JSX.Ele
   return (
     <TableContainer style={{maxHeight: '440px'}}>
       <Table stickyHeader>
+        
         <TableHead>
           <TableRow>
             {['', ...DATES].map( ele => (
@@ -37,13 +38,13 @@ const AvailableDatesTable = ({tableRows, handleTimeSelect}: DatesTable): JSX.Ele
           {tableRows.map(row => (
             <TableRow key={row.time}>
               <TableCell>{row.time}</TableCell>
-              <TableCell><Checkbox checked={row.Sunday} onChange={() => handleTimeSelect('Sunday', row.time)} /></TableCell>
-              <TableCell><Checkbox checked={row.Monday} onChange={() => handleTimeSelect('Monday', row.time)} /></TableCell>
-              <TableCell><Checkbox checked={row.Tuesday} onChange={() => handleTimeSelect('Tuesday', row.time)} /></TableCell>
-              <TableCell><Checkbox checked={row.Wednesday} onChange={() => handleTimeSelect('Wednesday', row.time)}/></TableCell>
-              <TableCell><Checkbox checked={row.Thursday} onChange={() => handleTimeSelect('Thursday', row.time)} /></TableCell>
-              <TableCell><Checkbox checked={row.Friday} onChange={() => handleTimeSelect('Friday', row.time)} /></TableCell>
-              <TableCell><Checkbox checked={row.Saturday} onChange={() => handleTimeSelect('Saturday', row.time)} /></TableCell>
+              <TableCell><Checkbox checked={row.Sunday} onChange={() => handleTimeSelect('Sunday', row.time)} inputProps={{ 'aria-label': `Sunday ${row.time}` }} /></TableCell>
+              <TableCell><Checkbox checked={row.Monday} onChange={() => handleTimeSelect('Monday', row.time)} inputProps={{ 'aria-label': `Monday ${row.time}` }} /></TableCell>
+              <TableCell><Checkbox checked={row.Tuesday} onChange={() => handleTimeSelect('Tuesday', row.time)} inputProps={{ 'aria-label': `Tuesday ${row.time}` }} /></TableCell>
+              <TableCell><Checkbox checked={row.Wednesday} onChange={() => handleTimeSelect('Wednesday', row.time)} inputProps={{ 'aria-label': `Wednesday ${row.time}` }} /></TableCell>
+              <TableCell><Checkbox checked={row.Thursday} onChange={() => handleTimeSelect('Thursday', row.time)} inputProps={{ 'aria-label': `Thursday ${row.time}` }} /></TableCell>
+              <TableCell><Checkbox checked={row.Friday} onChange={() => handleTimeSelect('Friday', row.time)} inputProps={{ 'aria-label': `Friday ${row.time}` }} /></TableCell>
+              <TableCell><Checkbox checked={row.Saturday} onChange={() => handleTimeSelect('Saturday', row.time)} inputProps={{ 'aria-label': `Saturday ${row.time}` }} /></TableCell>
             </TableRow>
           ))}
         </TableBody>

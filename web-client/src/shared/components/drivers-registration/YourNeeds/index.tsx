@@ -10,11 +10,9 @@ import { FormLabel, FormControl, FormGroup, FormControlLabel, Checkbox, Button }
 
 const YourNeedsSection = (): JSX.Element => {
 
-  const {communities, availableDates, typesOfDelivery} = useSelector((state: RootState) => ({
-    communities: state.driversRegistration.yourNeeds.communities,
-    availableDates: state.driversRegistration.yourNeeds.availableDates,
-    typesOfDelivery: state.driversRegistration.yourNeeds.typesOfDelivery
-  }));
+  const communities = useSelector((state: RootState) => state.driversRegistration.yourNeeds.communities);
+  const availableDates = useSelector((state: RootState) => state.driversRegistration.yourNeeds.availableDates);
+  const typesOfDelivery = useSelector((state: RootState) => state.driversRegistration.yourNeeds.typesOfDelivery);
 
   // Community state contains two attributes: name and selected
   const [communityState, setCommunityState] = useState(COMMUNITYNAME.map( community => {

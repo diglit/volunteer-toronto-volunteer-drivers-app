@@ -28,8 +28,7 @@ const driversRegistrationSlice = createSlice({
         ...state,
         yourNeeds: action.payload
       })
-    },
-    decrement: state => state
+    }
   }
 });
 
