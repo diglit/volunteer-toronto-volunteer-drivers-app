@@ -14,7 +14,7 @@ import { policeRecordsCheckOptionsLabel, policeRecordsCheckTypeLabel, drivingAbs
 
 const schema = yup.object().shape({
   policeRecordsCheckOptions: yup.string().required(),
-  //required field when they have police record check
+  /* required field when they have police record check */
   policeRecordsCheckDate: yup.string().when('policeRecordsCheckOptions', {
     is: (value: string) => value.includes('I have'),
     then: yup.string().required()
@@ -38,10 +38,10 @@ const schema = yup.object().shape({
 });
 
 const PreScreenRequirements = (): React.ReactElement => {
-  //redux store
+  /* redux store */
   const dispatch = useDispatch()
   const preScreen = useSelector((state: RootState) => state.driversRegistration.preScreen)
-  // React hook form
+  /* React hook form */
   const { control, handleSubmit, watch, errors } = useForm({
     resolver: yupResolver(schema),
     defaultValues: preScreen
@@ -55,7 +55,7 @@ const PreScreenRequirements = (): React.ReactElement => {
     dispatch(setPreScreen(newState))
   };
 
-  // Use for show or hide optional field
+  /* Use for show or hide optional field */
   const policeCheck = watch('policeRecordsCheckOptions')
   const drivingAbstract = watch('drivingAbstractOptions')
 
@@ -67,7 +67,6 @@ const PreScreenRequirements = (): React.ReactElement => {
           <Grid item >
             <FormRadio
               error={errors.policeRecordsCheckOptions}
-              value={preScreen.policeRecordsCheckOptions}
               labels={policeRecordsCheckOptionsLabel}
               control={control}
               formLabel='Police Records Check Requirements'
@@ -80,7 +79,6 @@ const PreScreenRequirements = (): React.ReactElement => {
               <Grid item >
                 <FormDateInput
                   error={errors.policeRecordsCheckDate}
-                  value={preScreen.policeRecordsCheckDate}
                   control={control}
                   labels={[]}
                   formLabel='Please indicate the date and type of check completed'
@@ -91,7 +89,6 @@ const PreScreenRequirements = (): React.ReactElement => {
               <Grid item >
                 <FormSelect
                   error={errors.policeRecordsCheckType}
-                  value={preScreen.policeRecordsCheckType}
                   labels={policeRecordsCheckTypeLabel}
                   control={control}
                   formLabel='Indicate the type of check here.'
@@ -104,7 +101,6 @@ const PreScreenRequirements = (): React.ReactElement => {
           <Grid item >
             <FormRadio
               error={errors.drivingAbstractOptions}
-              value={preScreen.drivingAbstractOptions}
               labels={drivingAbstractOptionsLabel}
               control={control}
               formLabel='Driving Abstract Options'
@@ -117,7 +113,6 @@ const PreScreenRequirements = (): React.ReactElement => {
               <Grid item >
                 <FormDateInput
                   error={errors.drivingAbstractDate}
-                  value={preScreen.drivingAbstractDate}
                   control={control}
                   labels={[]}
                   formLabel='Please indicate the date and type of check completed'
@@ -130,7 +125,6 @@ const PreScreenRequirements = (): React.ReactElement => {
           <Grid item>
           <FormCheckbox
               error={errors.LicenseAndVehicle}
-              value={preScreen.LicenseAndVehicle}
               labels={LicenseAndVehicleLabel}
               control={control}
               formLabel='Vehicle/License Requirements (Choose all that apply)'
@@ -141,7 +135,6 @@ const PreScreenRequirements = (): React.ReactElement => {
           <Grid item >
             <FormSelect
               error={errors.LicenseClasses}
-              value={preScreen.LicenseClasses}
               labels={LicenseClasses}
               control={control}
               formLabel='Please indicate other license classes here.'

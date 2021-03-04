@@ -1,4 +1,4 @@
-// Labels
+/** Question options */
 const policeRecordsCheckOptionsLabel = [
     'I have completed a police records check in the last 6 months',
     'I have completed a police records check in the last 12 months',

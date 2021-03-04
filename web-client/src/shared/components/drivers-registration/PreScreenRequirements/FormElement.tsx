@@ -6,7 +6,6 @@ import { CheckboxLabel } from './label';
 
 interface Props {
   error: FieldError | undefined,
-  value: unknown,
   labels: string[],
   control: Control<PreScreen>,
   formLabel: string,
@@ -84,7 +83,6 @@ export const FormSelect = ({ error, labels, control, formLabel, name }: Props): 
 
 interface Props2 {
   error: DeepMap<Record<string, unknown>, FieldError> | undefined,
-  value: unknown,
   labels: CheckboxLabel[],
   control: Control<PreScreen>,
   formLabel: string,
