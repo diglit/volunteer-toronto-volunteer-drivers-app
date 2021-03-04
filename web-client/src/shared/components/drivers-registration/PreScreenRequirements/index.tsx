@@ -1,6 +1,7 @@
 import React from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from '../../../redux/index'
+// import { useSelector, useDispatch } from "react-redux";
+// import { RootState } from '../../../redux/index'
+// import { PreScreen, setPreScreen } from 'shared/redux/driverRegistration';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -8,8 +9,8 @@ import * as yup from 'yup';
 import { Container, Button, Grid } from '@material-ui/core';
 import { FormRadio, FormDateInput, FormSelect, FormCheckbox } from './FormElement'
 
-import { PreScreen, setPreScreen } from 'shared/redux/driverRegistration';
 import { policeRecordsCheckOptionsLabel, policeRecordsCheckTypeLabel, drivingAbstractOptionsLabel, LicenseAndVehicleLabel, LicenseClasses } from './label';
+import { PreScreen } from 'shared/redux/driverRegistration';
 
 
 const schema = yup.object().shape({
@@ -37,23 +38,17 @@ const schema = yup.object().shape({
   LicenseClasses: yup.string()
 });
 
-const PreScreenRequirements = (): React.ReactElement => {
-  /* redux store */
-  const dispatch = useDispatch()
-  const preScreen = useSelector((state: RootState) => state.driversRegistration.preScreen)
+interface PreScreenPorps {
+  onSubmit: (data: PreScreen) => void,
+  defaultValues: PreScreen
+}
+
+const PreScreenRequirements = ({ onSubmit, defaultValues }: PreScreenPorps): React.ReactElement => {
   /* React hook form */
   const { control, handleSubmit, watch, errors } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: preScreen
+    defaultValues: defaultValues
   });
-
-  const onSubmit = (data: PreScreen) => {
-    // console.log("Submitting..");
-    // console.log(data);
-    // console.log('errors', errors);
-    const newState = { ...preScreen, ...data }
-    dispatch(setPreScreen(newState))
-  };
 
   /* Use for show or hide optional field */
   const policeCheck = watch('policeRecordsCheckOptions')
@@ -123,7 +118,7 @@ const PreScreenRequirements = (): React.ReactElement => {
           )}
 
           <Grid item>
-          <FormCheckbox
+            <FormCheckbox
               error={errors.LicenseAndVehicle}
               labels={LicenseAndVehicleLabel}
               control={control}
@@ -143,7 +138,7 @@ const PreScreenRequirements = (): React.ReactElement => {
           </Grid>
 
           <Grid item>
-            <Button type="submit" variant="contained">SAVE</Button>
+            <Button id="savePrescreen" type="submit" variant="contained">SAVE</Button>
           </Grid>
 
         </Grid>
