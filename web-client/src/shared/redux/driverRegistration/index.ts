@@ -1,43 +1,34 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export type CheckboxItem = {
-    [key: string]: boolean
-}
-
 export interface PreScreen {
     policeRecordsCheckOptions: string,
     policeRecordsCheckDate: string,
     policeRecordsCheckType: string,
     drivingAbstractOptions: string,
     drivingAbstractDate: string,
-    LicenseAndVehicle: CheckboxItem
-    LicenseClassesOther: string
+    LicenseAndVehicle: {
+        haveCar: boolean,
+        haveGLicense: boolean,
+        have1MInsurance: boolean,
+        have2MInsurance: boolean,
+    }
+
+    LicenseClasses: string
 }
 
 const initPreScreen: PreScreen = {
-    // policeRecordsCheckOptions: {
-    //     'I have completed a police records check in the last 6 months': false,
-    //     'I have completed a police records check in the last 12 months': false,
-    //     'I am willing to complete a police records check in order to volunteer as a driver': false,
-    //     'I am NOT willing to complete a police records check in order to volunteer as a driver': false,
-    // },
-    policeRecordsCheckOptions:'',
-    policeRecordsCheckDate: '2021-01-01',
-    // policeRecordsCheckType: {
-    //     'Criminal Record Checks': false,
-    //     'Criminal Record and Judicial Matters Checks': false,
-    //     'Vulnerable Sector Checks': false
-    // },
+    policeRecordsCheckOptions: '',
+    policeRecordsCheckDate: '',
     policeRecordsCheckType: '',
     drivingAbstractOptions: '',
-    drivingAbstractDate: '2021-01-01',
+    drivingAbstractDate: '',
     LicenseAndVehicle: {
-        'I have access to a car that is safe to drive for deliveries': false,
-        'I have liability insurance of $ 1 Million': false,
-        'I have liability insurance of $ 2 Million': false,
-        'I have a valid G license': false
+        haveCar: false,
+        haveGLicense: false,
+        have1MInsurance: false,
+        have2MInsurance: false,
     },
-    LicenseClassesOther: 'None'
+    LicenseClasses: 'None'
 }
 
 interface RegistrationState {

@@ -1,208 +1,152 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from '../../../redux/index'
-
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-// import * as yup from 'yup';
+import * as yup from 'yup';
 
-import { Container, Button, TextField, Grid, FormControl, FormLabel, FormGroup, Radio, RadioGroup, FormControlLabel, Select, MenuItem, makeStyles, Theme, createStyles } from '@material-ui/core';
+import { Container, Button, Grid } from '@material-ui/core';
+import { FormRadio, FormDateInput, FormSelect, FormCheckbox } from './FormElement'
 
-import FormCheckbox from "./FormCheckbox";
 import { PreScreen, setPreScreen } from 'shared/redux/driverRegistration';
+import { policeRecordsCheckOptionsLabel, policeRecordsCheckTypeLabel, drivingAbstractOptionsLabel, LicenseAndVehicleLabel, LicenseClasses } from './label';
 
-// const schema = yup.object().shape({
-//   policeRecordsCheckOptions: yup.array(),
-//   policeRecordsCheckDate: yup.date(),
-//   policeRecordsCheckType: yup.string(),
-//   drivingAbstractOptions: yup.array(),
-//   drivingAbstractDate: yup.date(),
-//   VehicleAndLicense: yup.array()
-// });
 
-// yup.object({
-//   terms: yup
-//     .boolean()
-//     .oneOf([true], 'Must Accept Terms and Conditions'),
-// });
+const schema = yup.object().shape({
+  policeRecordsCheckOptions: yup.string().required(),
+  //required field when they have police record check
+  policeRecordsCheckDate: yup.string().when('policeRecordsCheckOptions', {
+    is: (value: string) => value.includes('I have'),
+    then: yup.string().required()
+  }),
+  policeRecordsCheckType: yup.string().when('policeRecordsCheckOptions', {
+    is: (value: string) => value.includes('I have'),
+    then: yup.string().required()
+  }),
+  drivingAbstractOptions: yup.string().required(),
+  drivingAbstractDate: yup.string().when('drivingAbstractOptions', {
+    is: (value: string) => value.includes('I have'),
+    then: yup.string().required()
+  }),
+  LicenseAndVehicle: yup.object().shape({
+    haveCar: yup.boolean(),
+    haveGLicense: yup.boolean(),
+    have1MInsurance: yup.boolean(),
+    have2MInsurance: yup.boolean(),
+  }),
+  LicenseClasses: yup.string()
+});
 
 const PreScreenRequirements = (): React.ReactElement => {
+  //redux store
   const dispatch = useDispatch()
   const preScreen = useSelector((state: RootState) => state.driversRegistration.preScreen)
-  const { register, control, handleSubmit } = useForm({
-    // resolver: yupResolver(schema),
+  // React hook form
+  const { control, handleSubmit, watch, errors } = useForm({
+    resolver: yupResolver(schema),
     defaultValues: preScreen
   });
 
   const onSubmit = (data: PreScreen) => {
-    console.log("Submitting..");
-    console.log(data);
+    // console.log("Submitting..");
+    // console.log(data);
+    // console.log('errors', errors);
     const newState = { ...preScreen, ...data }
     dispatch(setPreScreen(newState))
   };
 
-  const policeRecordsCheckOptionsLabel = [
-    'I have completed a police records check in the last 6 months',
-    'I have completed a police records check in the last 12 months',
-    'I am willing to complete a police records check in order to volunteer as a driver',
-    'I am NOT willing to complete a police records check in order to volunteer as a driver',
-  ]
-
-  const policeRecordsCheckTypeLabel = [
-    'Criminal Record Checks',
-    'Criminal Record and Judicial Matters Checks',
-    'Vulnerable Sector Checks'
-  ]
-
-  const drivingAbstractOptionsLabel = [
-    'I have a clear drving abstract completed within the last 6 months',
-    'I have a clear driving abstract completed within the last 12 months',
-    'I am willing to complete a drving abstract in order to volunteer as a drvier',
-    'I am NOT willing to complete a driving abstract in order to volunteer as a driver'
-  ]
-
-  const LicenceClasses = ['None', 'A', 'B', 'C', 'D', 'E', 'F', 'G1', 'G2', 'M', 'M with L condition', 'M1', 'M2', 'M2 with L condition']
+  // Use for show or hide optional field
+  const policeCheck = watch('policeRecordsCheckOptions')
+  const drivingAbstract = watch('drivingAbstractOptions')
 
   return (
     <Container maxWidth="sm">
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={4}>
-          {/* <Grid item>
-          <FormControl component="fieldset" >
-            <FormLabel component="legend">Police Records Check Requirements (Choose all that apply)</FormLabel>
-            <FormGroup>
-              <FormCheckbox
-                data={preScreen}
-                name='policeRecordsCheckOptions'
-                control={control}
-                register={register}
-              />
-            </FormGroup>
-          </FormControl>
-        </Grid > */}
 
           <Grid item >
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Police Records Check Requirements</FormLabel>
-              <Controller
-                as={
-                  <RadioGroup
-                    name='policeRecordsCheckOptions'
-                    value={preScreen.policeRecordsCheckOptions} >
-                    {policeRecordsCheckOptionsLabel.map((label: string) =>
-                      <FormControlLabel
-                        value={label}
-                        control={<Radio />}
-                        label={label}
-                        key={label} />
-                    )}
-                  </RadioGroup>
-                }
-                name='policeRecordsCheckOptions'
-                control={control}
-              />
-            </FormControl>
+            <FormRadio
+              error={errors.policeRecordsCheckOptions}
+              value={preScreen.policeRecordsCheckOptions}
+              labels={policeRecordsCheckOptionsLabel}
+              control={control}
+              formLabel='Police Records Check Requirements'
+              name='policeRecordsCheckOptions'
+            />
           </Grid>
 
-          <Grid item >
-            <FormControl component="fieldset" >
-              <FormLabel>If you have completed a police records check, please indicate the date and type of check completed</FormLabel>
-              <Controller
-                as={TextField}
-                type="date"
-                value={preScreen.policeRecordsCheckDate}
-                control={control}
-                name='policeRecordsCheckDate'
-              />
-            </FormControl>
-          </Grid>
+          {policeCheck.includes('I have') && (
+            <>
+              <Grid item >
+                <FormDateInput
+                  error={errors.policeRecordsCheckDate}
+                  value={preScreen.policeRecordsCheckDate}
+                  control={control}
+                  labels={[]}
+                  formLabel='If you have completed a police records check, please indicate the date and type of check completed'
+                  name='policeRecordsCheckDate'
+                />
+              </Grid>
+
+              <Grid item >
+                <FormSelect
+                  error={errors.policeRecordsCheckType}
+                  value={preScreen.policeRecordsCheckType}
+                  labels={policeRecordsCheckTypeLabel}
+                  control={control}
+                  formLabel='Indicate the type of check here.'
+                  name='policeRecordsCheckType'
+                />
+              </Grid>
+            </>
+          )}
 
           <Grid item >
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Indicate the type of check here.</FormLabel>
-              <Controller
-                as={
-                  <Select value={preScreen.policeRecordsCheckType}>
-                    {policeRecordsCheckTypeLabel.map((label: string) =>
-                      <MenuItem
-                        value={label}
-                        key={label}>
-                        {label}
-                      </MenuItem>
-                    )}
-                  </Select>
-                }
-                name='policeRecordsCheckType'
-                value={preScreen.policeRecordsCheckType}
-                control={control}
-              />
-            </FormControl>
+            <FormRadio
+              error={errors.drivingAbstractOptions}
+              value={preScreen.drivingAbstractOptions}
+              labels={drivingAbstractOptionsLabel}
+              control={control}
+              formLabel='Driving Abstract Options'
+              name='drivingAbstractOptions'
+            />
           </Grid>
 
-          <Grid item >
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Driving Abstract Options</FormLabel>
-              <Controller
-                as={
-                  <RadioGroup name='drivingAbstractOptions' value={preScreen.drivingAbstractOptions} >
-                    {drivingAbstractOptionsLabel.map((label: string) =>
-                      <FormControlLabel
-                        value={label}
-                        control={<Radio />}
-                        label={label}
-                        key={label} />
-                    )}
-                  </RadioGroup>
-                }
-                name='drivingAbstractOptions'
-                control={control}
-              />
-            </FormControl>
-          </Grid>
-
-          <Grid item >
-            <FormControl component="fieldset" >
-              <FormLabel>If you have completed a drivig abstract, please indicate the date and type of check completed</FormLabel>
-              <Controller
-                as={TextField}
-                type="date"
-                value={preScreen.drivingAbstractDate}
-                control={control}
-                name='drivingAbstractDate'
-              />
-            </FormControl>
-          </Grid>
+          {drivingAbstract.includes('I have') && (
+            <>
+              <Grid item >
+                <FormDateInput
+                  error={errors.drivingAbstractDate}
+                  value={preScreen.drivingAbstractDate}
+                  control={control}
+                  labels={[]}
+                  formLabel='If you have completed a drivig abstract, please indicate the date and type of check completed'
+                  name='drivingAbstractDate'
+                />
+              </Grid>
+            </>
+          )}
 
           <Grid item>
-            <FormControl component="fieldset">
-              <FormLabel component="label">Vehicle/License Requirements (Choose all that apply)</FormLabel>
-              <FormGroup>
-                <FormCheckbox
-                  data={preScreen}
-                  name='LicenseAndVehicle'
-                  control={control}
-                  register={register}
-                />
-              </FormGroup>
-            </FormControl>
+          <FormCheckbox
+              error={errors.LicenseAndVehicle}
+              value={preScreen.LicenseAndVehicle}
+              labels={LicenseAndVehicleLabel}
+              control={control}
+              formLabel='Vehicle/License Requirements (Choose all that apply)'
+              name='LicenseAndVehicle'
+            />
           </Grid>
 
           <Grid item >
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Please indicate other license classes here.</FormLabel>
-              <Controller
-                as={
-                  <Select value={preScreen.LicenseClassesOther}>
-                    {LicenceClasses.map((label: string) =>
-                      <MenuItem value={label} key={label}>{label}</MenuItem>
-                    )}
-                  </Select>
-                }
-                name='policeRecordsCheckType'
-                value={preScreen.LicenseClassesOther}
-                control={control}
-              />
-            </FormControl>
+            <FormSelect
+              error={errors.LicenseClasses}
+              value={preScreen.LicenseClasses}
+              labels={LicenseClasses}
+              control={control}
+              formLabel='Please indicate other license classes here.'
+              name='LicenseClasses'
+            />
           </Grid>
 
           <Grid item>
@@ -214,6 +158,5 @@ const PreScreenRequirements = (): React.ReactElement => {
     </Container>
   );
 };
-
 
 export default PreScreenRequirements
