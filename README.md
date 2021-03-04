@@ -9,7 +9,7 @@ Tickets are simply github issues that have labels attached to them.
 There's two ways of looking at issues. 
 
 1) You can go to the issues tab in our github repo, and filter as needed.
-2) Checkout our project kanban board. https://github.com/orgs/diglit/projects
+2) Checkout our project kanban board. https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/projects/1
 
 ### Taking tickets
 
@@ -90,6 +90,12 @@ git push
 And then go to https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/pulls and create pull request
 
 Make sure the pull request passes all required tests
+
+## Deployents
+
+### DEV
+Backend: http://vt-volunteer-drivers-app.herokuapp.com
+Front-end: https://compassionate-noyce-78eb25.netlify.app/
 
 ### Optional
 One thing I like to setup is git autocomplete to make it easier to switch branches.
