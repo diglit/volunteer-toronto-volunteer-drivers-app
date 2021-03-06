@@ -16,10 +16,8 @@ const DriversRegistrationCurrentSlide = ({ currentSlide }: Props): React.ReactEl
     /* redux store */
     const dispatch = useDispatch()
     const driversRegistration = useSelector((state: RootState) => state.driversRegistration)
+    
     const savePreScreen = (data: PreScreen) => {
-        console.log("Submitting..");
-        console.log(data);
-        // console.log('errors', errors);
         const newState = { ...driversRegistration.preScreen, ...data }
         dispatch(setPreScreen(newState))
     };
@@ -32,7 +30,7 @@ const DriversRegistrationCurrentSlide = ({ currentSlide }: Props): React.ReactEl
         case 2:
             return <div>Your Needs</div>; //holdover until registration components are made, see case 1
         case 3:
-            return <PreScreenRequirements onSubmit={savePreScreen} defaultValues={driversRegistration.preScreen}/>;
+            return <PreScreenRequirements onSubmit={savePreScreen} />;
         case 4:
             return <div>Agreement</div>; //holdover until registration components are made, see case 1
         case 5:

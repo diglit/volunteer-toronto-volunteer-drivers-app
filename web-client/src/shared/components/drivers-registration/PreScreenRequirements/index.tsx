@@ -1,21 +1,23 @@
 import React from 'react';
-// import { useSelector, useDispatch } from "react-redux";
-// import { RootState } from '../../../redux/index'
-// import { PreScreen, setPreScreen } from 'shared/redux/driverRegistration';
+/** react hook form */
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
+/** MUI */
 import { Container, Button, Grid } from '@material-ui/core';
-import { FormRadio, FormDateInput, FormSelect, FormCheckbox } from './FormElement'
+/** redux */
+import { PreScreen } from 'shared/redux/driverRegistration';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/index'
+
+import FormInput from './FormInput'
 
 import { policeRecordsCheckOptionsLabel, policeRecordsCheckTypeLabel, drivingAbstractOptionsLabel, LicenseAndVehicleLabel, LicenseClasses } from './label';
-import { PreScreen } from 'shared/redux/driverRegistration';
 
 
 const schema = yup.object().shape({
   policeRecordsCheckOptions: yup.string().required(),
-  /* required field when they have police record check */
+  /**  required field when they have police record check */
   policeRecordsCheckDate: yup.string().when('policeRecordsCheckOptions', {
     is: (value: string) => value.includes('I have'),
     then: yup.string().required()
@@ -40,14 +42,16 @@ const schema = yup.object().shape({
 
 interface PreScreenPorps {
   onSubmit: (data: PreScreen) => void,
-  defaultValues: PreScreen
 }
 
-const PreScreenRequirements = ({ onSubmit, defaultValues }: PreScreenPorps): React.ReactElement => {
+const PreScreenRequirements = ({ onSubmit }: PreScreenPorps): React.ReactElement => {
+  const preScreen = useSelector((state: RootState) => state.driversRegistration.preScreen)
+
+
   /* React hook form */
   const { control, handleSubmit, watch, errors } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: defaultValues
+    defaultValues: preScreen
   });
 
   /* Use for show or hide optional field */
@@ -60,7 +64,8 @@ const PreScreenRequirements = ({ onSubmit, defaultValues }: PreScreenPorps): Rea
         <Grid container spacing={4}>
 
           <Grid item >
-            <FormRadio
+            <FormInput
+              formType='radio'
               error={errors.policeRecordsCheckOptions}
               labels={policeRecordsCheckOptionsLabel}
               control={control}
@@ -72,7 +77,8 @@ const PreScreenRequirements = ({ onSubmit, defaultValues }: PreScreenPorps): Rea
           {policeCheck.includes('I have') && (
             <>
               <Grid item >
-                <FormDateInput
+                <FormInput
+                  formType='dateInput'
                   error={errors.policeRecordsCheckDate}
                   control={control}
                   labels={[]}
@@ -82,7 +88,8 @@ const PreScreenRequirements = ({ onSubmit, defaultValues }: PreScreenPorps): Rea
               </Grid>
 
               <Grid item >
-                <FormSelect
+                <FormInput
+                  formType='select'
                   error={errors.policeRecordsCheckType}
                   labels={policeRecordsCheckTypeLabel}
                   control={control}
@@ -94,7 +101,8 @@ const PreScreenRequirements = ({ onSubmit, defaultValues }: PreScreenPorps): Rea
           )}
 
           <Grid item >
-            <FormRadio
+            <FormInput
+              formType='radio'
               error={errors.drivingAbstractOptions}
               labels={drivingAbstractOptionsLabel}
               control={control}
@@ -106,7 +114,8 @@ const PreScreenRequirements = ({ onSubmit, defaultValues }: PreScreenPorps): Rea
           {drivingAbstract.includes('I have') && (
             <>
               <Grid item >
-                <FormDateInput
+                <FormInput
+                  formType='dateInput'
                   error={errors.drivingAbstractDate}
                   control={control}
                   labels={[]}
@@ -118,7 +127,8 @@ const PreScreenRequirements = ({ onSubmit, defaultValues }: PreScreenPorps): Rea
           )}
 
           <Grid item>
-            <FormCheckbox
+            <FormInput
+              formType='checkbox'
               error={errors.LicenseAndVehicle}
               labels={LicenseAndVehicleLabel}
               control={control}
@@ -128,7 +138,8 @@ const PreScreenRequirements = ({ onSubmit, defaultValues }: PreScreenPorps): Rea
           </Grid>
 
           <Grid item >
-            <FormSelect
+            <FormInput
+              formType='select'
               error={errors.LicenseClasses}
               labels={LicenseClasses}
               control={control}

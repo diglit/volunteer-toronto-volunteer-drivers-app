@@ -26,9 +26,9 @@ export interface CheckboxLabel {
 
 const LicenseAndVehicleLabel: CheckboxLabel[] = [
     { name: 'haveCar', label: 'I have access to a car that is safe to drive for deliveries' },
-    { name: 'haveGLicense', label: 'I have liability insurance of $ 1 Million' },
-    { name: 'have1MInsurance', label: 'I have liability insurance of $ 2 Million' },
-    { name: 'have2MInsurance', label: 'I have a valid G license' },
+    { name: 'have1MInsurance', label: 'I have liability insurance of $ 1 Million' },
+    { name: 'have2MInsurance', label: 'I have liability insurance of $ 2 Million' },
+    { name: 'haveGLicense', label: 'I have a valid G license' },
 ]
 
 const LicenseClasses = ['None', 'A', 'B', 'C', 'D', 'E', 'F', 'G1', 'G2', 'M', 'M with L condition', 'M1', 'M2', 'M2 with L condition']
