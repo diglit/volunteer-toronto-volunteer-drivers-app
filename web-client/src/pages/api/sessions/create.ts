@@ -11,7 +11,7 @@ const users: User[] = [{
   password: 'Passw0rd!'
 }];
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => {
+const handler = (req: NextApiRequest, res: NextApiResponse): void => {
   if (req.method === 'POST') {
 
     const { email, password } = req.body;
