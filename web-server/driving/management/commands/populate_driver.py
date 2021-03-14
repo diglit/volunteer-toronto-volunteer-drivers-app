@@ -15,14 +15,11 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument("filename", type=str, help="filename for csv file")
-
-    def get_current_app_path(self):
-        return apps.get_app_config("driving").path
-
-    def get_csv_file(self, filename):
-        app_path = self.get_current_app_path()
-        file_path = os.path.join(app_path, "management", "commands", filename)
-        return file_path
+        parser.add_argument(
+            "--delete-data",
+            help="delete existing data in DB before writing in CSV data",
+            action="store_true",
+        )
 
     def clear_model(self):
         try:
@@ -54,7 +51,7 @@ class Command(BaseCommand):
                 van_truck_access=data["van_truck_access"],
                 one_mill_insurance=data["one_mill_insurance"],
                 two_mill_insurance=data["two_mill_insurance"],
-                G_license=data["G_license"],
+                g_license=data["g_license"],
                 other_license_class=data["other_license_class"],
             )
         except Exception as e:
@@ -62,9 +59,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         filename = kwargs["filename"]
+        delete_old_data = kwargs["delete_data"]
         self.stdout.write(self.style.SUCCESS(f"filename:{filename}"))
-        file_path = self.get_csv_file(filename)
-        line_count = 0
 
         driver_status = {
             "Not matched": "NM",
@@ -87,40 +83,40 @@ class Command(BaseCommand):
             "South Etobicoke": "SE",
             "Toronto West": "TW",
         }
-        selection = {"x": True, "X": True, "": False}
 
+        print(delete_old_data)
+        if delete_old_data:
+            self.clear_model()
+
+        line_count = 0
         try:
-            with open(file_path) as csv_file:
+            with open(filename) as csv_file:
                 csv_reader = csv.reader(csv_file, delimiter=",")
-                self.clear_model()
-                print("test")
                 for _ in range(2):
-                    print("test1")
                     next(csv_reader)
 
                 for row in csv_reader:
-
-                    if row != "" and line_count >= 0:
+                    if row:
                         data = {}
                         data["name"] = row[0]
-                        data["status"] = self.switch(driver_status, row[1])
+                        data["status"] = bool(row[1])
                         data["email"] = row[2]
                         data["advisor_name"] = row[4]
                         data["languages"] = row[5]
                         data["organization_referral"] = row[6]
                         data["second_match"] = row[7]
-                        data["community"] = self.switch(communities, row[8])
+                        data["community"] = bool(row[8])
                         data["other"] = row[9]
-                        data["contactless"] = self.switch(selection, row[11])
-                        data["high_risk_contact"] = self.switch(selection, row[12])
-                        data["up_to_thirty"] = self.switch(selection, row[14])
-                        data["up_to_fifty"] = self.switch(selection, row[15])
-                        data["packaging_sorting"] = self.switch(selection, row[16])
-                        data["car_access"] = self.switch(selection, row[19])
-                        data["van_truck_access"] = self.switch(selection, row[20])
-                        data["one_mill_insurance"] = self.switch(selection, row[21])
-                        data["two_mill_insurance"] = self.switch(selection, row[22])
-                        data["G_license"] = self.switch(selection, row[23])
+                        data["contactless"] = bool(row[11])
+                        data["high_risk_contact"] = bool(row[12])
+                        data["up_to_thirty"] = bool(row[14])
+                        data["up_to_fifty"] = bool(row[15])
+                        data["packaging_sorting"] = bool(row[16])
+                        data["car_access"] = bool(row[19])
+                        data["van_truck_access"] = bool(row[20])
+                        data["one_mill_insurance"] = bool(row[21])
+                        data["two_mill_insurance"] = bool(row[22])
+                        data["g_license"] = bool(row[23])
                         data["other_license_class"] = row[24]
 
                         self.insert_driver_to_db(data)
@@ -129,7 +125,7 @@ class Command(BaseCommand):
                 self.style.SUCCESS(f"{line_count} entries added to Drivers")
             )
         except FileNotFoundError:
-            raise CommandError(f"File {file_path} does not exist")
+            raise CommandError(f"File {filename} does not exist")
 
     def switch(self, choices, x):
         return choices.get(x)

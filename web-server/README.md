@@ -19,6 +19,20 @@ Make sure python, black and poetry are installed. Set up your text editor / IDE 
 
 From here, you should be able to go to `http://127.0.0.1:8000/exampledrivers/` and view and create new drivers in a local DB
 
+### Loading in Test Data
+
+```
+./manage.py populate_driver driving/management/commands/populate_drivers.csv
+```
+
+This will run a management command to populate the DB with our test CSV. If you'd like to clear out any existing driver data you have, you can run
+
+```
+./manage.py populate_driver driving/management/commands/populate_drivers.csv --delete-data
+```
+(note the `--delete-data` flag at the end)
+
+
 ## Key Technologies
 
 ### Django
@@ -38,7 +52,6 @@ Swagger will allow us to see, use, test and understand all our API endpoints (th
 #### Access
     [YOUR_ALLOWED_HOST]/swagger
     ex: http://192.168.2.26:8000/swagger/
-
 
 ### Docker
 
