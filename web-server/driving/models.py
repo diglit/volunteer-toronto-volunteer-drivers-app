@@ -55,3 +55,6 @@ class Driver(models.Model):
     two_mill_insurance = models.BooleanField()
     G_license = models.BooleanField()
     other_license_class = models.TextField()
+
+    class Meta:
+        ordering = ["created"]
