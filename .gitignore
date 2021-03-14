@@ -141,14 +141,12 @@ cython_debug/
 ############## JS / TS ################
 lib-cov
 *.seed
-*.log
 *.csv
 *.dat
 *.out
 *.pid
 *.gz
 *.swp
-
 pids
 logs
 results
@@ -157,23 +155,89 @@ tmp
 # Coverage reports
 coverage
 
-# API keys and secrets
-.env
-
 # Dependency directory
 node_modules
 bower_components
-
-# Editors
-.idea
-*.iml
-
-# OS metadata
-.DS_Store
-Thumbs.db
 
 # Ignore built ts files
 dist/**/*
 
 # ignore yarn.lock
 yarn.lock
+
+############ Global ##############
+# General
+.AppleDouble
+.LSOverride
+.DS_Store
+Thumbs.db
+
+# Thumbnails
+._*
+
+# Random Editors
+.idea
+*.iml
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Session
+Session.vim
+Sessionx.vim
+
+# Temporary
+.netrwhist
+*~
+
+# Auto-generated tag files
+tags
+
+# Persistent undo
+[._]*.un~
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+# Windows thumbnail cache files
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+
+# Dump file
+*.stackdump
+
+# Folder config file
+[Dd]esktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows shortcuts
+*.lnk
