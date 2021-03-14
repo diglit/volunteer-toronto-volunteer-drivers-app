@@ -5,7 +5,7 @@
 BEFORE YOU DO ANYTHING ELSE: Please read the README.md file in the root directory (../README.md) or https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/blob/develop/README.md
 
 ## Kanban Board
-https://github.com/orgs/diglit/projects/1?card_filter_query=label%3Abackend
+https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/projects/1?card_filter_query=label%3Abackend
 
 ## Dev Setup
 
@@ -44,6 +44,15 @@ Swagger will allow us to see, use, test and understand all our API endpoints (th
 #### Access 
     [YOUR_ALLOWED_HOST]/swagger
     ex: http://192.168.2.26:8000/swagger/
+
+
+#### Docker
+
+rename temp.env.dev .env.dev (mv temp.env.dev .env.dev)
+docker-compose build
+docker-compose up
+
+go to localhost:8000
 
 ## TODO
 

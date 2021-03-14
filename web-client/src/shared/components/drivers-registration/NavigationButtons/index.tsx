@@ -9,39 +9,36 @@ interface Props {
     prevSlide(event: React.MouseEvent): void,
 }
 
-const NavigationButtons = ({currentSlide, numberOfSlides, nextSlide, prevSlide}: Props): React.ReactElement => {
+const NavigationButtons = ({
+    currentSlide, 
+    numberOfSlides, 
+    nextSlide, 
+    prevSlide}: Props): React.ReactElement => {
 
     return (
         <>
             <ButtonGroup size="large">
-                {currentSlide > 1 ?
+                {currentSlide > 1 
+                &&
                 <Button
                 color="secondary"
                 variant="contained"
                 onClick={prevSlide}
                 >Back
-                </Button>
-                :null }
+                </Button>}
 
-                {currentSlide < numberOfSlides ? 
+                {currentSlide < numberOfSlides
+                && 
                 <Button
                 color="primary"
                 variant="contained"
                 onClick={nextSlide}
                 >Next
-                </Button>
-                : null }
+                </Button>}
 
-                {currentSlide === numberOfSlides ?
-                <Button
-
-                >Submit</Button>
-                : null }
-
-                
-
-
-
+                {currentSlide === numberOfSlides
+                &&
+                <Button>Submit</Button>}
             </ButtonGroup>
         </>
     )

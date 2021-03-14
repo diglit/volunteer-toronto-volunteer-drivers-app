@@ -4,7 +4,14 @@ import { NextPage } from 'next/types';
 import { useRouter } from "next/router";
 import { useForm } from 'react-hook-form';
 // MUI Core
-import { Typography, Link, TextField, Grid, Container, Button } from '@material-ui/core';
+import { 
+  Typography, 
+  Link, 
+  TextField, 
+  Grid, 
+  Container, 
+  Button 
+} from '@material-ui/core';
 import styles from './index.module.scss'
 
 interface FormData {
