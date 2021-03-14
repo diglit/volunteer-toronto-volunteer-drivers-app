@@ -35,33 +35,15 @@ From here, you should be able to go to `http://127.0.0.1:8000/exampledrivers/` a
 
 Swagger will allow us to see, use, test and understand all our API endpoints (their requests and responses). It provides a Web UI for us to navigate between end points for ease of use.
 
-#### Installation of Swagger/drf-yasg REQUIRED
-
-    Full instructions: https://github.com/axnsan12/drf-yasg
-    Quick Start
-        1. pip install -U drf-yasg
-        
-#### Access 
+#### Access
     [YOUR_ALLOWED_HOST]/swagger
     ex: http://192.168.2.26:8000/swagger/
 
 
-#### Docker
+### Docker
 
-rename temp.env.dev .env.dev (mv temp.env.dev .env.dev)
+rename temp.env.dev .env.dev ( `mv temp.env.dev .env.dev` )
 docker-compose build
 docker-compose up
 
 go to localhost:8000
-
-## TODO
-
-This is basic setup stuff, nothing app specific yet:
-
-- Example test
-- Dockerfile + dockercompose
-- Switch this over to postgres or another "real" DB
-- Document stuff better
-- Finish this TODO, I'm probably missing all sorts of stuff
-
-
