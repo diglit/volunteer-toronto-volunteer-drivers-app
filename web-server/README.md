@@ -30,6 +30,12 @@ PORT=8000
 
 SECRET_KEY=supersecret
 DEBUG=True
+
+POSTGRES_DB=postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
 ```
 
 You can set `SECRET_KEY` locally to whatever you want, in production this will be a long random string.
