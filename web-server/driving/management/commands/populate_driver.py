@@ -84,7 +84,6 @@ class Command(BaseCommand):
             "Toronto West": "TW",
         }
 
-        print(delete_old_data)
         if delete_old_data:
             self.clear_model()
 
