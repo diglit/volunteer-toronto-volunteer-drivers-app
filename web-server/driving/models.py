@@ -45,5 +45,5 @@ class Driver(models.Model):
     van_truck_access = models.BooleanField()
     one_mill_insurance = models.BooleanField()
     two_mill_insurance = models.BooleanField()
-    G_license = models.BooleanField()
+    g_license = models.BooleanField()
     other_license_class = models.TextField()
