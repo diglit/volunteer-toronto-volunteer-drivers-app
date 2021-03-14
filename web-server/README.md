@@ -12,12 +12,28 @@ https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/projects/1?car
 Make sure python, black and poetry are installed. Set up your text editor / IDE to run black on save for consistency, and set it up to work with poetry.
 
 - `cd` into the project directory
+- create your `.env.dev` file (see below)
 - `poetry install  # This installs your poetry dependencies`
 - `poetry shell  # This activates your virtualenv`
 - `python manage.py migrate  # This will run the migrations and create your sqlite db if it doesn't already exist`
 - `python manage.py runserver  # runs a local server for testing`
 
 From here, you should be able to go to `http://127.0.0.1:8000/exampledrivers/` and view and create new drivers in a local DB
+
+### `.env.dev` File
+
+To create this file, rename temp.env.dev to .env.dev ( `cp temp.env.dev .env.dev` ) It should look something like:
+
+```
+DATABASE_URL=postgres://postgres@db:5432/postgres
+PORT=8000
+
+SECRET_KEY=supersecret
+DEBUG=True
+```
+
+You can set `SECRET_KEY` locally to whatever you want, in production this will be a long random string.
+
 
 ### Loading in Test Data
 
@@ -55,7 +71,6 @@ Swagger will allow us to see, use, test and understand all our API endpoints (th
 
 ### Docker
 
-rename temp.env.dev .env.dev ( `cp temp.env.dev .env.dev` )
 docker-compose build
 docker-compose up
 
