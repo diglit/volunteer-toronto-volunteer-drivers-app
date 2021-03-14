@@ -55,7 +55,7 @@ Swagger will allow us to see, use, test and understand all our API endpoints (th
 
 ### Docker
 
-rename temp.env.dev .env.dev ( `mv temp.env.dev .env.dev` )
+rename temp.env.dev .env.dev ( `cp temp.env.dev .env.dev` )
 docker-compose build
 docker-compose up
 
