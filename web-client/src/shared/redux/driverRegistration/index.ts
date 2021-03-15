@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import Agreement from 'shared/components/drivers-registration/Agreement';
 
 export interface PreScreen {
     policeRecordsCheckOptions: string,
@@ -16,6 +17,16 @@ export interface PreScreen {
     LicenseClasses: string
 }
 
+export interface Agreement {
+    agreementOptions: {
+        agreement1: boolean,
+        agreement2: boolean,
+        agreement3: boolean,
+        agreement4: boolean,
+    },
+    signiture: string
+}
+
 const initPreScreen: PreScreen = {
     policeRecordsCheckOptions: '',
     policeRecordsCheckDate: '',
@@ -31,14 +42,27 @@ const initPreScreen: PreScreen = {
     LicenseClasses: 'None'
 }
 
+const initAgreement: Agreement = {
+    agreementOptions: {
+        agreement1: false,
+        agreement2: false,
+        agreement3: false,
+        agreement4: false,
+    },
+    signiture: ''
+}
+
+
 interface RegistrationState {
-    preScreen: PreScreen
+    preScreen: PreScreen,
+    agreement: Agreement,
 }
 
 
 
 const initialState = {
-    preScreen: initPreScreen
+    preScreen: initPreScreen,
+    agreement: initAgreement,
 } as RegistrationState;
 
 const driversRegistrationSlice = createSlice({
@@ -48,9 +72,12 @@ const driversRegistrationSlice = createSlice({
         setPreScreen: (state, { payload }: PayloadAction<PreScreen>) => {
             state.preScreen = payload;
         },
+        setAgreement: (state, { payload }: PayloadAction<Agreement>) => {
+            state.agreement = payload;
+        }
     }
 });
 
-export const { setPreScreen } = driversRegistrationSlice.actions;
+export const { setPreScreen, setAgreement } = driversRegistrationSlice.actions;
 
 export default driversRegistrationSlice;

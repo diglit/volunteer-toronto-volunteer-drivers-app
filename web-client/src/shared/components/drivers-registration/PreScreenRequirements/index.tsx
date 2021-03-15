@@ -10,10 +10,8 @@ import { PreScreen } from 'shared/redux/driverRegistration';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/index'
 
-import FormInput from './FormInput'
-
 import { policeRecordsCheckOptionsLabel, policeRecordsCheckTypeLabel, drivingAbstractOptionsLabel, LicenseAndVehicleLabel, LicenseClasses } from './label';
-
+import FormInput from '../FormInput';
 
 const schema = yup.object().shape({
   policeRecordsCheckOptions: yup.string().required(),
