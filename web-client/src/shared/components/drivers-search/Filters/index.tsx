@@ -1,141 +1,123 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NextPage } from 'next';
-// data for populating checkboxes
-import {
-  globalFilterData,
-  DefaultValues
-} from './defaultValues';
 // Material UI components
 import Button from '@material-ui/core/Button';
 // Components
 import FilterAccordion from '../FilterAccordion';
-// API mock file necessary for the API call to run
-// require('../../../../../public/mocks/index');
 // REDUX
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchDrivers,
-  updateFilters,
-  // filtersSelector,
+  filtersSelector,
   FilterRequest,
+  setFilters,
+  //example of using drivers state from Redux
   // driversSelector
 } from '../../../redux/driversSearch';
 
+const DriversSearchFilters: NextPage = React.memo(
+  function DriversSearchFilters() {
+    const dispatch = useDispatch();
 
-const DriversSearchFilters: NextPage = React.memo(function DriversSearchFilters() {
-  const dispatch = useDispatch();
+    // For using in Drivers List
+    //example of using drivers state from Redux
+    // const { isLoading, drivers, errors } = useSelector(driversSelector);
 
-  // OKSANA: This is for Wendy to use in Drivers List
-  // const { isLoading, drivers, errors } = useSelector(driversSelector);
+    // State  with all filters from Redux
+    const filterGroups = useSelector(filtersSelector);
 
-  // OKSANA: State originating from redux after filter update 
-  // OKSANA TO DO: replace local globalFilter state with Redux filters state  
-  // const filters = useSelector(filtersSelector);
+    const handleDriverSearch = async () => {
+      const updatedFilter: FilterRequest = {
+        language: [],
+        location: [],
+        availability: [],
+        comfortLevel: [],
+        policeCheck: [],
+        drivingAbstract: [],
+        licenceClass: [],
+        vehicleType: [],
+        insurancePolicy: [],
+        willingToLift: [],
+        packingAndSorting: [],
+      };
 
-  const [globalFilter, setGlobalFilter] = useState(globalFilterData);
-
-  const handleFilterChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    filter: DefaultValues,
-    filterName: string
-  ) => {
-    const newGlobalFilter = { ...globalFilter };
-    const newFilter = { ...filter };
-    for (const prop in newFilter) {
-      prop === event.target.name ? (newFilter[prop] = event.target.checked) : null
-    }
-    newGlobalFilter[filterName] = newFilter;
-    setGlobalFilter(newGlobalFilter);
-    // OKSANA: updating filters via Redux 
-    dispatch(updateFilters(newGlobalFilter));
-  };
-
-  const handleDriverSearch = async () => {
-    const mockFilter: FilterRequest = {
-      language: [],
-      location: [],
-      availability: [],
-      comfortLevel: [],
-      policeCheck: [],
-      drivingAbstract: [],
-      licenceClass: [],
-      vehicleType: [],
-      insurancePolicy: [],
-      willingToLift: [],
-      packingAndSorting: [],
+      for (const property in filterGroups) {
+        //create a new array with filtered out properties that were checked, i.e. they are true
+        const newArr = Object.keys(filterGroups[property]).filter(
+          (item) => filterGroups[property][item],
+        );
+        switch (property) {
+          case 'Language(s)':
+            updatedFilter.language = newArr;
+            break;
+          case 'Location':
+            updatedFilter.location = newArr;
+            break;
+          case 'Availability':
+            updatedFilter.availability = newArr;
+            break;
+          case 'Comfort Level':
+            updatedFilter.comfortLevel = newArr;
+            break;
+          case 'Police Check':
+            updatedFilter.policeCheck = newArr;
+            break;
+          case 'Driving Abstract':
+            updatedFilter.drivingAbstract = newArr;
+            break;
+          case 'License Class':
+            updatedFilter.licenceClass = newArr;
+            break;
+          case 'Vehicle Type':
+            updatedFilter.vehicleType = newArr;
+            break;
+          case 'Insurance Policy':
+            updatedFilter.insurancePolicy = newArr;
+            break;
+          case 'Willing to Lift':
+            updatedFilter.willingToLift = newArr;
+            break;
+          case 'Packing and Sorting':
+            updatedFilter.packingAndSorting = newArr;
+            break;
+          default:
+            [];
+        }
+      }
+      // Send a POST request to backend to fetch drivers based on filters and saving them in Redux store
+      dispatch(fetchDrivers(updatedFilter));
     };
 
-    for (const filter in globalFilter) {
-      const newArr = Object.keys(globalFilter[filter]).filter(item => globalFilter[filter][item]);
-      switch (filter) {
-        case 'Language(s)':
-          mockFilter.language = newArr;
-          break;
-        case "Location":
-          mockFilter.location = newArr;
-          break;
-        case "Availability":
-          mockFilter.availability = newArr;
-          break;
-        case "Comfort Level":
-          mockFilter.comfortLevel = newArr;
-          break;
-        case "Police Check":
-          mockFilter.policeCheck = newArr;
-          break;
-        case "Driving Abstract":
-          mockFilter.drivingAbstract = newArr;
-          break;
-        case "License Class":
-          mockFilter.licenceClass = newArr;
-          break;
-        case "Vehicle Type":
-          mockFilter.vehicleType = newArr;
-          break;
-        case "Insurance Policy":
-          mockFilter.insurancePolicy = newArr;
-          break;
-        case "Willing to Lift":
-          mockFilter.willingToLift = newArr;
-          break;
-        case "Packing and Sorting":
-          mockFilter.packingAndSorting = newArr;
-          break;
-        default:
-          console.log(newArr);
-      }
-    }
-    // Sending a POST request to backend to fetch drivers based on filters and saving them in Redux store
-    dispatch(fetchDrivers(mockFilter));
-  };
-
-  return (
-    <>
-      <h1>Driver Filters</h1>
-      <ul>
-        {Object.keys(globalFilter).map(filter => {
-          console.log(globalFilter[filter]);
-          return (
-            <li key={filter}>
-              <FilterAccordion
-                handleChange={(event) => handleFilterChange(event, globalFilter[filter], filter)}
-                state={globalFilter[filter]}
-                title={filter}
-              />
-            </li>
-          )
-        })
-        }
-      </ul>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleDriverSearch}
-      >
-        Search
-      </Button>
-    </>
-  );
-});
+    return (
+      <>
+        <h1>Driver Filters</h1>
+        <ul>
+          {Object.keys(filterGroups).map((filterGroupName) => {
+            // map over filters and render an accordion per filterGroup, e.g. Languages etc.
+            return (
+              <li key={filterGroupName}>
+                <FilterAccordion
+                  //e.g., filterName - Morning, e.g. filterGroupName - Availability
+                  onFilterChange={(filterName) => {
+                    dispatch(setFilters({ filterName, filterGroupName }));
+                  }}
+                  filterGroup={filterGroups[filterGroupName]}
+                  filterGroupName={filterGroupName}
+                />
+              </li>
+            );
+          })}
+        </ul>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleDriverSearch}
+        >
+          Search
+        </Button>
+      </>
+    );
+  },
+);
 
 export default DriversSearchFilters;

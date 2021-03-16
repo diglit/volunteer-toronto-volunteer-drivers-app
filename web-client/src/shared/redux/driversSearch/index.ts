@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from '../index';
 import {
   globalFilterData,
-  AllFilters
+  AllFilters,
 } from '../../components/drivers-search/Filters/defaultValues';
 
 export interface Driver {
@@ -19,22 +19,27 @@ export interface Driver {
 }
 
 export interface Error {
-  error: string
+  error: string;
 }
 
 export interface Response {
   isLoading: boolean;
   drivers: Driver[];
-  errors: Error[]
+  errors: Error[];
 }
 
 export interface FilterRequest {
-  [name: string]: string[]
+  [name: string]: string[];
 }
 
 export interface DriversState {
   response: Response;
   filters: AllFilters;
+}
+
+export interface DriversSearchPayload {
+  filterName: string;
+  filterGroupName: string;
 }
 
 // make a mock driver data as per design
@@ -49,8 +54,7 @@ const mockDriverData: Driver = {
   willingToLift: 'Up to 50lbs',
   packingAndSorting: 'Yes',
   riskComfortLevel: ['Contactless Deliveries', 'Low Risk', 'High Risk'],
-}
-
+};
 
 const initialState: DriversState = {
   response: {
@@ -58,9 +62,8 @@ const initialState: DriversState = {
     drivers: [mockDriverData],
     errors: [],
   },
-  filters: globalFilterData
-}
-
+  filters: globalFilterData,
+};
 
 const driversSearchSlice = createSlice({
   name: 'drivers',
@@ -73,47 +76,57 @@ const driversSearchSlice = createSlice({
       state.response.drivers = payload;
     },
     setErrors: (state, { payload }: PayloadAction<Error[]>) => {
-      state.response.errors = payload
+      state.response.errors = payload;
     },
-    setFilters: (state, { payload }: PayloadAction<AllFilters>) => {
-      state.filters = payload
-    }
-  }
+    setFilters: (state, { payload }: PayloadAction<DriversSearchPayload>) => {
+      const { filterName, filterGroupName } = payload;
+      // update state - global filters -  in reducers when possible - as per best practices 
+      state.filters[filterGroupName] = {
+        ...state.filters[filterGroupName],
+        [filterName]: !state.filters[filterGroupName][filterName],
+      };
+    },
+  },
 });
 
 // Actions generated from the drivers slice
-export const { setLoading, setErrors, setDrivers, setFilters } = driversSearchSlice.actions;
-
-export const updateFilters = (newFilters: AllFilters): AppThunk => {
-  return async dispatch => {
-    dispatch(setFilters(newFilters));
-  }
-}
+export const {
+  setLoading,
+  setErrors,
+  setDrivers,
+  setFilters,
+} = driversSearchSlice.actions;
 
 export const fetchDrivers = (filterRequest: FilterRequest): AppThunk => {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch(setLoading(true));
     try {
       const response = await fetch('http://localhost:3000/api/drivers', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(filterRequest)
+        body: JSON.stringify(filterRequest),
       });
       const newRes = await response.json();
       dispatch(setLoading(false));
       dispatch(setDrivers(newRes.data));
+      //keeping one console log on purpose to check api response from redux
       console.log(newRes.data, 'data from redux after setting state');
     } catch (error) {
       dispatch(setErrors(error));
       dispatch(setLoading(false));
     }
-  }
-}
+  };
+};
 
-// Export state for using in useSelector 
-export const driversSelector = (state: { driversSearch: DriversState }): Response => state.driversSearch.response;
-export const filtersSelector = (state: { driversSearch: DriversState }): AllFilters => state.driversSearch.filters;
+// Export state for using in useSelector
+export const driversSelector = (state: {
+  driversSearch: DriversState;
+}): Response => state.driversSearch.response;
+
+export const filtersSelector = (state: {
+  driversSearch: DriversState;
+}): AllFilters => state.driversSearch.filters;
 
 export default driversSearchSlice.reducer;
