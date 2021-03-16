@@ -1,3 +1,5 @@
+import type { NextApiRequest, NextApiResponse } from 'next';
+
 const mockDrivers = [
     {
       id: 1,
@@ -27,6 +29,6 @@ const mockDrivers = [
     }
   ]
 // eslint-disable-next-line
-export default function handler(req, res) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   res.status(200).json({data: mockDrivers})
 }

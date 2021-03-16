@@ -105,7 +105,6 @@ const DriversSearchFilters: NextPage = React.memo(function DriversSearchFilters(
           console.log(newArr);
       }
     }
-    console.log(mockFilter, "new new mock filter");
     // Sending a POST request to backend to fetch drivers based on filters and saving them in Redux store
     dispatch(fetchDrivers(mockFilter));
   };
@@ -115,6 +114,7 @@ const DriversSearchFilters: NextPage = React.memo(function DriversSearchFilters(
       <h1>Driver Filters</h1>
       <ul>
         {Object.keys(globalFilter).map(filter => {
+          console.log(globalFilter[filter]);
           return (
             <li key={filter}>
               <FilterAccordion
