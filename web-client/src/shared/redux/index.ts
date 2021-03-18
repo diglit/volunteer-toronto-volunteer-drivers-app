@@ -1,13 +1,15 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, Action } from '@reduxjs/toolkit';
+import { ThunkAction } from 'redux-thunk';
 import { combineReducers } from 'redux';
 import reduxThunk from 'redux-thunk';
+import driversSearchSlice, { DriversState } from './driversSearch';
+import driversRegistrationSlice from './driverRegistration';
 
-import driversSearchSlice from './driversSearch/index';
-import driversRegistrationSlice from './driversRegistration/index';
+export type AppThunk = ThunkAction<void, DriversState, unknown, Action<string>>;
 
 const reducer = combineReducers({
   driversSearch: driversSearchSlice.reducer,
-  driversRegistration: driversRegistrationSlice.reducer,
+  driversRegistration: driversRegistrationSlice.reducer
 })
 
 export const store = configureStore({
