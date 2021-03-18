@@ -13,5 +13,8 @@ const reducer = combineReducers({
 export const store = configureStore({
   reducer,
   devTools: true,
-  middleware: [reduxThunk],
-});
+  middleware: [reduxThunk]
+})
+
+// Create RootState type in Root Reducer.
+export type RootState = ReturnType<typeof reducer>

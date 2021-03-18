@@ -1,10 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppThunk } from '../index';
-import {
-  globalFilterData,
-  AllFilters,
-} from '../../components/drivers-search/Filters/defaultValues';
-
+import { AllFilters, globalFilterData } from 'shared/components/drivers-search/Filters/defaultValues';
+import { AppThunk } from '..';
 export interface Driver {
   id: number;
   name: string;
@@ -40,6 +36,9 @@ export interface DriversState {
 export interface DriversSearchPayload {
   filterName: string;
   filterGroupName: string;
+}
+export interface DriversSearch {
+  drivers: Driver[];
 }
 
 // make a mock driver data as per design

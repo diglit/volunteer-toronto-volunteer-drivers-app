@@ -1,29 +1,11 @@
 # Volunteer Drivers App - Front-End
 
-## Git Structure
+## General Principles
 
-We're going to be using (gitflow)[https://github.com/nvie/gitflow] structure for creating branches and merging. We'll be creating all of our branches off of develop.
-```
-git checkout develop
-``` 
+BEFORE YOU DO ANYTHING ELSE: Please read the README.md file in the root directory (../README.md) or https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/blob/develop/README.md
 
-When we want to start working on a ticket
-```
-git checkout develop
-git checkout -b feature/10     (where 10 is the issue number)
-```
-
-Once the feature is completed, you add to branch
-```
-git add .
-git commit -am '#number - commit message'
-git push
-```
-*#number refers to ticket number*
-
-And then go to https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/pulls and create pull request
-
-Make sure the pull request passes all required tests
+## Kanban Board
+https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/projects/1?card_filter_query=label%3Afront-end
 
 ## Folder Structure
 
@@ -46,8 +28,6 @@ Make sure the pull request passes all required tests
       selectors.ts
       (actions.ts optional)
 
-
-
 ## Key Technologies
 
 ### Application State
@@ -60,17 +40,13 @@ Make sure the pull request passes all required tests
 
 * @material-ui/core
 
-## Authors
+## Forms
 
-Leigh Silverstein \
-Oksana Samokhvalova \
-Wendy Chen \
-Chris Cottier\
-Yinyin Lu
+We're going to be using react-hook-form with yup to handle form submissions
+https://react-hook-form.com/
 
-## Pull Requests
-
-When you complete tickets and create a pull request for your work, you'll want to add two reviewers from the team, and the dev manager. When the ticket is approved by all three people, you can merge it in.
+We'll be using the yup implementation of this hook system.
+https://github.com/react-hook-form/resolvers#yup
 
 ## Forms
 
@@ -126,8 +102,6 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-
-
 ### Getting Started
 
 First, run the development server:
@@ -142,3 +116,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
+## Authors
+
+Leigh Silverstein \
+Oksana Samokhvalova \
+Wendy Chen \
+Chris Cottier\
+Yinyin Lu
