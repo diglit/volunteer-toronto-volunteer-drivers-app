@@ -12,12 +12,48 @@ https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/projects/1?car
 Make sure python, black and poetry are installed. Set up your text editor / IDE to run black on save for consistency, and set it up to work with poetry.
 
 - `cd` into the project directory
+- create your `.env.dev` file (see below)
 - `poetry install  # This installs your poetry dependencies`
 - `poetry shell  # This activates your virtualenv`
 - `python manage.py migrate  # This will run the migrations and create your sqlite db if it doesn't already exist`
 - `python manage.py runserver  # runs a local server for testing`
 
 From here, you should be able to go to `http://127.0.0.1:8000/exampledrivers/` and view and create new drivers in a local DB
+
+### `.env.dev` File
+
+To create this file, rename temp.env.dev to .env.dev ( `cp temp.env.dev .env.dev` ) It should look something like:
+
+```
+DATABASE_URL=postgres://postgres@db:5432/postgres
+PORT=8000
+
+SECRET_KEY=supersecret
+DEBUG=True
+
+POSTGRES_DB=postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
+```
+
+You can set `SECRET_KEY` locally to whatever you want, in production this will be a long random string.
+
+
+### Loading in Test Data
+
+```
+./manage.py populate_driver driving/management/commands/populate_drivers.csv
+```
+
+This will run a management command to populate the DB with our test CSV. If you'd like to clear out any existing driver data you have, you can run
+
+```
+./manage.py populate_driver driving/management/commands/populate_drivers.csv --delete-data
+```
+(note the `--delete-data` flag at the end)
+
 
 ## Key Technologies
 
@@ -35,33 +71,13 @@ From here, you should be able to go to `http://127.0.0.1:8000/exampledrivers/` a
 
 Swagger will allow us to see, use, test and understand all our API endpoints (their requests and responses). It provides a Web UI for us to navigate between end points for ease of use.
 
-#### Installation of Swagger/drf-yasg REQUIRED
-
-    Full instructions: https://github.com/axnsan12/drf-yasg
-    Quick Start
-        1. pip install -U drf-yasg
-        
-#### Access 
+#### Access
     [YOUR_ALLOWED_HOST]/swagger
     ex: http://192.168.2.26:8000/swagger/
 
+### Docker
 
-#### Docker
-
-rename temp.env.dev .env.dev (mv temp.env.dev .env.dev)
 docker-compose build
 docker-compose up
 
 go to localhost:8000
-
-## TODO
-
-This is basic setup stuff, nothing app specific yet:
-
-- Example test
-- Dockerfile + dockercompose
-- Switch this over to postgres or another "real" DB
-- Document stuff better
-- Finish this TODO, I'm probably missing all sorts of stuff
-
-

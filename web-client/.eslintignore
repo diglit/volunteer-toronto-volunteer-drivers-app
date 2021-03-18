@@ -2,3 +2,5 @@
 **/out/*
 **/.next/*
 next-env.d.ts
+**/build/*
+

@@ -1,14 +1,6 @@
 from django.db import models
 
 
-class ExampleDriver(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
-    name = models.TextField()
-
-    class Meta:
-        ordering = ["created"]
-
-
 class Driver(models.Model):
     DRIVER_STATUS = (
         ("NM", "Not Matched"),
@@ -53,5 +45,5 @@ class Driver(models.Model):
     van_truck_access = models.BooleanField()
     one_mill_insurance = models.BooleanField()
     two_mill_insurance = models.BooleanField()
-    G_license = models.BooleanField()
+    g_license = models.BooleanField()
     other_license_class = models.TextField()

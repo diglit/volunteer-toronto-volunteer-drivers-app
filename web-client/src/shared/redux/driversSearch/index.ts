@@ -128,4 +128,4 @@ export const filtersSelector = (state: {
   driversSearch: DriversState;
 }): AllFilters => state.driversSearch.filters;
 
-export default driversSearchSlice.reducer;
+export default driversSearchSlice;

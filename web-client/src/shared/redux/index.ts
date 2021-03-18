@@ -3,12 +3,14 @@ import { ThunkAction } from 'redux-thunk';
 import { combineReducers } from 'redux';
 import reduxThunk from 'redux-thunk';
 import driversSearchSlice, { DriversState } from './driversSearch';
+import driversRegistrationSlice from './driverRegistration';
 
 export type AppThunk = ThunkAction<void, DriversState, unknown, Action<string>>;
 
 const reducer = combineReducers({
-  driversSearch: driversSearchSlice,
-});
+  driversSearch: driversSearchSlice.reducer,
+  driversRegistration: driversRegistrationSlice.reducer
+})
 
 export const store = configureStore({
   reducer,

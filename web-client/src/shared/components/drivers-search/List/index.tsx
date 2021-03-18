@@ -13,8 +13,13 @@ const DriversSearchList = React.memo(function DriversSearchList() {
   return (
     <div>
       {driversList.map((driver) => (
-        <div role="driverCard" key={driver.id} >
-          <DriverCard driverInfo={driver} />
+        <div 
+          role="driverCard" 
+          key={driver.id} 
+        >
+          <DriverCard 
+            driverInfo={driver} 
+          />
         </div>
       ))}
     </div>
