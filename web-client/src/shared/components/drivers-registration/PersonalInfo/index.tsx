@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PersonalInfo = (): React.ReactElement => {
+const PersonalInfo = (props:any): React.ReactElement => {
     return (
         <div>First Name</div>
     )

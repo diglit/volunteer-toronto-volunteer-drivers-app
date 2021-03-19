@@ -19,20 +19,37 @@ const mockDriverInputData = {
 
 describe('PersonalInfo', ()=>{
     const mockOnSubmit = jest.fn()
-    render(
-        <Provider store={store}>
-            <PersonalInfoComponent onSubmit={mockOnSubmit}/>
-        </Provider>
-    )
+    
+    const createTestElements = ()=>{
+        return {
+            firstNameField: screen.getByLabelText('First Name'),
+            lastNameField: screen.getByLabelText('Last Name'),
+            emailField: screen.getByLabelText('Email Address'),
+            phoneField: screen.getByLabelText('Phone Number'),
+            language: screen.getByLabelText('English'),
+            languageOther: screen.getByPlaceholderText('Other'),
+            otherLanguageCheckBox: screen.getByTestId('other-language'),
+            nextBtn: screen.getByText('Next')
+        }
+    }
 
     describe('when provided information does not meet the criteria', ()=>{
-        const firstNameField = screen.getByLabelText('First Name')
-        const lastNameField = screen.getByLabelText('Last Name')
-        const emailField = screen.getByLabelText('Email Address')
-        const phoneField = screen.getByLabelText('Phone Number')
-        const language = screen.getByLabelText('English')
-        const languageOther = screen.getByPlaceholderText('Other')
-        const nextBtn = screen.getByText('Next')
+        render(
+            <Provider store={store}>
+                <PersonalInfoComponent onSubmit={mockOnSubmit}/>
+            </Provider>
+        )
+
+        const {
+            firstNameField,
+            lastNameField,
+            emailField,
+            phoneField,
+            language,
+            otherLanguageCheckBox,
+            languageOther,
+            nextBtn
+        } = createTestElements()
 
         beforeEach(()=>{
             // Filling in valid data so each field can be 
@@ -43,7 +60,6 @@ describe('PersonalInfo', ()=>{
             UserEvent.type(emailField, mockDriverInputData.email)
             UserEvent.type(phoneField, mockDriverInputData.phone)
             UserEvent.click(language)
-            UserEvent.type(languageOther, mockDriverInputData.otherLanguage)
         })
 
         const assertEmptyFieldErrorShouldBeDefined = (field:HTMLElement)=>{
@@ -51,18 +67,18 @@ describe('PersonalInfo', ()=>{
             UserEvent.click(nextBtn)
 
             const errorMsgElem = screen.getByText('Please fill the field')
-            expect(errorMsgElem).toBeDefined()
+            expect(errorMsgElem).toBeInTheDocument()
         }
 
         describe('First Name field', ()=>{
             it('should display empty field error on empty field',()=>{
-                assertEmptyFieldDisplayError(firstNameField)
+                assertEmptyFieldErrorShouldBeDefined(firstNameField)
             })
         })
 
         describe('Last Name field', ()=>{
             it('should display empty field error on empty field',()=>{
-                assertEmptyFieldDisplayError(lastNameField)
+                assertEmptyFieldErrorShouldBeDefined(lastNameField)
             })
         })
 
@@ -72,14 +88,75 @@ describe('PersonalInfo', ()=>{
             })
 
             it('should display invalid email error on invalid inputs',()=>{
+                UserEvent.type(emailField, 'randomtext')
+                UserEvent.click(nextBtn)
+                expect(screen.getByText('Invalid Email Address')).toBeInTheDocument()
 
+                UserEvent.type(emailField, 'test.com')
+                UserEvent.click(nextBtn)
+                expect(screen.getByText('Invalid Email Address')).toBeInTheDocument()
+
+                UserEvent.type(emailField, 'test@com')
+                UserEvent.click(nextBtn)
+                expect(screen.getByText('Invalid Email Address')).toBeInTheDocument()
+
+                UserEvent.type(emailField, 'test@.')
+                UserEvent.click(nextBtn)
+                expect(screen.getByText('Invalid Email Address')).toBeInTheDocument()
+            })
+        })
+
+        describe('Phone Number field', ()=>{
+            it('should display empty field error on empty field',()=>{
+                assertEmptyFieldErrorShouldBeDefined(phoneField)
+            })
+
+            it('should display nothing when non-number characters are typed', ()=>{
+                UserEvent.type(phoneField, 'randomtext')
+                expect(phoneField).toHaveValue('')
+            })
+
+            it('should display phone number in right format', ()=>{
+                UserEvent.type(phoneField, '4444444444')
+                expect(screen.getByDisplayValue('(444)444-4444'))
+                .toBeInTheDocument()
+            })
+
+            it('should display invalid phone number error on invalid inputs', ()=>{
+                UserEvent.type(phoneField, '9')
+                UserEvent.click(nextBtn)
+                expect(screen.getByText('Invalid Phone Number')).toBeInTheDocument()
+
+                UserEvent.type(phoneField, '9999999999999')
+                UserEvent.click(nextBtn)
+                expect(screen.getByText('Invalid Phone Number')).toBeInTheDocument()
+            })
+        })
+
+        describe('Language Inputs', ()=>{
+            it('should display an error when no language is selected', ()=>{
+                // deselect language checkbox: selected by default in this test suit
+                // setting other language field to empty string
+                UserEvent.click(language)
+                fireEvent.change(languageOther, {target:{value:''}})
+
+                UserEvent.click(nextBtn)
+                expect(screen.getByText('Language is not selected'))
+                .toBeInTheDocument()
+            })
+
+            it('should display an error when Other language field is filled but not selected',()=>{
+                UserEvent.type(languageOther, 'Arabic')
+                UserEvent.click(nextBtn)
+                expect(screen.getByText('Language is not selected'))
+                .toBeInTheDocument()
             })
         })
     })
 
     describe('when provided information meets the criteria', ()=>{
         const mockOnSubmit = jest.fn()
-
+        
         render(
             <Provider store={store}>
                 <PersonalInfoComponent onSubmit={mockOnSubmit}/>
@@ -87,13 +164,17 @@ describe('PersonalInfo', ()=>{
         )
 
         it('should call onSubmit function', ()=>{
-            const firstNameField = screen.getByLabelText('First Name')
-            const lastNameField = screen.getByLabelText('Last Name')
-            const emailField = screen.getByLabelText('Email Address')
-            const phoneField = screen.getByLabelText('Phone Number')
-            const language = screen.getByLabelText('English')
-            const languageOther = screen.getByPlaceholderText('Other')
-            const nextBtn = screen.getByText('Next')
+
+        const {
+            firstNameField,
+            lastNameField,
+            emailField,
+            phoneField,
+            language,
+            languageOther,
+            otherLanguageCheckBox,
+            nextBtn
+        } = createTestElements()
 
             UserEvent.type(firstNameField, mockDriverInputData.firstName)
             UserEvent.type(lastNameField, mockDriverInputData.lastName)
@@ -101,6 +182,7 @@ describe('PersonalInfo', ()=>{
             UserEvent.type(phoneField, mockDriverInputData.phone)
             UserEvent.click(language)
             UserEvent.type(languageOther, mockDriverInputData.otherLanguage)
+            UserEvent.click(otherLanguageCheckBox)
 
             UserEvent.click(nextBtn)
 
