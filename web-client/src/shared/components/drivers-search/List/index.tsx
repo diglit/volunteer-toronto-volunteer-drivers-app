@@ -7,14 +7,19 @@ import { RootState } from '../../../redux/index';
 
 const DriversSearchList = React.memo(function DriversSearchList() {
   const driversList: Driver[] = useSelector(
-    (state: RootState) => state.driversSearch.drivers,
+    (state: RootState) => state.driversSearch.response.drivers,
   );
 
   return (
     <div>
       {driversList.map((driver) => (
-        <div role="driverCard" key={driver.id} >
-          <DriverCard driverInfo={driver} />
+        <div 
+          role="driverCard" 
+          key={driver.id} 
+        >
+          <DriverCard 
+            driverInfo={driver} 
+          />
         </div>
       ))}
     </div>

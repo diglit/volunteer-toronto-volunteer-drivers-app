@@ -5,7 +5,7 @@
 BEFORE YOU DO ANYTHING ELSE: Please read the README.md file in the root directory (../README.md) or https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/blob/develop/README.md
 
 ## Kanban Board
-https://github.com/orgs/diglit/projects/1?card_filter_query=label%3Afront-end
+https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/projects/1?card_filter_query=label%3Afront-end
 
 ## Folder Structure
 
@@ -47,6 +47,12 @@ https://react-hook-form.com/
 
 We'll be using the yup implementation of this hook system.
 https://github.com/react-hook-form/resolvers#yup
+
+## Forms
+
+We're going to be using react-hook-form with yup to handle form submissions
+
+https://react-hook-form.com/
 
 ## Tests
 
@@ -116,4 +122,7 @@ Leigh Silverstein \
 Oksana Samokhvalova \
 Wendy Chen \
 Chris Cottier\
-Yinyin Lu
+Yinyin Lu \
+Cayman Heng \
+Haris Ahmad 
+Swati Dixit

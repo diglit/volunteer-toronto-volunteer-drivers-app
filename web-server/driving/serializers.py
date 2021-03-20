@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from driving.models import ExampleDriver
+from driving.models import Driver
 
 
-class ExampleDriverSerializer(serializers.ModelSerializer):
+class DriverSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ExampleDriver
-        fields = ["created", "name"]
+        model = Driver
+        fields = "__all__"

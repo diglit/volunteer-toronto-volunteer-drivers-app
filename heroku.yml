@@ -1,0 +1,11 @@
+setup:
+  addons:
+    - plan: heroku-postgresql
+      as: DATABASE
+build:
+  config:
+    DJANGO_ENV: development
+  docker:
+    web: web-server/Dockerfile
+run:
+  web: poetry install && python manage.py migrate && python -Wd manage.py runserver 0.0.0.0:$PORT
