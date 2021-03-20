@@ -1,13 +1,13 @@
 import { Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@material-ui/core';
 import React from 'react';
 import { Control, Controller, DeepMap, FieldError } from 'react-hook-form';
-import { PreScreen } from 'shared/redux/driverRegistration';
+import { PreScreen, Agreement } from 'shared/redux/driverRegistration';
 
 interface Props {
   formType: 'radio' | 'select' | 'checkbox' | 'dateInput' | 'textInput',
   error: FieldError | undefined | DeepMap<Record<string, unknown>, FieldError>,
   labels: string[] | CheckboxLabel[],
-  control: Control<Record<string, any>> | undefined,
+  control: Control<Agreement> | Control<PreScreen> | undefined,
   formLabel: string,
   name: string,
 }
@@ -72,7 +72,7 @@ const FormInput = ({ formType, error, labels, control, formLabel, name }: Props)
               <FormGroup >
                 {(labels as CheckboxLabel[]).map((item) => {
                   return (
-                    <>
+                    <div key={item.name}>
                       <FormControlLabel
                         control={
                           <Controller
@@ -88,11 +88,11 @@ const FormInput = ({ formType, error, labels, control, formLabel, name }: Props)
                             control={control}
                           />
                         }
-                        key={item.name}
+
                         label={item.label}
                       />
                       {error && <FormHelperText>{(error[item.name as keyof typeof error] as typeof error)?.message}</FormHelperText>}
-                    </>
+                    </div>
                   )
                 }
                 )}

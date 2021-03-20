@@ -48,6 +48,12 @@ https://react-hook-form.com/
 We'll be using the yup implementation of this hook system.
 https://github.com/react-hook-form/resolvers#yup
 
+## Forms
+
+We're going to be using react-hook-form with yup to handle form submissions
+
+https://react-hook-form.com/
+
 ## Tests
 
 For testing, we're using jest with testing-library (react version). Unlike other testing libraries, it's very opinionated. 

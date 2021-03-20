@@ -73,7 +73,7 @@ const AgreementSection = ({ onSubmit }: AgreementPorps): React.ReactElement => {
                     </Grid>
 
                     <Grid item>
-                        <Button id="savePrescreen" type="submit" variant="contained">SAVE</Button>
+                        <Button id="saveAgreement" type="submit" variant="contained">SAVE</Button>
                     </Grid>
 
                 </Grid>

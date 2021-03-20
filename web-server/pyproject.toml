@@ -11,6 +11,8 @@ djangorestframework = "^3.12.2"
 black = "^20.8b1"
 drf-yasg = "^1.20.0"
 dj_database_url = "^0.5.0"
+python-dotenv = "^0.15.0"
+psycopg2 = "^2.8.6"
 
 [tool.poetry.dev-dependencies]
 
