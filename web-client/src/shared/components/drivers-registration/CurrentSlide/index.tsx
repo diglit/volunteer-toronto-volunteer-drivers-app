@@ -6,7 +6,7 @@ import PreScreenRequirements from '../PreScreenRequirements/index';
 
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from '../../../redux/index'
-import { PreScreen, setPreScreen } from '../../../redux/driverRegistration';
+import { PreScreen, setPreScreen } from '../../../redux/driversRegistration/index';
 
 interface Props {
     currentSlide: number
