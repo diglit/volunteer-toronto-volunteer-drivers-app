@@ -3,7 +3,7 @@ import { ThunkAction } from 'redux-thunk';
 import { combineReducers } from 'redux';
 import reduxThunk from 'redux-thunk';
 import driversSearchSlice, { DriversState } from './driversSearch';
-import driversRegistrationSlice from './driverRegistration';
+import driversRegistrationSlice from './driversRegistration';
 
 export type AppThunk = ThunkAction<void, DriversState, unknown, Action<string>>;
 

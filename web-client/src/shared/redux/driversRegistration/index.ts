@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { YourNeeds, DATES } from './yourNeeds/index';
+
 export interface PreScreen {
     policeRecordsCheckOptions: string,
     policeRecordsCheckDate: string,
@@ -16,12 +18,23 @@ export interface PreScreen {
     LicenseClasses: string
 }
 
+const initYourNeeds: YourNeeds = {
+    communities: [],
+    availableDates: [...DATES.map(date => (
+        {
+            date: date,
+            availableTimes: []
+        }))
+    ],
+    typesOfDelivery: []
+}
+
 const initPreScreen: PreScreen = {
     policeRecordsCheckOptions: '',
     policeRecordsCheckDate: '',
     policeRecordsCheckType: '',
     drivingAbstractOptions: '',
-    drivingAbstractDate: '',
+    drivingAbstractDate: '', 
     LicenseAndVehicle: {
         haveCar: false,
         haveGLicense: false,
@@ -32,25 +45,33 @@ const initPreScreen: PreScreen = {
 }
 
 interface RegistrationState {
+    yourNeeds: YourNeeds,
     preScreen: PreScreen
 }
 
 
 
-const initialState = {
+const initialState: RegistrationState = {
+    yourNeeds: initYourNeeds,
     preScreen: initPreScreen
-} as RegistrationState;
+};
 
 const driversRegistrationSlice = createSlice({
     name: 'driversRegistration',
     initialState: initialState,
     reducers: {
+        saveYourNeeds(state, action: PayloadAction<YourNeeds>) {
+            return ({
+                ...state,
+                yourNeeds: action.payload
+            })
+        },
         setPreScreen: (state, { payload }: PayloadAction<PreScreen>) => {
             state.preScreen = payload;
         },
     }
 });
 
-export const { setPreScreen } = driversRegistrationSlice.actions;
+export const { saveYourNeeds, setPreScreen } = driversRegistrationSlice.actions;
 
 export default driversRegistrationSlice;

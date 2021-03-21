@@ -1,16 +1,16 @@
 import React from 'react';
 
-import PersonalInfo from '../PersonalInfo/index'
+import PersonalInfo from '../PersonalInfo/index';
+import YourNeedsSection from '../YourNeeds/index';
 import PreScreenRequirements from '../PreScreenRequirements/index';
 
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from '../../../redux/index'
-import { PreScreen, setPreScreen } from '../../../redux/driverRegistration';
+import { PreScreen, setPreScreen } from '../../../redux/driversRegistration/index';
 
 interface Props {
     currentSlide: number
 }
-
 
 const DriversRegistrationCurrentSlide = ({ currentSlide }: Props): React.ReactElement => {
     /* redux store */
@@ -28,7 +28,7 @@ const DriversRegistrationCurrentSlide = ({ currentSlide }: Props): React.ReactEl
         case 1:
             return <PersonalInfo />;
         case 2:
-            return <div>Your Needs</div>; //holdover until registration components are made, see case 1
+            return <YourNeedsSection />;
         case 3:
             return <PreScreenRequirements onSubmit={savePreScreen} />;
         case 4:
