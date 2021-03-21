@@ -6,7 +6,7 @@ import * as yup from 'yup';
 /** MUI */
 import { Container, Button, Grid } from '@material-ui/core';
 /** redux */
-import { Agreement } from 'shared/redux/driverRegistration';
+import { Agreement } from 'shared/redux/driversRegistration';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/index'
 

@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import Agreement from 'shared/components/drivers-registration/Agreement';
 
+import { YourNeeds, DATES } from './yourNeeds/index';
+
 export interface PreScreen {
     policeRecordsCheckOptions: string,
     policeRecordsCheckDate: string,
@@ -16,7 +18,6 @@ export interface PreScreen {
 
     LicenseClasses: string
 }
-
 export interface Agreement {
     agreementOptions: {
         agreement1: boolean,
@@ -27,12 +28,23 @@ export interface Agreement {
     signiture: string
 }
 
+const initYourNeeds: YourNeeds = {
+    communities: [],
+    availableDates: [...DATES.map(date => (
+        {
+            date: date,
+            availableTimes: []
+        }))
+    ],
+    typesOfDelivery: []
+}
+
 const initPreScreen: PreScreen = {
     policeRecordsCheckOptions: '',
     policeRecordsCheckDate: '',
     policeRecordsCheckType: '',
     drivingAbstractOptions: '',
-    drivingAbstractDate: '',
+    drivingAbstractDate: '', 
     LicenseAndVehicle: {
         haveCar: false,
         haveGLicense: false,
@@ -56,19 +68,25 @@ const initAgreement: Agreement = {
 interface RegistrationState {
     preScreen: PreScreen,
     agreement: Agreement,
+    yourNeeds: YourNeeds,
 }
 
-
-
-const initialState = {
+const initialState: RegistrationState = {
+    yourNeeds: initYourNeeds,
     preScreen: initPreScreen,
     agreement: initAgreement,
-} as RegistrationState;
+};
 
 const driversRegistrationSlice = createSlice({
     name: 'driversRegistration',
     initialState: initialState,
     reducers: {
+        saveYourNeeds(state, action: PayloadAction<YourNeeds>) {
+            return ({
+                ...state,
+                yourNeeds: action.payload
+            })
+        },
         setPreScreen: (state, { payload }: PayloadAction<PreScreen>) => {
             state.preScreen = payload;
         },
@@ -78,6 +96,6 @@ const driversRegistrationSlice = createSlice({
     }
 });
 
-export const { setPreScreen, setAgreement } = driversRegistrationSlice.actions;
+export const { saveYourNeeds, setPreScreen, setAgreement } = driversRegistrationSlice.actions;
 
 export default driversRegistrationSlice;
