@@ -6,7 +6,10 @@ import PreScreenRequirements from '../PreScreenRequirements/index';
 
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from '../../../redux/index'
-import { PreScreen, setPreScreen } from '../../../redux/driversRegistration/index';
+import { Agreement, setAgreement, PreScreen, setPreScreen } from '../../../redux/driversRegistration'
+import AgreementSection from '../Agreement';
+
+
 
 interface Props {
     currentSlide: number
@@ -22,6 +25,11 @@ const DriversRegistrationCurrentSlide = ({ currentSlide }: Props): React.ReactEl
         dispatch(setPreScreen(newState))
     };
 
+    const saveAgreement = (data: Agreement) => {
+        const newState = { ...driversRegistration.agreement, ...data }
+        dispatch(setAgreement(newState))
+    };
+
     //Intention of this component: import the components for 
     //Personal Info Page, etc., then insert into corresponding switch case
     switch (currentSlide) {
@@ -32,7 +40,7 @@ const DriversRegistrationCurrentSlide = ({ currentSlide }: Props): React.ReactEl
         case 3:
             return <PreScreenRequirements onSubmit={savePreScreen} />;
         case 4:
-            return <div>Agreement</div>; //holdover until registration components are made, see case 1
+            return <AgreementSection onSubmit={saveAgreement}/>; //holdover until registration components are made, see case 1
         case 5:
             return <div>Review</div>; //holdover until registration components are made, see case 1
         default:
