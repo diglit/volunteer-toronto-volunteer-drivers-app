@@ -16,6 +16,14 @@ export interface PreScreen {
     LicenseClasses: string
 }
 
+export interface PersonalInfoFormInput{
+    firstName: string,
+    lastName: string,
+    email: string,
+    phone: string,
+    languages: Array<string>
+}
+
 const initPreScreen: PreScreen = {
     policeRecordsCheckOptions: '',
     policeRecordsCheckDate: '',

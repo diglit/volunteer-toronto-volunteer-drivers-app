@@ -1,6 +1,11 @@
 import React from 'react';
+import {PersonalInfoFormInput} from '../../../redux/driverRegistration'
 
-const PersonalInfo = (props:any): React.ReactElement => {
+interface PersonalInfoPropTypes {
+    onSubmit: (data:PersonalInfoFormInput)=>void
+}
+
+const PersonalInfo = (props:PersonalInfoPropTypes): React.ReactElement => {
     return (
         <div>First Name</div>
     )

@@ -5,20 +5,13 @@ import UserEvent from '@testing-library/user-event'
 import { Provider } from 'react-redux';
 import { store } from '../../../redux';
 
+import {PersonalInfoInputFactory} from '../../../test-utils/factories'
+
 import PersonalInfoComponent from './index'
-
-
-const mockDriverInputData = {
-    firstName: 'Pam',
-    lastName: 'Beesly',
-    email: 'pam@Beesly.com',
-    phone: '4444444444',
-    otherLanguage: 'Arabic'
-}
-
 
 describe('PersonalInfo', ()=>{
     const mockOnSubmit = jest.fn()
+    const mockDriverInputData = PersonalInfoInputFactory.build()
     
     const createTestElements = ()=>{
         return {
@@ -66,7 +59,7 @@ describe('PersonalInfo', ()=>{
             fireEvent.change(field, {target:{value: ''}})
             UserEvent.click(nextBtn)
 
-            const errorMsgElem = screen.getByText('Please fill the field')
+            const errorMsgElem = screen.findByText('Please fill the field')
             expect(errorMsgElem).toBeInTheDocument()
         }
 
@@ -88,21 +81,16 @@ describe('PersonalInfo', ()=>{
             })
 
             it('should display invalid email error on invalid inputs',()=>{
-                UserEvent.type(emailField, 'randomtext')
-                UserEvent.click(nextBtn)
-                expect(screen.getByText('Invalid Email Address')).toBeInTheDocument()
+                const assertEmailFieldShouldGiveErrorOnInput = (input:string)=>{
+                    UserEvent.type(emailField, input)
+                    UserEvent.click(nextBtn)
+                    expect(screen.findByText('Invalid Email Address')).toBeInTheDocument()
+                }
 
-                UserEvent.type(emailField, 'test.com')
-                UserEvent.click(nextBtn)
-                expect(screen.getByText('Invalid Email Address')).toBeInTheDocument()
-
-                UserEvent.type(emailField, 'test@com')
-                UserEvent.click(nextBtn)
-                expect(screen.getByText('Invalid Email Address')).toBeInTheDocument()
-
-                UserEvent.type(emailField, 'test@.')
-                UserEvent.click(nextBtn)
-                expect(screen.getByText('Invalid Email Address')).toBeInTheDocument()
+                assertEmailFieldShouldGiveErrorOnInput('randomtext')
+                assertEmailFieldShouldGiveErrorOnInput('test.com')
+                assertEmailFieldShouldGiveErrorOnInput('test@com')
+                assertEmailFieldShouldGiveErrorOnInput('test@.')
             })
         })
 
@@ -125,11 +113,11 @@ describe('PersonalInfo', ()=>{
             it('should display invalid phone number error on invalid inputs', ()=>{
                 UserEvent.type(phoneField, '9')
                 UserEvent.click(nextBtn)
-                expect(screen.getByText('Invalid Phone Number')).toBeInTheDocument()
+                expect(screen.findByText('Invalid Phone Number')).toBeInTheDocument()
 
                 UserEvent.type(phoneField, '9999999999999')
                 UserEvent.click(nextBtn)
-                expect(screen.getByText('Invalid Phone Number')).toBeInTheDocument()
+                expect(screen.findByText('Invalid Phone Number')).toBeInTheDocument()
             })
         })
 
@@ -141,14 +129,14 @@ describe('PersonalInfo', ()=>{
                 fireEvent.change(languageOther, {target:{value:''}})
 
                 UserEvent.click(nextBtn)
-                expect(screen.getByText('Language is not selected'))
+                expect(screen.findByText('Language is not selected'))
                 .toBeInTheDocument()
             })
 
             it('should display an error when Other language field is filled but not selected',()=>{
                 UserEvent.type(languageOther, 'Arabic')
                 UserEvent.click(nextBtn)
-                expect(screen.getByText('Language is not selected'))
+                expect(screen.findByText('Language is not selected'))
                 .toBeInTheDocument()
             })
         })
@@ -181,7 +169,7 @@ describe('PersonalInfo', ()=>{
             UserEvent.type(emailField, mockDriverInputData.email)
             UserEvent.type(phoneField, mockDriverInputData.phone)
             UserEvent.click(language)
-            UserEvent.type(languageOther, mockDriverInputData.otherLanguage)
+            UserEvent.type(languageOther, mockDriverInputData.languages[1])
             UserEvent.click(otherLanguageCheckBox)
 
             UserEvent.click(nextBtn)
