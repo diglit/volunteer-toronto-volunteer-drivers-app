@@ -22,7 +22,9 @@ describe('PersonalInfo', ()=>{
     }
 
     describe('When providing information does not meet the criteria',()=>{
+
         beforeEach(()=>{
+            cy.visit('/drivers-registration')
             populateFieldsWithValidData()
         })
 
