@@ -39,7 +39,6 @@ describe('PersonalInfo', ()=>{
             emailField,
             phoneField,
             language,
-            otherLanguageCheckBox,
             languageOther,
             nextBtn
         } = createTestElements()
