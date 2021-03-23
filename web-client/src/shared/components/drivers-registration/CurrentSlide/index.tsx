@@ -32,6 +32,7 @@ const DriversRegistrationCurrentSlide = ({ currentSlide }: Props): React.ReactEl
 
     const savePersonalInfo = (data: PersonalInfoFormInput)=>{
         // TODO: implement save PersonalInfo Form data
+        console.log(data)
     }
 
     //Intention of this component: import the components for 
