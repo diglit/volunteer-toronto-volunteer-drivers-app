@@ -28,6 +28,14 @@ export interface Agreement {
     signiture: string
 }
 
+export interface PersonalInfoFormInput{
+    firstName: string,
+    lastName: string,
+    email: string,
+    phone: string,
+    languages: Array<string>
+}
+
 const initYourNeeds: YourNeeds = {
     communities: [],
     availableDates: [...DATES.map(date => (
