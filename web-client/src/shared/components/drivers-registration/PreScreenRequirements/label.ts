@@ -1,3 +1,5 @@
+import { CheckboxLabel } from "../FormInput"
+
 /** Question options */
 const policeRecordsCheckOptionsLabel = [
     'I have completed a police records check in the last 6 months',
@@ -18,11 +20,6 @@ const drivingAbstractOptionsLabel = [
     'I am willing to complete a drving abstract in order to volunteer as a drvier',
     'I am NOT willing to complete a driving abstract in order to volunteer as a driver'
 ]
-
-export interface CheckboxLabel {
-    name: string,
-    label: string
-}
 
 const LicenseAndVehicleLabel: CheckboxLabel[] = [
     { name: 'haveCar', label: 'I have access to a car that is safe to drive for deliveries' },
