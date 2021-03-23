@@ -1,9 +1,9 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
+import DriverRegistration from '../../../../pages/drivers-registration';
+import { store } from '../../../redux';
 
-import { store } from 'shared/redux';
-import DriverRegistration from 'pages/drivers-registration';
 
 // const setUp = () => {
 //     const screen = render(<DriverRegistration />);
@@ -51,8 +51,8 @@ describe('Personal Info', () => {
   
   test('should allow users to select languages spoken.', () => {
     const screen = render(<Provider store={store}><DriverRegistration /></Provider>);
-    const englishCheckBox = screen.getByLabelText('language-english') as HTMLInputElement;
-    const chineseCheckBox = screen.getByLabelText('language-chinese') as HTMLInputElement;
+    const englishCheckBox = screen.getByLabelText('languagesSpoken-english') as HTMLInputElement;
+    const chineseCheckBox = screen.getByLabelText('languagesSpoken-chinese') as HTMLInputElement;
 
     expect(englishCheckBox.checked).toEqual(false);
     expect(chineseCheckBox.checked).toEqual(false);
@@ -67,7 +67,7 @@ describe('Personal Info', () => {
 
   test('should allow users to deselect languages spoken.', () => {
     const screen = render(<Provider store={store}><DriverRegistration /></Provider>);
-    const englishCheckBox = screen.getByLabelText('language-english') as HTMLInputElement;
+    const englishCheckBox = screen.getByLabelText('languagesSpoken-english') as HTMLInputElement;
 
     expect(englishCheckBox.checked).toEqual(false);
 
