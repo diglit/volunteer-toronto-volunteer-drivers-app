@@ -1,7 +1,6 @@
 import { Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@material-ui/core';
 import React from 'react';
 import { Control, Controller, DeepMap, FieldError } from 'react-hook-form';
-// import { PreScreen, Agreement } from 'shared/redux/driversRegistration';
 import { PersonalInfo, PreScreen, Agreement } from '../../redux/driversRegistration';
 
 interface Props {
