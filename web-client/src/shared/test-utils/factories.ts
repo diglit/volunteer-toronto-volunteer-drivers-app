@@ -1,5 +1,5 @@
 import { Factory } from 'fishery';
-import { PersonalInfoFormInput } from 'shared/redux/driverRegistration';
+import { PersonalInfoFormInput } from 'shared/redux/driversRegistration';
 import { Driver } from '../redux/driversSearch/index';
 
 // mock driver information
