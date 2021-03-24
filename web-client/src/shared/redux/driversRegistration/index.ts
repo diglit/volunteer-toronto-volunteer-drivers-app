@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import Agreement from 'shared/components/drivers-registration/Agreement';
 
 import { YourNeeds, DATES } from './yourNeeds/index';
 
@@ -28,12 +27,21 @@ export interface Agreement {
     signiture: string
 }
 
-export interface PersonalInfoFormInput{
+export interface PersonalInfo {
     firstName: string,
     lastName: string,
-    email: string,
-    phone: string,
-    languages: Array<string>
+    emailAddress: string,
+    phoneNumber: string,
+    languagesSpoken: {
+        english: boolean,
+        french: boolean,
+        tagalog: boolean,
+        portuguese: boolean,
+        spanish: boolean,
+        chinese: boolean,
+        other: boolean,
+    },
+    languageOther: string,
 }
 
 const initYourNeeds: YourNeeds = {
@@ -72,14 +80,33 @@ const initAgreement: Agreement = {
     signiture: ''
 }
 
+const initPersonalInfo: PersonalInfo = {
+    firstName: '',
+    lastName: '',
+    emailAddress: '',
+    phoneNumber: "",
+    languagesSpoken: {
+        english: false,
+        french: false,
+        tagalog: false,
+        portuguese: false,
+        spanish: false,
+        chinese: false,
+        other: false,
+    },
+    languageOther: '',
+}
+
 
 interface RegistrationState {
+    personalInfo: PersonalInfo,
     preScreen: PreScreen,
     agreement: Agreement,
     yourNeeds: YourNeeds,
 }
 
 const initialState: RegistrationState = {
+    personalInfo: initPersonalInfo,
     yourNeeds: initYourNeeds,
     preScreen: initPreScreen,
     agreement: initAgreement,
@@ -95,6 +122,9 @@ const driversRegistrationSlice = createSlice({
                 yourNeeds: action.payload
             })
         },
+        setPersonalInfo: (state, { payload }: PayloadAction<PersonalInfo>) => {
+            state.personalInfo = payload;
+        },
         setPreScreen: (state, { payload }: PayloadAction<PreScreen>) => {
             state.preScreen = payload;
         },
@@ -104,6 +134,6 @@ const driversRegistrationSlice = createSlice({
     }
 });
 
-export const { saveYourNeeds, setPreScreen, setAgreement } = driversRegistrationSlice.actions;
+export const { saveYourNeeds, setPersonalInfo, setPreScreen, setAgreement } = driversRegistrationSlice.actions;
 
 export default driversRegistrationSlice;

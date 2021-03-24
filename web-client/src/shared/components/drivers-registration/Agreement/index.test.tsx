@@ -51,7 +51,7 @@ describe("Agreement Section", () => {
                 await act(async () => {
                     fireEvent.click(getByText('SAVE'))
                 })
-                expect(container.innerHTML).toMatch("please confirm")
+                expect(container.innerHTML).toMatch("Please comfirm")
             })
         })
     })

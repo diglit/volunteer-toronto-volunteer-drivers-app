@@ -1,13 +1,13 @@
 import React from 'react';
 
-import PersonalInfo from '../PersonalInfo/index';
+import PersonalInfoSection from '../PersonalInfo/index';
 import YourNeedsSection from '../YourNeeds/index';
 import PreScreenRequirements from '../PreScreenRequirements/index';
+import AgreementSection from '../Agreement';
 
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from '../../../redux/index'
-import { Agreement, setAgreement, PreScreen, setPreScreen, PersonalInfoFormInput } from '../../../redux/driversRegistration'
-import AgreementSection from '../Agreement';
+import { Agreement, setAgreement, PreScreen, setPreScreen, PersonalInfo, setPersonalInfo } from '../../../redux/driversRegistration'
 
 
 
@@ -19,7 +19,12 @@ const DriversRegistrationCurrentSlide = ({ currentSlide }: Props): React.ReactEl
     /* redux store */
     const dispatch = useDispatch()
     const driversRegistration = useSelector((state: RootState) => state.driversRegistration)
-    
+
+    const savePersonalInfo = (data: PersonalInfo) => {
+        const newState = { ...driversRegistration.personalInfo, ...data }
+        dispatch(setPersonalInfo(newState))
+    };
+
     const savePreScreen = (data: PreScreen) => {
         const newState = { ...driversRegistration.preScreen, ...data }
         dispatch(setPreScreen(newState))
@@ -29,17 +34,12 @@ const DriversRegistrationCurrentSlide = ({ currentSlide }: Props): React.ReactEl
         const newState = { ...driversRegistration.agreement, ...data }
         dispatch(setAgreement(newState))
     };
-
-    const savePersonalInfo = (data: PersonalInfoFormInput)=>{
-        // TODO: implement save PersonalInfo Form data
-        console.log(data)
-    }
-
+    
     //Intention of this component: import the components for 
     //Personal Info Page, etc., then insert into corresponding switch case
     switch (currentSlide) {
         case 1:
-            return <PersonalInfo onSubmit = {savePersonalInfo}/>;
+            return <PersonalInfoSection onSubmit={savePersonalInfo}/>;
         case 2:
             return <YourNeedsSection />;
         case 3:
@@ -49,7 +49,7 @@ const DriversRegistrationCurrentSlide = ({ currentSlide }: Props): React.ReactEl
         case 5:
             return <div>Review</div>; //holdover until registration components are made, see case 1
         default:
-            return <PersonalInfo onSubmit={savePersonalInfo}/>;
+            return <PersonalInfoSection onSubmit={savePersonalInfo}/>;
     }
 }
 
