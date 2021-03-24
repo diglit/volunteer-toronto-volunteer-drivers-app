@@ -1,13 +1,13 @@
 import { Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@material-ui/core';
 import React from 'react';
 import { Control, Controller, DeepMap, FieldError } from 'react-hook-form';
-import { PreScreen, Agreement } from 'shared/redux/driversRegistration';
+import { PersonalInfo, PreScreen, Agreement } from '../../redux/driversRegistration';
 
 interface Props {
   formType: 'radio' | 'select' | 'checkbox' | 'dateInput' | 'textInput',
   error: FieldError | undefined | DeepMap<Record<string, unknown>, FieldError>,
-  labels: string[] | CheckboxLabel[],
-  control: Control<Agreement> | Control<PreScreen> | undefined,
+  labels: string | string[] | CheckboxLabel[],
+  control: Control<Agreement> | Control<PreScreen> | Control<PersonalInfo> | undefined,
   formLabel: string,
   name: string,
 }
@@ -62,7 +62,7 @@ const FormInput = ({ formType, error, labels, control, formLabel, name }: Props)
 
           : formType === 'dateInput' ?
             <Controller
-              as={TextField}
+              as={<TextField inputProps={{ 'aria-label': labels as string }} />}
               type="date"
               control={control}
               name={name}
@@ -80,6 +80,7 @@ const FormInput = ({ formType, error, labels, control, formLabel, name }: Props)
                             render={({ onChange, value }) => {
                               return (
                                 <Checkbox
+                                  inputProps={{ 'aria-label': `${name}-${item.name}` }}
                                   checked={value}
                                   onChange={(e) => onChange(e.target.checked)}
                                 />
@@ -91,7 +92,6 @@ const FormInput = ({ formType, error, labels, control, formLabel, name }: Props)
 
                         label={item.label}
                       />
-                      {error && <FormHelperText>{(error[item.name as keyof typeof error] as typeof error)?.message}</FormHelperText>}
                     </div>
                   )
                 }
@@ -100,7 +100,7 @@ const FormInput = ({ formType, error, labels, control, formLabel, name }: Props)
 
               : // formType === 'textInput'
               <Controller
-                as={TextField}
+                as={<TextField inputProps={{ 'aria-label': labels as string }} />}
                 control={control}
                 name={name}
               />

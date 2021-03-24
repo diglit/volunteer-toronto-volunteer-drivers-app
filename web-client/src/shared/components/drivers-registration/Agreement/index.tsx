@@ -6,19 +6,19 @@ import * as yup from 'yup';
 /** MUI */
 import { Container, Button, Grid } from '@material-ui/core';
 /** redux */
-import { Agreement } from 'shared/redux/driversRegistration';
+import { Agreement } from '../../../redux/driversRegistration';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/index'
 
 import FormInput, { CheckboxLabel } from '../FormInput';
 
 const schema = yup.object().shape({
-    agreementOptions: yup.object().shape({
-        agreement1: yup.boolean().oneOf([true], "please confirm"),
-        agreement2: yup.boolean().oneOf([true], "please confirm"),
-        agreement3: yup.boolean().oneOf([true], "please confirm"),
-        agreement4: yup.boolean().oneOf([true], "please confirm"),
-    }),
+    agreementOptions: yup.object({
+        agreement1: yup.boolean(),
+        agreement2: yup.boolean(),
+        agreement3: yup.boolean(),
+        agreement4: yup.boolean(),
+    }).test('OK', 'Please comfirm all of above', a => (a.agreement1 && a.agreement2 && a.agreement3 && a.agreement4) as boolean),
     signiture: yup.string().required()
 });
 
