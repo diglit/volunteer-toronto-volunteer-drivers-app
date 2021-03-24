@@ -128,7 +128,7 @@ const PersonalInfoSection = ({ onSubmit }: personalInfoPorps): React.ReactElemen
                                 formType='textInput'
                                 error={errors.languageOther}
                                 control={control}
-                                labels={[]}
+                                labels={'other-language'}
                                 formLabel='Other Language'
                                 name='languageOther'
                             />

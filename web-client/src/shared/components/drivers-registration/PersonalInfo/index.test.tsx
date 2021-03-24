@@ -15,14 +15,14 @@ describe('PersonalInfo', ()=>{
     
     const createTestElements = ()=>{
         return {
-            firstNameField: screen.getByLabelText('First Name'),
-            lastNameField: screen.getByLabelText('Last Name'),
-            emailField: screen.getByLabelText('Email Address'),
-            phoneField: screen.getByLabelText('Phone Number'),
+            firstNameField: screen.getByLabelText('first-name'),
+            lastNameField: screen.getByLabelText('last-name'),
+            emailField: screen.getByLabelText('email'),
+            phoneField: screen.getByLabelText('phone-number'),
             language: screen.getByLabelText('English'),
-            languageOther: screen.getByPlaceholderText('Other'),
-            otherLanguageCheckBox: screen.getByTestId('other-language'),
-            nextBtn: screen.getByText('Next')
+            languageOther: screen.findByLabelText('other-language'),
+            otherLanguageCheckBox: screen.getByLabelText('Other'),
+            nextBtn: screen.getByText('SAVE')
         }
     }
 
@@ -49,8 +49,8 @@ describe('PersonalInfo', ()=>{
             // field doesn't show error on submit
             UserEvent.type(firstNameField, mockDriverInputData.firstName)
             UserEvent.type(lastNameField, mockDriverInputData.lastName)
-            UserEvent.type(emailField, mockDriverInputData.email)
-            UserEvent.type(phoneField, mockDriverInputData.phone)
+            UserEvent.type(emailField, mockDriverInputData.emailAddress)
+            UserEvent.type(phoneField, mockDriverInputData.phoneNumber)
             UserEvent.click(language)
         })
 
@@ -165,10 +165,10 @@ describe('PersonalInfo', ()=>{
 
             UserEvent.type(firstNameField, mockDriverInputData.firstName)
             UserEvent.type(lastNameField, mockDriverInputData.lastName)
-            UserEvent.type(emailField, mockDriverInputData.email)
-            UserEvent.type(phoneField, mockDriverInputData.phone)
+            UserEvent.type(emailField, mockDriverInputData.emailAddress)
+            UserEvent.type(phoneField, mockDriverInputData.phoneNumber)
             UserEvent.click(language)
-            UserEvent.type(languageOther, mockDriverInputData.languages[1])
+            UserEvent.type(languageOther, mockDriverInputData.languageOther)
             UserEvent.click(otherLanguageCheckBox)
 
             UserEvent.click(nextBtn)
