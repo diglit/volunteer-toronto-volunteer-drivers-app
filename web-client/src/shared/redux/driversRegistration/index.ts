@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// import Agreement from 'shared/components/drivers-registration/Agreement';
 
 import { YourNeeds, DATES } from './yourNeeds/index';
 
@@ -80,15 +79,6 @@ const initAgreement: Agreement = {
     },
     signiture: ''
 }
-
-// const mockPersonalInfo: PersonalInfo = {
-//     firstName: 'Jonathan',
-//     lastName: 'Saunders',
-//     emailAddress: 'jsaunders@gmail.com',
-//     phoneNumber: "2805284619",
-//     languagesSpoken: ['English'],
-//     languageOther: '',
-// }
 
 const initPersonalInfo: PersonalInfo = {
     firstName: '',

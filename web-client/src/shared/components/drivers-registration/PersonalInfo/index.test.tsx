@@ -4,12 +4,6 @@ import { Provider } from 'react-redux';
 import DriverRegistration from '../../../../pages/drivers-registration';
 import { store } from '../../../redux';
 
-
-// const setUp = () => {
-//     const screen = render(<DriverRegistration />);
-//     return screen;
-// }
-
 describe('Personal Info', () => {
 
   test('should allow users to enter their first name.', () => {
