@@ -12,11 +12,20 @@ import { RootState } from '../../../redux/index'
 
 import FormInput, { CheckboxLabel } from '../FormInput';
 
+const errorMessages = {
+    required: 'Please fill the field',
+    email: 'Invalid Email Address',
+    phone: {
+        type: 'Phone Number must be a number',
+        length: 'Phone number should be 10 digits',
+    }
+}
+
 const schema = yup.object().shape({
-    firstName: yup.string().required('Please fill the field'),
-    lastName: yup.string().required('Please fill the field'),
-    emailAddress: yup.string().email('Invalid Email Address').required('Please fill the field'),
-    phoneNumber: yup.string().matches(/^\d*$/, {message:'Phone Number must be a number'}).required('Please fill the field').length(10,'Phone number should be 10 digits'),
+    firstName: yup.string().required(errorMessages.required),
+    lastName: yup.string().required(errorMessages.required),
+    emailAddress: yup.string().email(errorMessages.email).required(errorMessages.required),
+    phoneNumber: yup.string().matches(/^\d*$/, {message:errorMessages.phone.type}).required(errorMessages.required).length(10,errorMessages.phone.length),
     languagesSpoken: yup.object({
         english: yup.boolean(),
         french: yup.boolean(),
@@ -30,7 +39,7 @@ const schema = yup.object().shape({
     languageOther: yup.string()
     .when('languagesSpoken', {
         is: (value: { other: boolean; }) => value.other,
-        then: yup.string().required('Please fill the field'),
+        then: yup.string().required(errorMessages.required),
       }),
 });
 

@@ -13,47 +13,18 @@ import { act } from 'react-dom/test-utils';
 describe('PersonalInfo', ()=>{
     const mockOnSubmit = jest.fn()
     const mockDriverInputData = PersonalInfoInputFactory.build()
-    
-    const createTestElements = ()=>{
-        return {
-            firstNameField: screen.getByLabelText('first-name'),
-            lastNameField: screen.getByLabelText('last-name'),
-            emailField: screen.getByLabelText('email'),
-            phoneField: screen.getByLabelText('phone-number'),
-            language: screen.getByLabelText('English'),
-            otherLanguageCheckBox: screen.getByLabelText('Other'),
-            nextBtn: screen.getByText('SAVE')
-        }
-    }
+
+    const getSaveBtn = ()=>screen.getByText('SAVE')
+    const getFirstNameField = ()=>screen.getByLabelText('first-name')
+    const getLastNameField = ()=>screen.getByLabelText('last-name')
+    const getEmailField = ()=>screen.getByLabelText('email')
+    const getPhoneField = ()=>screen.getByLabelText('phone-number')
+    const getSpokenLanguageCheckBox = ()=>screen.getByLabelText('English')
+    const getOtherLanguageCheckBox = ()=>screen.getByLabelText('Other')
+    const getEmptyFieldErrElement = async ()=>await screen.findByText('Please fill the field')
+    const getOtherLanguageField = async ()=>await screen.findByLabelText('other-language')
 
     describe('when provided information does not meet the criteria', ()=>{
-        // render(
-        //     <Provider store={store}>
-        //         <PersonalInfoComponent onSubmit={mockOnSubmit}/>
-        //     </Provider>
-        // )
-
-        // const {
-        //     firstNameField,
-        //     lastNameField,
-        //     emailField,
-        //     phoneField,
-        //     language,
-        //    // languageOther,
-        //     nextBtn
-        // } = createTestElements()
-
-        // beforeEach(()=>{
-        //     // Filling in valid data so each field can be 
-        //     // tested individually for error and so every 
-        //     // field doesn't show error on submit
-        //     UserEvent.type(firstNameField, mockDriverInputData.firstName)
-        //     UserEvent.type(lastNameField, mockDriverInputData.lastName)
-        //     UserEvent.type(emailField, mockDriverInputData.emailAddress)
-        //     UserEvent.type(phoneField, mockDriverInputData.phoneNumber)
-        //     UserEvent.click(language)
-        // })
-
         const renderComponent = ()=>{
             render(
                 <Provider store={store}>
@@ -64,14 +35,13 @@ describe('PersonalInfo', ()=>{
 
         const populateFields = ()=>{
             const fields = {
-                firstNameField: screen.getByLabelText('first-name'),
-                lastNameField: screen.getByLabelText('last-name'),
-                emailField: screen.getByLabelText('email'),
-                phoneField: screen.getByLabelText('phone-number'),
-                language: screen.getByLabelText('English'),
-                //languageOther: screen.findByLabelText('other-language'),
-                otherLanguageCheckBox: screen.getByLabelText('Other'),
-                nextBtn: screen.getByText('SAVE')
+                firstNameField: getFirstNameField(),
+                lastNameField: getLastNameField(),
+                emailField: getEmailField(),
+                phoneField: getPhoneField(),
+                language: getSpokenLanguageCheckBox(),
+                otherLanguageCheckBox: getOtherLanguageCheckBox(),
+                nextBtn:getSaveBtn()
             }
 
             fireEvent.change(fields.firstNameField, {target:{value:mockDriverInputData.firstName}})
@@ -93,16 +63,16 @@ describe('PersonalInfo', ()=>{
         const assertEmptyFieldsErrorRendered = async (field:HTMLElement)=>{
                 fireEvent.change(field, {target:{value: ''}})
 
-                const nextBtn = screen.getByText('SAVE')
+                const nextBtn =getSaveBtn()
                 UserEvent.click(nextBtn)
 
-                const errorMsgElem = await screen.findByText('Please fill the field')
+                const errorMsgElem = await getEmptyFieldErrElement()
                 expect(errorMsgElem).toBeInTheDocument()
         }
 
         describe('First Name field', ()=>{
             it('should display empty field error on empty field',async ()=>{
-                const firstNameField = screen.getByLabelText('first-name')
+                const firstNameField = getFirstNameField()
                 await assertEmptyFieldsErrorRendered(firstNameField)
                 
             })
@@ -110,25 +80,25 @@ describe('PersonalInfo', ()=>{
 
         describe('Last Name field', ()=>{
             it('should display empty field error on empty field',async ()=>{
-                const lastNameField = screen.getByLabelText('last-name')
+                const lastNameField = getLastNameField()
                 await assertEmptyFieldsErrorRendered(lastNameField)
             })
         })
 
         describe('Email Address field', ()=>{
             it('should display empty field error on empty field',async ()=>{
-                const emailField = screen.getByLabelText('email')
+                const emailField = getEmailField()
                 await assertEmptyFieldsErrorRendered(emailField)
             })
 
             it('should display invalid email error on invalid inputs',async ()=>{
                 const assertEmailFieldShouldGiveErrorOnInput = async (input:string)=>{
-                    const emailField = screen.getByLabelText('email')
+                    const emailField = getEmailField()
 
                     fireEvent.change(emailField, {target:{value:''}})
                     UserEvent.type(emailField, input)
 
-                    const nextBtn = screen.getByText('SAVE')
+                    const nextBtn =getSaveBtn()
                     UserEvent.click(nextBtn)
 
                     const err = await screen.findByText('Invalid Email Address')
@@ -144,16 +114,16 @@ describe('PersonalInfo', ()=>{
 
         describe('Phone Number field', ()=>{
             it('should display empty field error on empty field',async()=>{
-                const phoneField = screen.getByLabelText('phone-number')
+                const phoneField = getPhoneField()
                 await assertEmptyFieldsErrorRendered(phoneField)
             })
 
             it('should display nothing when non-number characters are typed', async ()=>{
-                const phoneField = screen.getByLabelText('phone-number')
+                const phoneField = getPhoneField()
                 fireEvent.change(phoneField, {target: {value: ''}})
                 UserEvent.type(phoneField, 'randomtext')
                 
-                const btn = screen.getByText('SAVE')
+                const btn =getSaveBtn()
                 UserEvent.click(btn)
 
                 const err = await screen.findByText('Phone Number must be a number')
@@ -161,12 +131,12 @@ describe('PersonalInfo', ()=>{
             })
 
             it('should display invalid phone number error on invalid inputs', async ()=>{
-                const phoneField = screen.getByLabelText('phone-number')
+                const phoneField = getPhoneField()
                 fireEvent.change(phoneField, {target: {value: ''}})
 
                 UserEvent.type(phoneField, '9')
 
-                const nextBtn = screen.getByText('SAVE')
+                const nextBtn =getSaveBtn()
                 UserEvent.click(nextBtn)
                 expect(await screen.findByText('Phone number should be 10 digits')).toBeInTheDocument()
 
@@ -180,7 +150,7 @@ describe('PersonalInfo', ()=>{
 
         describe('Language Inputs', ()=>{
             it('should have toggleable checkbox' , ()=>{
-                const language = screen.getByLabelText('English') as HTMLInputElement
+                const language = getSpokenLanguageCheckBox() as HTMLInputElement
                 const initialState = language.checked
 
                 UserEvent.click(language)
@@ -194,10 +164,10 @@ describe('PersonalInfo', ()=>{
             it('should display an error when no language is selected', async ()=>{
                 // deselect language checkbox: selected by default in this test suit
                 // setting other language field to empty string
-                const language = screen.getByLabelText('English')
+                const language = getSpokenLanguageCheckBox()
                 UserEvent.click(language)
 
-                const nextBtn = screen.getByText('SAVE')
+                const nextBtn =getSaveBtn()
                 UserEvent.click(nextBtn)
 
                 expect(await screen.findByText('Please select at least one language'))
@@ -206,16 +176,16 @@ describe('PersonalInfo', ()=>{
 
             it('should display an error when Other language field is filled but not selected',async ()=>{
                 const otherLanguageCheckBox
-                = screen.getByLabelText('Other')
+                = getOtherLanguageCheckBox()
                 UserEvent.click(otherLanguageCheckBox)
 
-                const otherField = await screen.findByLabelText('other-language')
+                const otherField = await getOtherLanguageField()
                 expect(otherField).toBeInTheDocument()
 
-                const saveBtn = screen.getByText('SAVE')
+                const saveBtn =getSaveBtn()
                 UserEvent.click(saveBtn)
 
-                expect(await screen.findByText('Please fill the field'))
+                expect(await getEmptyFieldErrElement())
                 .toBeInTheDocument()
             })
         })
@@ -223,34 +193,23 @@ describe('PersonalInfo', ()=>{
 
     describe('when provided information meets the criteria', ()=>{
         it('should call onSubmit function', async ()=>{
-        const mockOnSubmit = jest.fn()
+            const mockOnSubmit = jest.fn()
 
-        render(
-            <Provider store={store}>
-                <PersonalInfoComponent onSubmit={mockOnSubmit}/>
-            </Provider>
-        )
+            render(
+                <Provider store={store}>
+                    <PersonalInfoComponent onSubmit={mockOnSubmit}/>
+                </Provider>
+            )
 
-        const {
-            firstNameField,
-            lastNameField,
-            emailField,
-            phoneField,
-            language,
-            otherLanguageCheckBox,
-            nextBtn
-        } = createTestElements()
+            UserEvent.type(getFirstNameField(), mockDriverInputData.firstName)
+            UserEvent.type(getLastNameField(), mockDriverInputData.lastName)
+            UserEvent.type(getEmailField(), mockDriverInputData.emailAddress)
+            UserEvent.type(getPhoneField(), mockDriverInputData.phoneNumber)
+            UserEvent.click(getSpokenLanguageCheckBox())
+            UserEvent.click(getOtherLanguageCheckBox())
+            UserEvent.type(await getOtherLanguageField(), mockDriverInputData.languageOther)
 
-
-            UserEvent.type(firstNameField, mockDriverInputData.firstName)
-            UserEvent.type(lastNameField, mockDriverInputData.lastName)
-            UserEvent.type(emailField, mockDriverInputData.emailAddress)
-            UserEvent.type(phoneField, mockDriverInputData.phoneNumber)
-            UserEvent.click(language)
-            UserEvent.click(otherLanguageCheckBox)
-            UserEvent.type(await screen.findByLabelText('other-language'), mockDriverInputData.languageOther)
-
-            await act(async ()=>{UserEvent.click(nextBtn)})
+            await act(async ()=>{UserEvent.click(getSaveBtn())})
 
             expect(mockOnSubmit).toHaveBeenCalled()
         })
