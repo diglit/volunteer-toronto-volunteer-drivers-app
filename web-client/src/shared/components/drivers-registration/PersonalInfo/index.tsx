@@ -13,10 +13,10 @@ import { RootState } from '../../../redux/index'
 import FormInput, { CheckboxLabel } from '../FormInput';
 
 const schema = yup.object().shape({
-    firstName: yup.string().required(),
-    lastName: yup.string().required(),
-    emailAddress: yup.string().email().required(),
-    phoneNumber: yup.string().required(),
+    firstName: yup.string().required('Please fill the field'),
+    lastName: yup.string().required('Please fill the field'),
+    emailAddress: yup.string().email('Invalid Email Address').required('Please fill the field'),
+    phoneNumber: yup.string().matches(/^\d*$/, {message:'Phone Number must be a number'}).required('Please fill the field').length(10,'Phone number should be 10 digits'),
     languagesSpoken: yup.object({
         english: yup.boolean(),
         french: yup.boolean(),
@@ -30,7 +30,7 @@ const schema = yup.object().shape({
     languageOther: yup.string()
     .when('languagesSpoken', {
         is: (value: { other: boolean; }) => value.other,
-        then: yup.string().required(),
+        then: yup.string().required('Please fill the field'),
       }),
 });
 
