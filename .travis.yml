@@ -32,7 +32,7 @@ matrix:
       script:
         - npm run lint && npm run type-check && npm run test
         - npm run dev &
-        - cd ../e2e && npm ci && $(npm bin)/cypress run
+        - cd ../e2e && npm ci && CYPRESS_BASE_URL=http://localhost:3000 $(npm bin)/cypress run
 
 notifications:
   email: false
