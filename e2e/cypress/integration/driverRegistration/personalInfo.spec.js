@@ -1,13 +1,13 @@
 
 const inputLabels = {
-    firstName: 'First Name',
-    lastName: 'Last Name',
-    email: 'Email Address',
-    phone: 'Phone Number',
+    firstName: 'first-name',
+    lastName: 'last-name',
+    email: 'email',
+    phone: 'phone-number',
     language: 'English',
     otherLanguage: 'Other',
-    nextBtn: 'Next',
-    otherLanguageTestId: 'other-language'
+    otherLanguageField: 'other-language',
+    nextBtn: 'SAVE',
 }
 
 describe('PersonalInfo', ()=>{
@@ -17,8 +17,8 @@ describe('PersonalInfo', ()=>{
         cy.findByLabelText(inputLabels.email).type('pam@beesly.ca')
         cy.findByLabelText(inputLabels.phone).type('4444444444')
         cy.findByLabelText(inputLabels.language).click()    
-        cy.findByPlaceholderText(inputLabels.otherLanguage).type("Arabic")
-        cy.findByTestId(inputLabels.otherLanguageTestId).click()
+        cy.findByLabelText(inputLabels.otherLanguage).click()
+        cy.findByLabelText(inputLabels.otherLanguageField).type("Arabic")
     }
 
     describe('When providing information does not meet the criteria',()=>{
@@ -29,8 +29,8 @@ describe('PersonalInfo', ()=>{
         })
 
         const assertEmptyFieldErrorShouldBeDefined = (fieldName)=>{
-            cy.findByLabelText(fieldName).type('')
-            cy.findByText(inputLabels.nextBtn)
+            cy.findByLabelText(fieldName).clear()
+            cy.findByText(inputLabels.nextBtn).click()
             cy.findByText('Please fill the field')
             .should('exist')
         }
@@ -54,7 +54,9 @@ describe('PersonalInfo', ()=>{
 
             it('should display invalid email error on invalid inputs', ()=>{
                 const assertEmailFieldShouldGiveErrorOnInput = (input)=>{
-                    cy.findByLabelText(inputLabels.email).type(input)
+                    cy.findByLabelText(inputLabels.email)
+                    .clear()
+                    .type(input)
                     cy.findByText(inputLabels.nextBtn).click()
                     cy.findByText('Invalid Email Address').should('exist')
                 }
@@ -68,25 +70,27 @@ describe('PersonalInfo', ()=>{
 
         describe('Phone Number field', ()=>{
             it('should display empty  field error on empty field', ()=>{
-                assertEmptyFieldErrorShouldBeDefined()
+                assertEmptyFieldErrorShouldBeDefined(inputLabels.phone)
             })
 
             it('should display nothing when non-number characters are typed', ()=>{
-                cy.findByLabelText(inputLabels.phone).type('randomtext')
-                .should('have.value', '')
-            })
-
-            it('should display phone number in right format', ()=>{
-                cy.findByLabelText(inputLabels.phone).type('4444444444')
-                .should('have.value', '(444)444-4444')
+                cy.findByLabelText(inputLabels.phone).clear()
+                .type('randomtext')
+                cy.findByText(inputLabels.nextBtn).click()
+                cy.findByText('Phone Number must be a number')
+                .should('exist')
             })
 
             it('should display invalid phone number error on invalid inputs', ()=>{
-                cy.findByLabelText(inputLabels.phone).type('9')
-                cy.findByText('Invalid Phone Number').should('exist')
+                cy.findByLabelText(inputLabels.phone)
+                .clear()
+                .type('9')
+                cy.findByText(inputLabels.nextBtn).click()
+                cy.findByText('Phone number should be 10 digits').should('exist')
 
-                cy.findByLabelText(inputLabels.phone).type('999999999999999')
-                cy.findByText('Invalid Phone Number').should('exist')
+                cy.findByLabelText(inputLabels.phone).clear().type('999999999999999')
+                cy.findByText(inputLabels.nextBtn).click()
+                cy.findByText('Phone number should be 10 digits').should('exist')
             })
         })
 
@@ -97,21 +101,21 @@ describe('PersonalInfo', ()=>{
                 
                 cy.findByLabelText(inputLabels.language)
                 .click()
+                cy.findByLabelText(inputLabels.otherLanguage).click()
 
                 cy.findByText(inputLabels.nextBtn)
                 .click()
 
-                cy.findByText('Language is not selected')
+                cy.findByText('Please select at least one language')
                 .should('exist')
             })
 
             it('should display error when Other language is filled but not selected',()=>{
-                cy.findByTestId(inputLabels.otherLanguageTestId).click() // deselecting selected checkbox
-                cy.findByPlaceholderText(inputLabels.otherLanguage).type("Arabic")
-                cy.findByTestId(inputLabels.otherLanguageTestId).click()
+                cy.findByLabelText(inputLabels.language).click() // deselecting selected checkbox
+                cy.findByLabelText(inputLabels.otherLanguageField).clear()
                 cy.findByText(inputLabels.nextBtn).click()
 
-                cy.findByText('Language is not selected')
+                cy.findByText('Please fill the field')
                 .should('exist')
             })
         })
@@ -123,7 +127,7 @@ describe('PersonalInfo', ()=>{
             
             populateFieldsWithValidData()
             
-            cy.findByText(inputLabels.nextBtn).click()
+            cy.findByText('Next').click()
             cy.findByText('Your Needs')
             .should('exist')
         })
