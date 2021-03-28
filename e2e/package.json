@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/diglit/volunteer-toronto-volunteer-drivers-app#readme",
   "devDependencies": {
+    "@testing-library/cypress": "^7.0.4",
     "cypress": "^6.4.0"
   }
 }
