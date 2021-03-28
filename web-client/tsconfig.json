@@ -34,6 +34,7 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.js",
+    "./jest-setup.ts",
     "src/shared/components/drivers-search/FilterAccordion"
   ]
 }
