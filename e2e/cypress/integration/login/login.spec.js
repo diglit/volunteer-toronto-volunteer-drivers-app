@@ -1,10 +1,12 @@
 describe('loginTestSuite',()=>{
-    beforeEach(()=>{
-        cy.visit('/signin')
+    before(function(){
+        cy.visit('/signin'),
         cy.fixture('login').then(function(data){
             this.data=data
         })
+      
     })
+
 
     const inputLabels = {
         username: 'Username',
