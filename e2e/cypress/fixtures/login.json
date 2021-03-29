@@ -1,0 +1,6 @@
+{
+    "validUsername": "abc@gmail.com",
+    "validPassword": "Password@123",
+    "invalidUsername": "@abc@gmail.com",
+    "invalidPassword": "Pa"    
+  }
