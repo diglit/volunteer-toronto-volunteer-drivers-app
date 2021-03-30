@@ -2,6 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { YourNeeds, DATES } from './yourNeeds/index';
 
+export type languageOption = 'english' | 'french' | 'tagalog' | 'portuguese' | 'spanish' | 'chinese' | 'other';
+export type licenseAndVehicle = 'haveCar' | 'haveGLicense' | 'have1MInsurance' | 'have2MInsurance';
+export type agreement = 'agreement1' | 'agreement2' | 'agreement3' | 'agreement4';
+
 export interface PreScreen {
     policeRecordsCheckOptions: string,
     policeRecordsCheckDate: string,
@@ -9,20 +13,14 @@ export interface PreScreen {
     drivingAbstractOptions: string,
     drivingAbstractDate: string,
     LicenseAndVehicle: {
-        haveCar: boolean,
-        haveGLicense: boolean,
-        have1MInsurance: boolean,
-        have2MInsurance: boolean,
+        [key in licenseAndVehicle]: boolean
     }
 
     LicenseClasses: string
 }
 export interface Agreement {
     agreementOptions: {
-        agreement1: boolean,
-        agreement2: boolean,
-        agreement3: boolean,
-        agreement4: boolean,
+        [key in agreement]: boolean
     },
     signiture: string
 }
@@ -33,13 +31,7 @@ export interface PersonalInfo {
     emailAddress: string,
     phoneNumber: string,
     languagesSpoken: {
-        english: boolean,
-        french: boolean,
-        tagalog: boolean,
-        portuguese: boolean,
-        spanish: boolean,
-        chinese: boolean,
-        other: boolean,
+        [key in languageOption]: boolean
     },
     languageOther: string,
 }

@@ -4,12 +4,11 @@ import PersonalInfoSection from '../PersonalInfo/index';
 import YourNeedsSection from '../YourNeeds/index';
 import PreScreenRequirements from '../PreScreenRequirements/index';
 import AgreementSection from '../Agreement';
+import ReviewSection from '../Review';
 
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from '../../../redux/index'
-import { Agreement, setAgreement, PreScreen, setPreScreen, PersonalInfo, setPersonalInfo } from '../../../redux/driversRegistration'
-
-
+import { RootState } from '../../../redux/index';
+import { Agreement, setAgreement, PreScreen, setPreScreen, PersonalInfo, setPersonalInfo } from '../../../redux/driversRegistration';
 
 interface Props {
     currentSlide: number
@@ -47,7 +46,7 @@ const DriversRegistrationCurrentSlide = ({ currentSlide }: Props): React.ReactEl
         case 4:
             return <AgreementSection onSubmit={saveAgreement}/>; //holdover until registration components are made, see case 1
         case 5:
-            return <div>Review</div>; //holdover until registration components are made, see case 1
+            return <ReviewSection />; //holdover until registration components are made, see case 1
         default:
             return <PersonalInfoSection onSubmit={savePersonalInfo}/>;
     }
