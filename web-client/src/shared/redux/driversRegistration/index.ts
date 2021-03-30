@@ -10,6 +10,7 @@ export interface PreScreen {
     drivingAbstractDate: string,
     LicenseAndVehicle: {
         haveCar: boolean,
+        haveVan: boolean
         haveGLicense: boolean,
         have1MInsurance: boolean,
         have2MInsurance: boolean,
@@ -62,6 +63,7 @@ const initPreScreen: PreScreen = {
     drivingAbstractOptions: '',
     drivingAbstractDate: '', 
     LicenseAndVehicle: {
+        haveVan: false,
         haveCar: false,
         haveGLicense: false,
         have1MInsurance: false,
