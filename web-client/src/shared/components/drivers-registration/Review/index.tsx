@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/index';
 import { languageOption, licenseAndVehicle, agreement } from '../../../redux/driversRegistration/index';
 import { COMMUNITYNAME, TIMES, DELIVERTYPES } from '../../../redux/driversRegistration/yourNeeds/index';
-import { policeRecordsCheckOptionsLabel, drivingAbstractOptionsLabel } from '../PreScreenRequirements/label';
+import { policeRecordsCheckOptionsLabel, drivingAbstractOptionsLabel, LicenseAndVehicleLabel } from '../PreScreenRequirements/label';
 import { agreementLabel } from '../Agreement/index';
 
 import { Typography, TextField, FormControlLabel, Checkbox } from '@material-ui/core';
@@ -44,7 +44,13 @@ const ReviewSection = (): React.ReactElement => {
     Saturday: availableDates.filter(ele => ele.date === 'Saturday')[0].availableTimes.includes(time)
   }))];
 
-  // const checkedLicenseAndVehicles = [...]
+  const checkedLicenseAndVehicles = [...licenses.map(license => {
+    return {
+      name: license,
+      checked: LicenseAndVehicle[license],
+      label: LicenseAndVehicleLabel.filter(label => label.name === license)[0].label
+    }
+  })];
 
   const checkedAgreements = [...agreements.map(agreement => {
     return {
@@ -133,7 +139,7 @@ const ReviewSection = (): React.ReactElement => {
         <div>
           <Typography>If you have completed a police records check, please indicate the date and type of check completed</Typography>
           <TextField id="date" type="date" defaultValue={policeRecordsCheckDate} disabled />
-          <TextField id="date" type="date" defaultValue={policeRecordsCheckType} disabled />
+          <TextField id="police records check type" defaultValue={policeRecordsCheckType} disabled />
         </div>
         
         <div>
@@ -152,20 +158,20 @@ const ReviewSection = (): React.ReactElement => {
           </div>
         </div>
 
-        {/* <div>
+        <div>
           <Typography>Vehicle/License Requirements (choose all that apply)</Typography>
-          { LicenseAndVehicleLabel.map(requirement => {
-            const requireName = requirement.name;
-            if (LicenseAndVehicle[requirement.name]) {
-              return <FormControlLabel disabled control={<Checkbox checked name={requirement.label} />} label={requirement.label} key={requirement.label} />
+          { checkedLicenseAndVehicles.map(license => {
+            if (license.checked) {
+              return <FormControlLabel disabled control={<Checkbox checked name={license.label} />} label={license.label} key={license.label} />
             } else {
-              return <FormControlLabel disabled control={<Checkbox name={requirement.label} />} label={requirement.label} key={requirement.label} />
+              return <FormControlLabel disabled control={<Checkbox name={license.label} />} label={license.label} key={license.label} />
             }
           })}
-        </div> */}
-        <div>
-          <Typography>Please indicate other license classes here</Typography>
-          <TextField id="license class" defaultValue={LicenseClasses} disabled />
+
+          <div>
+            <Typography>Please indicate other license classes here</Typography>
+            <TextField id="license class" defaultValue={LicenseClasses} disabled />
+          </div>
         </div>
       </div>
 
