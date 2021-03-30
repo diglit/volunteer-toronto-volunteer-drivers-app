@@ -1,5 +1,5 @@
 import React from 'react';
-import AvaiableDatesTable from '../YourNeeds/AvailableDatesTable/index';
+import AvailableDatesTable from '../YourNeeds/AvailableDatesTable/index';
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/index';
@@ -9,7 +9,6 @@ import { policeRecordsCheckOptionsLabel, drivingAbstractOptionsLabel, LicenseAnd
 import { agreementLabel } from '../Agreement/index';
 
 import { Typography, TextField, FormControlLabel, Checkbox } from '@material-ui/core';
-import AvailableDatesTable from '../YourNeeds/AvailableDatesTable/index';
 
 const ReviewSection = (): React.ReactElement => {
 
@@ -107,7 +106,7 @@ const ReviewSection = (): React.ReactElement => {
 
         <div>
           <Typography>I am available to deliver (select all that apply):</Typography>
-          <AvailableDatesTable tableRows={availableDatesAndTimes} handleTimeSelect={()=> {}} disabled={true} />
+          <AvailableDatesTable tableRows={availableDatesAndTimes} disabled={true} />
         </div>
 
         <div>
