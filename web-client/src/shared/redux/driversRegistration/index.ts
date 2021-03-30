@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { YourNeeds, DATES } from './yourNeeds/index';
 
 export type languageOption = 'english' | 'french' | 'tagalog' | 'portuguese' | 'spanish' | 'chinese' | 'other';
-export type licenseAndVehicle = 'haveCar' | 'haveGLicense' | 'have1MInsurance' | 'have2MInsurance';
+export type licenseAndVehicle = 'haveCar' | 'haveVan' | 'haveGLicense' | 'have1MInsurance' | 'have2MInsurance';
 export type agreement = 'agreement1' | 'agreement2' | 'agreement3' | 'agreement4';
 
 export interface PreScreen {
@@ -54,6 +54,7 @@ const initPreScreen: PreScreen = {
     drivingAbstractOptions: '',
     drivingAbstractDate: '', 
     LicenseAndVehicle: {
+        haveVan: false,
         haveCar: false,
         haveGLicense: false,
         have1MInsurance: false,

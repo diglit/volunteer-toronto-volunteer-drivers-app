@@ -12,11 +12,20 @@ import { RootState } from '../../../redux/index'
 
 import FormInput, { CheckboxLabel } from '../FormInput';
 
+const errorMessages = {
+    required: 'Please fill the field',
+    email: 'Invalid Email Address',
+    phone: {
+        type: 'Phone Number must be a number',
+        length: 'Phone number should be 10 digits',
+    }
+}
+
 const schema = yup.object().shape({
-    firstName: yup.string().required(),
-    lastName: yup.string().required(),
-    emailAddress: yup.string().email().required(),
-    phoneNumber: yup.string().required(),
+    firstName: yup.string().required(errorMessages.required),
+    lastName: yup.string().required(errorMessages.required),
+    emailAddress: yup.string().email(errorMessages.email).required(errorMessages.required),
+    phoneNumber: yup.string().matches(/^\d*$/, {message:errorMessages.phone.type}).required(errorMessages.required).length(10,errorMessages.phone.length),
     languagesSpoken: yup.object({
         english: yup.boolean(),
         french: yup.boolean(),
@@ -30,7 +39,7 @@ const schema = yup.object().shape({
     languageOther: yup.string()
     .when('languagesSpoken', {
         is: (value: { other: boolean; }) => value.other,
-        then: yup.string().required(),
+        then: yup.string().required(errorMessages.required),
       }),
 });
 
@@ -128,7 +137,7 @@ const PersonalInfoSection = ({ onSubmit }: personalInfoPorps): React.ReactElemen
                                 formType='textInput'
                                 error={errors.languageOther}
                                 control={control}
-                                labels={[]}
+                                labels={'other-language'}
                                 formLabel='Other Language'
                                 name='languageOther'
                             />

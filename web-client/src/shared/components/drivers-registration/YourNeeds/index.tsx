@@ -6,7 +6,7 @@ import { RootState } from '../../../redux/index';
 import { Community, YourNeeds, Time, DeliveryType, Date, COMMUNITYNAME, DATES, TIMES, DELIVERTYPES } from '../../../redux/driversRegistration/yourNeeds/index';
 import { saveYourNeeds } from '../../../redux/driversRegistration/index';
 
-import { FormLabel, FormControl, FormGroup, FormControlLabel, Checkbox, Button } from '@material-ui/core';
+import { FormLabel, FormControl, FormGroup, FormControlLabel, Checkbox, Button, Typography } from '@material-ui/core';
 
 const YourNeedsSection = (): JSX.Element => {
 
@@ -125,6 +125,7 @@ const YourNeedsSection = (): JSX.Element => {
   return (
     <div>
       <div className="needs-communities">
+        <Typography variant="h4">Your Needs</Typography>
         <form onSubmit={handleSubmit}>
           <FormControl>
             <FormLabel>I want to deliver in these communities (select all the apply)</FormLabel>

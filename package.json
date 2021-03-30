@@ -1,11 +1,10 @@
 {
-  "name": "e2e",
+  "name": "volunteer-toronto-volunteer-drivers-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "## Ticket System",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "cypress:open": "cypress open"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -17,8 +16,7 @@
     "url": "https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/issues"
   },
   "homepage": "https://github.com/diglit/volunteer-toronto-volunteer-drivers-app#readme",
-  "devDependencies": {
-    "@testing-library/cypress": "^7.0.4",
-    "cypress": "^6.8.0"
+  "dependencies": {
+    "@netlify/plugin-nextjs": "^3.0.3"
   }
 }

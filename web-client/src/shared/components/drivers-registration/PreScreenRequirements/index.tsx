@@ -30,6 +30,7 @@ const schema = yup.object().shape({
     then: yup.string().required()
   }),
   LicenseAndVehicle: yup.object().shape({
+    haveVan: yup.boolean(),
     haveCar: yup.boolean(),
     haveGLicense: yup.boolean(),
     have1MInsurance: yup.boolean(),
