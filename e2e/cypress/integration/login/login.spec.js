@@ -3,8 +3,7 @@ describe('loginTestSuite',()=>{
         cy.visit('/signin'),
         cy.fixture('login').then(function(data){
             this.data=data
-        })
-      
+        })      
     })
 
 
@@ -30,34 +29,38 @@ describe('loginTestSuite',()=>{
     })
     
     it('requires username',()=>{
-        cy.findByLabelText(inputLabels.password).type(this.data.validPassword)
-        cy.findByLabelText(inputLabels.signin).click()
-        cy.findByText('Invalid email').should('exist')
+        cy.findByLabelText(inputLabels.username).clear()
+        cy.findByLabelText(inputLabels.password).type("password")
+        cy.get('span.MuiButton-label').click() // clicking on Sign In button
+        cy.focused().should('have.attr', 'name', 'username')
+               
+    })
+    
+     it('requires Password',()=>{
+        cy.findByLabelText(inputLabels.username).type("username")
+        cy.findByLabelText(inputLabels.password).clear()
+        cy.get('span.MuiButton-label').click()   // clicking on Sign In button
+        cy.focused().should('have.attr', 'name', 'password')
         
     })
     
-    it('requires Password',()=>{
-        cy.findByLabelText(inputLabels.username).type(this.data.validUsername)
-        cy.findByLabelText(inputLabels.signin).click()
-        cy.findByText('Invalid password!').should('exist')
-        
-    })
-    
-    it('requires valid username and password',()=>{
+  /* Test to validate Invalid login 
+   it('requires valid username and password',()=>{
         cy.findByLabelText(inputLabels.username).type(this.data.invalidUsername)
         cy.findByLabelText(inputLabels.password).type(this.data.invalidPassword)
-        cy.findByLabelText(inputLabels.signin).click()
+        cy.get('span.MuiButton-label').click() 
         cy.contains('Unable to log in')
         
     })
     
+     Test to validate Valid login 
     it('naviagates to next page after sucessfull login',()=>{
         cy.findByLabelText(inputLabels.username).type(this.data.validUsername)
         cy.findByLabelText(inputLabels.password).type(this.data.validPassword)
         cy.findByLabelText(inputLabels.signin).click()
         cy.url().should('include','/drivers-registration')
     })
-    
+    */
     
     })
     
