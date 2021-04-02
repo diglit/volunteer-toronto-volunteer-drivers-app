@@ -8,5 +8,5 @@ build:
   docker:
     web: web-server/Dockerfile
 run:
-  web: python -Wd manage.py runserver 0.0.0.0:$PORT
+  web: python manage.py migrate && python -Wd manage.py runserver 0.0.0.0:$PORT
   # web: poetry install && python manage.py migrate && python -Wd manage.py runserver 0.0.0.0:$PORT
