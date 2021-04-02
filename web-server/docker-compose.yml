@@ -11,10 +11,10 @@ services:
         - "*"
       args:
         DJANGO_ENV: development
-
-    command: >
-      sh -c "python manage.py migrate &&
-             python -Wd manage.py runserver \"0.0.0.0:8000\""
+    # command: sleep 60m
+    # command: >
+    #   sh -c "python manage.py migrate &&
+    #          python -Wd manage.py runserver \"0.0.0.0:8000\""
     ports:
       - 8000:8000
     env_file:
@@ -23,7 +23,7 @@ services:
       - db
 
   db:
-    image: postgres:12.0-alpine
+    image: postgres:9.5-alpine
     restart: unless-stopped
     ports:
       - 5432:5432
