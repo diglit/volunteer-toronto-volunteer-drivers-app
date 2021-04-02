@@ -58,7 +58,7 @@ describe('loginTestSuite',()=>{
         cy.findByLabelText(inputLabels.username).type(this.data.validUsername)
         cy.findByLabelText(inputLabels.password).type(this.data.validPassword)
         cy.findAllByText('Sign In').last().click() 
-        cy.url().should('include','/drivers-registration')
+        cy.url().should('include','/drivers-search')
     })
     */
     
