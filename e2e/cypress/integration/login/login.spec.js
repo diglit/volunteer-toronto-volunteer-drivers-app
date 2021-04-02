@@ -31,7 +31,7 @@ describe('loginTestSuite',()=>{
     it('requires username',()=>{
         cy.findByLabelText(inputLabels.username).clear()
         cy.findByLabelText(inputLabels.password).type("password")
-        cy.get('span.MuiButton-label').click() // clicking on Sign In button
+        cy.findAllByText('Sign In').last().click() // clicking on Sign In button
         cy.focused().should('have.attr', 'name', 'username')
                
     })
@@ -39,7 +39,7 @@ describe('loginTestSuite',()=>{
      it('requires Password',()=>{
         cy.findByLabelText(inputLabels.username).type("username")
         cy.findByLabelText(inputLabels.password).clear()
-        cy.get('span.MuiButton-label').click()   // clicking on Sign In button
+        cy.findAllByText('Sign In').last().click()   // clicking on Sign In button
         cy.focused().should('have.attr', 'name', 'password')
         
     })
@@ -48,7 +48,7 @@ describe('loginTestSuite',()=>{
    it('requires valid username and password',()=>{
         cy.findByLabelText(inputLabels.username).type(this.data.invalidUsername)
         cy.findByLabelText(inputLabels.password).type(this.data.invalidPassword)
-        cy.get('span.MuiButton-label').click() 
+        cy.findAllByText('Sign In').last().click()  
         cy.contains('Unable to log in')
         
     })
@@ -57,7 +57,7 @@ describe('loginTestSuite',()=>{
     it('naviagates to next page after sucessfull login',()=>{
         cy.findByLabelText(inputLabels.username).type(this.data.validUsername)
         cy.findByLabelText(inputLabels.password).type(this.data.validPassword)
-        cy.findByLabelText(inputLabels.signin).click()
+        cy.findAllByText('Sign In').last().click() 
         cy.url().should('include','/drivers-registration')
     })
     */
