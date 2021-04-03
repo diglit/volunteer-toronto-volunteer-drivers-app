@@ -7,6 +7,8 @@ type DriverCardProps = {
   driverInfo: Driver;
 };
 
+// TODO: Update the card based on the design: 
+// https://xd.adobe.com/view/4a36317f-0fd9-444a-b1cd-e135d91ce2e0-1f65/screen/4034537d-d116-4726-8539-9f7f2d42d3f4/?fullscreen&hints=off
 export const DriverCard = ({ driverInfo }: DriverCardProps): JSX.Element => {
 
   const riskComforlLevelSpanList 
