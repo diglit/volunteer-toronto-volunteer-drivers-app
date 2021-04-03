@@ -22,3 +22,6 @@ Use cases for the following designs:
 4) User arrives at dashboard
 
 ]
+
+# After Actions
+Create cypress ticket(s) for these use cases. Use your judgement for the size.

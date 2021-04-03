@@ -22,7 +22,7 @@ Create any new files that need to be created for this component. Reuse old files
 
 # After Actions
 
-Create new mocks and dependency tickets for logical groups of files (The smaller the better)
+Create [new mocks and dependency tickets](https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/issues/new?assignees=&labels=front-end&template=mocks.md&title=Write+mocks+and+interfaces+for+%5BNAME%5D) for logical groups of files (The smaller the better)
 
 # Dependencies:
 [Use Case Issue]
