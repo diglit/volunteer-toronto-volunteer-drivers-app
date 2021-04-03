@@ -17,7 +17,7 @@ const DriversSearchList = React.memo(function DriversSearchList() {
           role="driverCard" 
           key={driver.id} 
         >
-          <DriverCard 
+          <DriverCard
             driverInfo={driver} 
           />
         </div>

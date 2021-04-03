@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Driver } from '../../../../redux/driversSearch/index';
 import DriverFullProfile from '../DriverFullProfile/index';
 // Material UI Imports
-import { Card, CardContent, Typography } from '@material-ui/core';
+import { Card, CardContent, Typography, Button } from '@material-ui/core';
 
 type DriverCardProps = {
   driverInfo: Driver;
@@ -16,6 +16,11 @@ export const DriverCard = ({ driverInfo }: DriverCardProps): JSX.Element => {
   const [viewProfile, setViewProfile] = useState(false);
 
   // Add email, delete reset password & edit profile functions
+
+  // TODO: update view profile state
+  const viewProfileHandle = () => {
+    setViewProfile(true);
+  }
   
   return (
     <Card>
@@ -25,6 +30,7 @@ export const DriverCard = ({ driverInfo }: DriverCardProps): JSX.Element => {
             {driverInfo.name}
           </span>
         </Typography>
+        <Button onClick={viewProfileHandle}>View Full Profile</Button>
         {viewProfile && <DriverFullProfile driverInfo={driverInfo} />}
       </CardContent>
     </Card>
