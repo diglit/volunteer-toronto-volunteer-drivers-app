@@ -3,9 +3,9 @@ import React from 'react';
 // import { RootState } from 'shared/redux';
 // import { Review } from '../../driver-registration/Review/index' 
 
-const ApplicationReview = ({
-    // application data
-}): React.ReactElement => {
+const ApplicationReview = (
+    // { /**application data*/ }
+): React.ReactElement => {
     // const ApplicationReview = useSelector();
     // TODO: handle reject
     // TODO: handle approve
