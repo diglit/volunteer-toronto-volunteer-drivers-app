@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",  # required for serving swagger ui's css/js files
     "rest_framework",
     "driving.apps.DrivingConfig",
+    "users.apps.UsersConfig",
     "drf_yasg",
     "django_extensions",
 ]
@@ -98,6 +99,7 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = "users.User"
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
