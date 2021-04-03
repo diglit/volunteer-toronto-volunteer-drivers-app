@@ -5,38 +5,45 @@ import {
 
 // TODO: combine data from driver registeration 
 
-interface Application {
-    email: string, // or id
+export interface AppListItem {
+    id: number,
     lastName: string,
     firstName: string,
     viewed: boolean,
     approved: boolean,
 }
 
+export const mockApplicationList: AppListItem[] = [
+    {
+        id: 5664,
+        lastName: 'Smith',
+        firstName: 'John',
+        viewed: false,
+        approved: false
+    },
+]
 
-const initialState = {
-    // TODO: fetch all applications data
-    application: 'placeholder'
-}
+// TODO: fetch all applications data
+const initialState: AppListItem[] = mockApplicationList
 
 const driverApplicationSlice = createSlice({
     name: 'driverApplication',
     initialState,
     reducers: {
         // TODO: 
-        setApplication: (state, {payload}: PayloadAction)=> {
+        setApplication: (state, { payload }: PayloadAction) => {
             console.log(state);
             console.log(payload);
         },
-        setView: (state, {payload}: PayloadAction)=> {
+        setView: (state, { payload }: PayloadAction) => {
             console.log(state);
             console.log(payload);
         },
-        setApprove: (state, {payload}: PayloadAction)=> {
+        setApprove: (state, { payload }: PayloadAction) => {
             console.log(state);
             console.log(payload);
         },
-        setReject: (state, {payload}: PayloadAction)=> {
+        setReject: (state, { payload }: PayloadAction<AppListItem>) => {
             console.log(state);
             console.log(payload);
         },
