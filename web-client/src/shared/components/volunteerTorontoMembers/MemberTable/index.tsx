@@ -1,8 +1,10 @@
 
 import React from 'react'
 
-export default ()=>{
+const MemberTable:React.FunctionComponent = ()=>{
     return (
         <div>Member Table</div>
     )
 }
+
+export default MemberTable

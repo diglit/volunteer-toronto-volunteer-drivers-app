@@ -1,8 +1,10 @@
 
 import React from 'react'
 
-export default ()=>{
+const Btns: React.FunctionComponent = ()=>{
     return (
         <div>Buttons</div>
     )
 }
+
+export default Btns

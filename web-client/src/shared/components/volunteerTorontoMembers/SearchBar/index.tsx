@@ -1,8 +1,10 @@
 
 import React from 'react'
 
-export default ()=>{
+const SearchBar: React.FunctionComponent = ()=>{
     return (
         <div>SearchBar</div>
     )
 }
+
+export default SearchBar

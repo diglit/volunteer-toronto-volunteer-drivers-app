@@ -28,11 +28,20 @@ const volunteerTorontoMembersSlice = createSlice({
     reducers: {
         setMembers: (state, {payload}: PayloadAction)=>{
             // implement
+            console.log(state)
+            console.log(payload)
         },
         setSearchQuery: (state, {payload}: PayloadAction<string>)=>{
             // implement
+            console.log(state)
+            console.log(payload)
         },
     }
 })
+
+export const {
+    setMembers,
+    setSearchQuery
+} = volunteerTorontoMembersSlice.actions
 
 export default volunteerTorontoMembersSlice
