@@ -2,7 +2,7 @@
 name: 'Spike: USE CASE'
 about: Spike for a USE CASE Ticket
 title: ''
-labels: ''
+labels: 'qa'
 assignees: ''
 
 ---
