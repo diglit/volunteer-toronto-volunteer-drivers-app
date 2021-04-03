@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "driving.apps.DrivingConfig",
     "drf_yasg",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [

@@ -13,6 +13,7 @@ drf-yasg = "^1.20.0"
 dj_database_url = "^0.5.0"
 python-dotenv = "^0.15.0"
 psycopg2 = "^2.8.6"
+django-extensions = "^3.1.1"
 
 [tool.poetry.dev-dependencies]
 
