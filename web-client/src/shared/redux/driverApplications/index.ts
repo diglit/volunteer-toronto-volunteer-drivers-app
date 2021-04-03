@@ -3,23 +3,28 @@ import {
     PayloadAction
 } from '@reduxjs/toolkit';
 
-// TODO: combine data from driver registeration 
-
 export interface AppListItem {
     id: number,
-    lastName: string,
-    firstName: string,
+    application: {
+        //TODO: combine data from driver registeration 
+        lastName: string,
+        firstName: string,
+    },
     viewed: boolean,
     approved: boolean,
+    applicationDate: '2021-3-30',
 }
 
 export const mockApplicationList: AppListItem[] = [
     {
         id: 5664,
-        lastName: 'Smith',
-        firstName: 'John',
+        application: {
+            lastName: 'Smith',
+            firstName: 'John',
+        },
         viewed: false,
-        approved: false
+        approved: false,
+        applicationDate: '2021-3-30'
     },
 ]
 
