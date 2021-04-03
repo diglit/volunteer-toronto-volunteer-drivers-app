@@ -9,7 +9,7 @@ assignees: ''
 
 # Description
 
-Create a [ticket](https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/issues/new?assignees=&labels=use-case&template=use-case.md&title=) with the label use-case for the following designs:
+Create a [ticket](https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/issues/new?assignees=&labels=use-case&template=use-case.md&title=Use+case+for+%5BNAME%5D) with the label use-case for the following designs:
 
 [Design Urls]
 
