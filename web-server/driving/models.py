@@ -47,3 +47,6 @@ class Driver(models.Model):
     two_mill_insurance = models.BooleanField()
     g_license = models.BooleanField()
     other_license_class = models.TextField()
+
+    def __str__(self):
+        return f"{self.name} - {self.email}"
