@@ -1,7 +1,7 @@
 ---
 name: 'USE CASE'
 about: Create a USE CASE Ticket
-title: ''
+title: 'Use case for [NAME]'
 labels: 'use-case'
 assignees: ''
 

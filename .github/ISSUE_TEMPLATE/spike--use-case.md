@@ -1,7 +1,7 @@
 ---
 name: 'Spike: USE CASE'
 about: Spike for a USE CASE Ticket
-title: ''
+title: 'Spike: USE CASE for [NAME]'
 labels: 'qa'
 assignees: ''
 
@@ -9,7 +9,7 @@ assignees: ''
 
 # Description
 
-Create a ticket with the label use-case for the following designs:
+Create a [ticket](https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/issues/new?assignees=&labels=use-case&template=use-case.md&title=) with the label use-case for the following designs:
 
 [Design Urls]
 
