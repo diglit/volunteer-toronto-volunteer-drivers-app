@@ -2,7 +2,7 @@
 name: Help wanted
 about: Ask a question to the group
 title: ''
-labels: 'help wanted'
+labels: help wanted
 assignees: ''
 
 ---
