@@ -18,4 +18,9 @@ Create any new files that need to be created for this component
 - [ ] Services
 - [ ] Helpers
 
-Dependencies: [Use Case Issue]
+# After Actions
+
+Create new mocks and dependency tickets for logical groups of files (The smaller the better)
+
+# Dependencies:
+[Use Case Issue]
