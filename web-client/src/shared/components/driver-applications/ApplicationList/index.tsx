@@ -3,8 +3,9 @@ import React from 'react';
 // import { RootState } from 'shared/redux';
 
 const ApplicationList = (): React.ReactElement => {
-    // const Applications = useSelector();
-    // TODO: handleClick: update viewed, get application by id
+    // TODO: get all applications
+    // const Applications = useSelector(); 
+    // TODO: handleClick: update viewed, get application by id, go to route
     return (
         <>
             {/* TODO: map applications data into the table rows */}

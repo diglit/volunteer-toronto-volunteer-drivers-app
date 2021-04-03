@@ -3,32 +3,33 @@ import {
     // PayloadAction
 } from '@reduxjs/toolkit';
 
-interface Applications {
-    email: string, // id
-    LastName: string,
-    FirstName: string,
+interface Application {
+    email: string, // or id
+    lastName: string,
+    firstName: string,
     viewed: boolean,
     approved: boolean,
+    // TODO: combine data from driver registeration 
 }
 
 const initialState = {
-    // TODO: fetch application data
+    // TODO: fetch all applications data
 }
 
 const driverApplicationSlice = createSlice({
     name: 'driverApplication',
-    initialState: initialState,
+    initialState,
     reducers: {
         // TODO: 
-        // fetchApplication
-        // setView,
-        // setApprove,
-        // setReject,
+        // setApplication: (state, {payload}: PayloadAction)=> {}
+        // setView: (state, {payload}: PayloadAction)=> {},
+        // setApprove: (state, {payload}: PayloadAction)=> {},
+        // setReject: (state, {payload}: PayloadAction)=> {},
     }
 });
 
 export const {
-    // setReject, setApprove, setView, fetchApplication
+    //setApplication, setView, setApprove, setReject
 } = driverApplicationSlice.actions;
 
 export default driverApplicationSlice;
