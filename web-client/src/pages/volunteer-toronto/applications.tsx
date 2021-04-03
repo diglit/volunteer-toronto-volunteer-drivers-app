@@ -2,7 +2,7 @@ import React from 'react'
 import { NextPage } from 'next'
 import ApplicationList from '../../shared/components/driver-applications/ApplicationList'
 
-const VolunteerTorontoMembers: NextPage = () => {
+const Applications: NextPage = () => {
     return (
         <>
             <ApplicationList />
@@ -10,4 +10,4 @@ const VolunteerTorontoMembers: NextPage = () => {
     )
 }
 
-export default VolunteerTorontoMembers
+export default Applications
