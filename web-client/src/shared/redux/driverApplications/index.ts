@@ -5,13 +5,13 @@ import {
 
 // TODO: combine data from driver registeration 
 
-// interface Application {
-//     email: string, // or id
-//     lastName: string,
-//     firstName: string,
-//     viewed: boolean,
-//     approved: boolean,
-// }
+interface Application {
+    email: string, // or id
+    lastName: string,
+    firstName: string,
+    viewed: boolean,
+    approved: boolean,
+}
 
 
 const initialState = {
