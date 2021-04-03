@@ -4,7 +4,7 @@ import React from 'react';
 // import { Review } from '../../driver-registration/Review/index' 
 
 const ApplicationReview = (
-    // { /**application data*/ }
+    // { /**application id*/ }
 ): React.ReactElement => {
     // const ApplicationReview = useSelector();
     // TODO: handle reject
