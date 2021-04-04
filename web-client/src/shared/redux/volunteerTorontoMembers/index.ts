@@ -1,28 +1,4 @@
-import {createSlice, PayloadAction, ThunkAction} from '@reduxjs/toolkit'
-import { AppThunk } from '..'
-
-const mockMembersList: MembersListItem[] = [
-    {
-        id: '1',
-        name: "Pam",
-        jobTitle: 'Senior Manager'
-    },
-    {
-        id: '2',
-        name: "Bam",
-        jobTitle: 'Senior Manager'
-    },
-    {
-        id: '3',
-        name: "Sam",
-        jobTitle: 'Senior Manager'
-    },
-    {
-        id: '4',
-        name: "Henry Ford",
-        jobTitle: 'Senior Manager'
-    }
-]
+import {Action, createSlice, PayloadAction, ThunkAction} from '@reduxjs/toolkit'
 
 export interface MembersListItem {
     id: string,
@@ -31,76 +7,110 @@ export interface MembersListItem {
 }
 
 export interface VolunteerTorontoMembersState {
+    loading: boolean
     members: MembersListItem[]
     filteredMembers: MembersListItem[]
-    searchQuery: string
 }
 
+export type MemberThunk = ThunkAction<void, {volunteerTorontoMembers: VolunteerTorontoMembersState}, unknown, Action>
+
 const initialState:VolunteerTorontoMembersState = {
-    members: mockMembersList,
-    filteredMembers: mockMembersList,
-    searchQuery: ''
+    loading:true,
+    members: [],
+    filteredMembers: []
 }
 
 const volunteerTorontoMembersSlice = createSlice({
     name: 'volunteerTorontoMembers',
     initialState,
     reducers: {
-        setMembers: (state, {payload}: PayloadAction)=>{
-            // implement
-            console.log(state)
-            console.log(payload)
+        setLoading: (state, {payload}: PayloadAction<boolean>) =>{
+            state.loading = payload
+        },
+        setMembers: (state, {payload}: PayloadAction<MembersListItem[]>)=>{
+            state.members = payload
         },
         setFilteredMembers: (state, {payload}: PayloadAction<MembersListItem[]>)=>{
-            console.log(payload)
             state.filteredMembers = payload
-        },
-        setSearchQuery: (state, {payload}: PayloadAction<string>)=>{
-            // implement
-            console.log(state)
-            console.log(payload)
-        },
+        }
     }
 })
 
 
 export const {
     setMembers,
-    setSearchQuery,
-    setFilteredMembers
+    setFilteredMembers,
+    setLoading
 } = volunteerTorontoMembersSlice.actions
 
-export const deleteUser = (userId: string)=>{
-    return (dispatch, getState)=>{
-        // This is simulated implementation
-        // This implementation does not make any API call
-        const state = getState().volunteerTorontoMembers
-        const newFiltered = state.filteredMembers.filter((
-            member=>member.id!=userId
-        ))
-        dispatch(setFilteredMembers(newFiltered))  
+export const fetchMembers = ():MemberThunk =>{
+    return async (dispatch)=>{
+        dispatch(setLoading(true))
+        try{
+            const res = await fetch('http://localhost:3000/api/vtmembers')
+            const members = await res.json()
+            dispatch(setMembers(members.data))
+            dispatch(setFilteredMembers(members.data))
+            dispatch(setLoading(false))
+        }
+        catch(e){
+            dispatch(setMembers([]))
+            dispatch(setFilteredMembers([]))
+            dispatch(setLoading(false))
+        }
     }
 }
 
-export const filterUsers = (userName: string)=>(dispatch, getState)=>{
-    const state = getState().volunteerTorontoMembers
-    if(userName === ''){
-        dispatch(setFilteredMembers(state.members))
+export const deleteMember = (userId: string): MemberThunk=>{
+    return async (dispatch)=>{
+        dispatch(setLoading(true))
+        try{
+            const res = await fetch('http://localhost:3000/api/vtmembers/delete', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body:JSON.stringify({id:userId})
+            })
+
+            const confirmation = await res.json()
+            if(confirmation.data.id){
+                dispatch(fetchMembers())
+                dispatch(setLoading(false))
+            }
+            else{
+                dispatch(setLoading(false))
+            }
+        }
+        catch(e){
+            console.log(e, 'DELETE MEMBER')
+            dispatch(setLoading(false))
+        }
     }
-    else{
-        dispatch(
-            setFilteredMembers(
+}
+
+export const filterMembers = (filterString: string):MemberThunk =>{
+    return (dispatch, getState)=>{
+        const state = getState().volunteerTorontoMembers
+        if(filterString === ''){
+            dispatch(setFilteredMembers(state.members))
+        }
+        else{
+            dispatch(setFilteredMembers(
                 state.members.filter(member=>(
-                    new RegExp(`${userName}`,'i').test(member.name)
+                    new RegExp(`${filterString}`,'i').test(member.name)
                 ))
-            )
-        )
+            ))
+        }
     }
 }
 
 export const filteredMemberListSelector 
-= ((state: {volunteerTorontoMembers: VolunteerTorontoMembersState})=>{
+= ((state: {volunteerTorontoMembers: VolunteerTorontoMembersState}):MembersListItem[]=>{
     return state.volunteerTorontoMembers.filteredMembers
+})
+
+export const loadingSelector
+= ((state: {volunteerTorontoMembers: VolunteerTorontoMembersState}):boolean=>{
+    return state.volunteerTorontoMembers.loading
 })
 
 export default volunteerTorontoMembersSlice

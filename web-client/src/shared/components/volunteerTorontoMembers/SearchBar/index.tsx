@@ -2,14 +2,14 @@
 import React from 'react'
 import {TextField} from '@material-ui/core'
 import {useDispatch} from 'react-redux'
-import {filterUsers} from '../../../redux/volunteerTorontoMembers'
+import {filterMembers} from '../../../redux/volunteerTorontoMembers'
 
 const SearchBar: React.FunctionComponent = ()=>{
     const dispatch = useDispatch()
 
-    const filterUsersByName = (e)=>{
+    const filterUsersByName = (e:React.ChangeEvent<HTMLInputElement>)=>{
         console.log(e.target.value)
-        dispatch(filterUsers(e.target.value))
+        dispatch(filterMembers(e.target.value))
     }
 
     return (

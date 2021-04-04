@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { MembersListItem, deleteUser } from '../../../redux/volunteerTorontoMembers'
+import { MembersListItem, deleteMember } from '../../../redux/volunteerTorontoMembers'
 import {Button, Link} from '@material-ui/core'
 import {useDispatch} from 'react-redux'
 
@@ -16,7 +16,7 @@ const ButtonGroup: React.FunctionComponent<ButtonGroupPropTypes> = (props:Button
     }
 
     const sendDeleteUserRequest = ()=>{
-        dispatch(deleteUser(props.member.id))
+        dispatch(deleteMember(props.member.id))
     }
 
     const navigateToEmailCompose = ()=>{
