@@ -10,7 +10,7 @@ export interface AppListItem {
         lastName: string,
         firstName: string,
     },
-    viewed: boolean,
+    rejected: boolean,
     approved: boolean,
     applicationDate: '2021-3-30',
 }
@@ -22,7 +22,7 @@ export const mockApplicationList: AppListItem[] = [
             lastName: 'Smith',
             firstName: 'John',
         },
-        viewed: false,
+        rejected: false,
         approved: false,
         applicationDate: '2021-3-30'
     },
@@ -40,10 +40,6 @@ const driverApplicationSlice = createSlice({
             console.log(state);
             console.log(payload);
         },
-        setView: (state, { payload }: PayloadAction) => {
-            console.log(state);
-            console.log(payload);
-        },
         setApprove: (state, { payload }: PayloadAction) => {
             console.log(state);
             console.log(payload);
@@ -56,7 +52,9 @@ const driverApplicationSlice = createSlice({
 });
 
 export const {
-    setApplication, setView, setApprove, setReject
+    setApplication,
+    setReject,
+    setApprove
 } = driverApplicationSlice.actions;
 
 export default driverApplicationSlice;
