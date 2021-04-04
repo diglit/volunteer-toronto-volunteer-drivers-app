@@ -5,7 +5,7 @@ import reduxThunk from 'redux-thunk';
 import driversSearchSlice, { DriversState } from './driversSearch';
 import driversRegistrationSlice from './driversRegistration';
 import driverApplicationSlice from './driverApplications';
-import volunteerTorontoMembersSlice from './volunteerTorontoMembers'
+import volunteerTorontoMembersSlice from './volunnteer-toronto/members'
 
 export type AppThunk = ThunkAction<void, DriversState, unknown, Action<string>>;
 

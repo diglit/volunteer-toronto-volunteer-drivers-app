@@ -6,7 +6,7 @@ import {
     filteredMemberListSelector, 
     loadingSelector,
     fetchMembers
-} from '../../../redux/volunteerTorontoMembers'
+} from '../../../../redux/volunnteer-toronto/members'
 
 import {
     Table,

@@ -1,4 +1,4 @@
-import {MembersListItem} from '../../../shared/redux/volunteerTorontoMembers'
+import {MembersListItem} from '../../../shared/redux/volunnteer-toronto/members'
 
 
 class MockMember{

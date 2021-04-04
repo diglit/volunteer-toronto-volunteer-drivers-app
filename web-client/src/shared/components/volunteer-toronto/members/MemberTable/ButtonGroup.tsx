@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { MembersListItem, deleteMember } from '../../../redux/volunteerTorontoMembers'
+import { MembersListItem, deleteMember } from '../../../../redux/volunnteer-toronto/members'
 import {Button, Link} from '@material-ui/core'
 import {useDispatch} from 'react-redux'
 
