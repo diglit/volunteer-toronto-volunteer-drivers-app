@@ -1,12 +1,15 @@
 import React from 'react';
+
 import { useSelector } from 'react-redux';
 import { RootState } from 'shared/redux';
+import Link from 'next/link'
 
 import {
     Table, TableBody, TableHead, TableCell, TableContainer, TableRow, Paper, TablePagination,
     Button
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
+// import styles from './index.module.scss'
 
 interface Column {
     field: 'name' | 'applicationDate' | 'review';
@@ -30,6 +33,9 @@ const columns: Column[] = [
     { field: 'review', label: '', minWidth: 160, },
 ];
 
+
+
+
 const ApplicationList = (): React.ReactElement => {
     const classes = useStyles();
 
@@ -42,22 +48,17 @@ const ApplicationList = (): React.ReactElement => {
         setPage(0);
     };
 
-
-
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-
-    // TODO: get all applications
-    const applications = useSelector((state: RootState) => state.driverApplication);
-    // TODO: handleClick: update viewed, get application by id, go to route
-    console.log(applications);
+    const applications = useSelector((state: RootState) => state.driverApplication.applicationList);
 
     const rows = applications.map(a => {
         return {
             id: a.id,
             name: `${a.application.lastName}, ${a.application.firstName}`,
-            applicationDate: a.applicationDate
+            applicationDate: a.applicationDate,
+            viewed: a.rejected || a.approved
         }
     });
 
@@ -82,15 +83,17 @@ const ApplicationList = (): React.ReactElement => {
                         <TableBody>
                             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                                 return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                                        <TableCell key='name' align='left'>
+                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.id} >
+                                        <TableCell key='name' align='left' style={row['viewed'] ? {} : { fontWeight: 'bold' }}>
                                             {row['name']}
                                         </TableCell>
-                                        <TableCell key='applicationDate' align='left'>
+                                        <TableCell key='applicationDate' align='left' style={row['viewed'] ? {} : { fontWeight: 'bold' }}>
                                             {row['applicationDate']}
                                         </TableCell>
                                         <TableCell key='review' align='right'>
-                                            <Button>Review Application</Button>
+                                            <Link href={`/volunteer-toronto/applications/${row['id']}`}>
+                                                <Button variant="outlined" color="primary">Review Application</Button>
+                                            </Link>
                                         </TableCell>
                                     </TableRow>
                                 );
@@ -108,6 +111,7 @@ const ApplicationList = (): React.ReactElement => {
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
             </Paper>
+
         </>
     )
 }

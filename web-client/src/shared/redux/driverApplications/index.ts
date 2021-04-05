@@ -11,6 +11,7 @@ export interface AppListItem {
         firstName: string,
     },
     rejected: boolean,
+    comment: string,
     approved: boolean,
     applicationDate: '2021-3-30',
 }
@@ -24,12 +25,15 @@ export const mockApplicationList: AppListItem[] = [
         },
         rejected: false,
         approved: false,
+        comment: '',
         applicationDate: '2021-3-30'
     },
 ]
 
+interface AppState { applicationList: AppListItem[] }
+
 // TODO: fetch all applications data
-const initialState: AppListItem[] = mockApplicationList
+const initialState: AppState = { applicationList: mockApplicationList}
 
 const driverApplicationSlice = createSlice({
     name: 'driverApplication',
@@ -40,13 +44,15 @@ const driverApplicationSlice = createSlice({
             console.log(state);
             console.log(payload);
         },
-        setApprove: (state, { payload }: PayloadAction) => {
+        setApprove: (state, { payload }: PayloadAction<AppListItem[]>) => {
             console.log(state);
             console.log(payload);
+            state.applicationList = payload
         },
-        setReject: (state, { payload }: PayloadAction<AppListItem>) => {
+        setReject: (state, { payload }: PayloadAction<AppListItem[]>) => {
             console.log(state);
             console.log(payload);
+            state.applicationList = payload
         },
     }
 });
