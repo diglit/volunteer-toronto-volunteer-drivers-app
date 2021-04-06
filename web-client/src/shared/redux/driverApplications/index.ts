@@ -71,7 +71,7 @@ const driverApplicationSlice = createSlice({
             builder
                 .addCase(fetchApplications.fulfilled, (state, { payload }) => {
                     if (state.loading === 'pending') {
-                        state.loading = 'idle'
+                        state.loading = 'succeeded'
                         state.applicationList = payload
                     }
                 })
@@ -80,7 +80,7 @@ const driverApplicationSlice = createSlice({
                         state.loading = 'pending'
                     }
                 })
-                .addCase(fetchApplications.rejected, (state, { payload }) => {
+                .addCase(fetchApplications.rejected, (state) => {
                     state.loading = 'failed'
                 })
         }
