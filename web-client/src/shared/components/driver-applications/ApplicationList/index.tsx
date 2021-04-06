@@ -48,7 +48,6 @@ const ApplicationList = (): React.ReactElement => {
     });
 
     return (
-        <>
             <Paper className='root'>
                 <TableContainer className={'container'}>
                     <Table stickyHeader aria-label="sticky table">
@@ -100,8 +99,6 @@ const ApplicationList = (): React.ReactElement => {
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
             </Paper>
-
-        </>
     )
 }
 

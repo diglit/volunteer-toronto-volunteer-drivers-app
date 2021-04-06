@@ -13,18 +13,18 @@ interface Props {
 }
 
 const ApplicationReview = ({ id }: Props): React.ReactElement => {
-    
+
     const applicationList = useSelector((state: RootState) => state.driverApplication.applicationList);
     const data = applicationList.find(a => a.id === id)
-    
+
     const [openReject, setOpenReject] = useState(false);
     const [openApprove, setOpenApprove] = useState(false);
 
     const [comment, setComment] = useState('')
-    
+
     const router = useRouter()
     const dispatch = useDispatch()
-    
+
     const handleReject = () => {
         const newState = applicationList.map(s => (s.id === id) ? { ...s, rejected: true, approved: false, comment: comment } : s)
         dispatch(setReject(newState))
@@ -68,8 +68,8 @@ const ApplicationReview = ({ id }: Props): React.ReactElement => {
                     <Button variant="contained" color="primary" onClick={() => setOpenApprove(true)}>approve </Button>
 
                     <AlertDialog title='' contentText='' open={openApprove} handleCancel={() => setOpenApprove(false)} handleConfirm={handleApprove} confirmLabel='Approve'>
-                        You would like to approve <span style={{ fontWeight: 'bold' }} >{data?.application.firstName} {data?.application.lastName}</span> to the colunteer driver list.
-                </AlertDialog>
+                        You would like to approve <span style={{ fontWeight: 'bold' }} >{data?.application.firstName} {data?.application.lastName}</span> to the volunteer driver list.
+                    </AlertDialog>
                 </div>
             </div>
         </>

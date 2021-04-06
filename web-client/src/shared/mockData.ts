@@ -1,4 +1,6 @@
-export const applications = [
+import { AppListItem } from "./redux/driverApplications";
+
+export const applications: AppListItem[] = [
     {
         id: 5664,
         application: {

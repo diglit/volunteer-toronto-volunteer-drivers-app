@@ -15,33 +15,8 @@ export interface AppListItem {
     rejected: boolean,
     comment: string,
     approved: boolean,
-    applicationDate: '2021-3-30',
+    applicationDate: string,
 }
-
-export const mockApplicationList: AppListItem[] = [
-    {
-        id: 5664,
-        application: {
-            lastName: 'Smith',
-            firstName: 'John',
-        },
-        rejected: false,
-        approved: false,
-        comment: '',
-        applicationDate: '2021-3-30'
-    },
-    {
-        id: 255,
-        application: {
-            lastName: 'John',
-            firstName: 'Smith',
-        },
-        rejected: false,
-        approved: false,
-        comment: '',
-        applicationDate: '2021-3-30'
-    },
-]
 
 interface AppState {
     applicationList: AppListItem[],
@@ -80,7 +55,7 @@ const driverApplicationSlice = createSlice({
         },
         applicationReceived: (state, { payload }: PayloadAction<AppListItem[]>) => {
             if (state.loading === 'pending') {
-                state.loading = 'idle'
+                state.loading = 'succeeded'
                 state.applicationList = payload
             }
         },
@@ -106,8 +81,7 @@ const driverApplicationSlice = createSlice({
                     }
                 })
                 .addCase(fetchApplications.rejected, (state, { payload }) => {
-                    console.log(state);
-                    console.log(payload);
+                    state.loading = 'failed'
                 })
         }
 });
