@@ -93,16 +93,4 @@ export const {
     setApprove
 } = driverApplicationSlice.actions;
 
-
-// export const fetchApplications = async () => {
-//     const dispatch = useDispatch()
-//     dispatch(applicationLoading(null))
-//     try {
-//         const data = await ApplicationService.getAll()
-//         dispatch(applicationReceived(data))
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
-
 export default driverApplicationSlice;

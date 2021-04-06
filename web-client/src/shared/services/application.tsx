@@ -4,7 +4,7 @@ const url = 'http://localhost:3000/api/applications';
 
 const getAll = async (): Promise<AppListItem[]> => {
     const res = await fetch(url, {
-        method: 'POST',
+        method: 'GET',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json;charset=UTF-8'
