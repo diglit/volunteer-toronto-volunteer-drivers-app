@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link'
 import { RootState } from 'shared/redux';
 import { Table, TableBody, TableHead, TableCell, TableContainer, TableRow, Paper, TablePagination, Button } from '@material-ui/core'
-import { fetchApplications } from 'shared/redux/driverApplications';
+import { fetchApplications } from 'shared/redux/volunnteer-toronto/driverApplications';
 import './index.module.scss'
 
 interface Column {

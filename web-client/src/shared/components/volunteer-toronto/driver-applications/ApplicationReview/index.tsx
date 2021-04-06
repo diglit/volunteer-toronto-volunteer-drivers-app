@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 
 
 import AlertDialog from './AlertDialog'
-import { setReject, setApprove } from 'shared/redux/driverApplications';
+import { setReject, setApprove } from 'shared/redux/volunnteer-toronto/driverApplications';
 
 interface Props {
     id: number

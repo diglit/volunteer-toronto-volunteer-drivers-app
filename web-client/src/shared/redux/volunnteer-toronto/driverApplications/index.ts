@@ -1,11 +1,11 @@
-import ApplicationService from "../../services/application";
+import ApplicationService from "../../../services/application";
 import {
     createSlice,
     PayloadAction,
     createAsyncThunk
 } from '@reduxjs/toolkit';
 
-export interface AppListItem {
+export interface DriverApplication {
     id: number,
     application: {
         //TODO: combine data from driver registeration 
@@ -19,7 +19,7 @@ export interface AppListItem {
 }
 
 interface AppState {
-    applicationList: AppListItem[],
+    applicationList: DriverApplication[],
     loading: 'idle' | 'pending' | 'succeeded' | 'failed'
 }
 
@@ -53,16 +53,16 @@ const driverApplicationSlice = createSlice({
                 state.loading = 'pending'
             }
         },
-        applicationReceived: (state, { payload }: PayloadAction<AppListItem[]>) => {
+        applicationReceived: (state, { payload }: PayloadAction<DriverApplication[]>) => {
             if (state.loading === 'pending') {
                 state.loading = 'succeeded'
                 state.applicationList = payload
             }
         },
-        setApprove: (state, { payload }: PayloadAction<AppListItem[]>) => {
+        setApprove: (state, { payload }: PayloadAction<DriverApplication[]>) => {
             state.applicationList = payload
         },
-        setReject: (state, { payload }: PayloadAction<AppListItem[]>) => {
+        setReject: (state, { payload }: PayloadAction<DriverApplication[]>) => {
             state.applicationList = payload
         },
     },
