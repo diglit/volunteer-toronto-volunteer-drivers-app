@@ -1,15 +1,22 @@
 import React from 'react'
 import { NextPage } from 'next'
-import ApplicationReview from '../../../shared/components/driver-applications/ApplicationReview'
 import { useRouter } from 'next/router'
+import { Container } from '@material-ui/core'
+import Head from 'next/head'
+import ApplicationReview from '../../../shared/components/driver-applications/ApplicationReview'
 
 const Applications: NextPage = () => {
   const router = useRouter()
-  const { id } = router.query   
-  
+  const { id } = router.query
+
   return (
     <>
-      <ApplicationReview id={parseInt(id)} />
+      <Head>
+        <title>Voluteer Toronto Applications</title>
+      </Head>
+      <Container>
+        <ApplicationReview id={parseInt(id as string)} />
+      </Container>
     </>
   )
 }

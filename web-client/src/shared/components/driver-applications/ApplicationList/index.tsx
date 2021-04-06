@@ -1,15 +1,10 @@
-import React from 'react';
-
-import { useSelector } from 'react-redux';
-import { RootState } from 'shared/redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link'
-
-import {
-    Table, TableBody, TableHead, TableCell, TableContainer, TableRow, Paper, TablePagination,
-    Button
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles';
-// import styles from './index.module.scss'
+import { RootState } from 'shared/redux';
+import { Table, TableBody, TableHead, TableCell, TableContainer, TableRow, Paper, TablePagination, Button } from '@material-ui/core'
+import { fetchApplications } from 'shared/redux/driverApplications';
+import './index.module.scss'
 
 interface Column {
     field: 'name' | 'applicationDate' | 'review';
@@ -18,14 +13,6 @@ interface Column {
     align?: 'right';
     format?: (value: number) => string;
 }
-const useStyles = makeStyles({
-    root: {
-        width: '100%',
-    },
-    container: {
-        maxHeight: 440,
-    },
-});
 
 const columns: Column[] = [
     { field: 'name', label: 'Name', minWidth: 130 },
@@ -33,26 +20,24 @@ const columns: Column[] = [
     { field: 'review', label: '', minWidth: 160, },
 ];
 
-
-
-
 const ApplicationList = (): React.ReactElement => {
-    const classes = useStyles();
-
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
     };
-
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
 
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchApplications())
+    }, [])
 
     const applications = useSelector((state: RootState) => state.driverApplication.applicationList);
-
     const rows = applications.map(a => {
         return {
             id: a.id,
@@ -64,8 +49,8 @@ const ApplicationList = (): React.ReactElement => {
 
     return (
         <>
-            <Paper className={classes.root}>
-                <TableContainer className={classes.container}>
+            <Paper className='root'>
+                <TableContainer className={'container'}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
@@ -84,17 +69,21 @@ const ApplicationList = (): React.ReactElement => {
                             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id} >
+
                                         <TableCell key='name' align='left' style={row['viewed'] ? {} : { fontWeight: 'bold' }}>
                                             {row['name']}
                                         </TableCell>
+
                                         <TableCell key='applicationDate' align='left' style={row['viewed'] ? {} : { fontWeight: 'bold' }}>
                                             {row['applicationDate']}
                                         </TableCell>
+
                                         <TableCell key='review' align='right'>
                                             <Link href={`/volunteer-toronto/applications/${row['id']}`}>
                                                 <Button variant="outlined" color="primary">Review Application</Button>
                                             </Link>
                                         </TableCell>
+                                        
                                     </TableRow>
                                 );
                             })}

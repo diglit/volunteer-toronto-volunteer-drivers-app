@@ -12,7 +12,7 @@ import {
   Container, 
   Button 
 } from '@material-ui/core';
-import styles from './index.module.scss'
+import './index.module.scss'
 
 interface FormData {
   username: string;
@@ -43,9 +43,9 @@ const SignInPage: NextPage = () => {
   })
 
   return (
-    <Container className={styles.container} maxWidth="xs">
+    <Container className='container' maxWidth="xs">
 
-      <Grid className={styles.header} container spacing={3} >
+      <Grid className='header' container spacing={3} >
         <Grid item xs>
           <Typography variant='h6'>
             Welcome to Volunteer Driver Search
@@ -102,7 +102,7 @@ const SignInPage: NextPage = () => {
               Sign In
             </Button>
           </Grid >
-          <Grid className={styles.links} container >
+          <Grid className='links' container >
 
 
             <Grid item xs={12}>

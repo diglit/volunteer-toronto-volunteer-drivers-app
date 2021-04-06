@@ -6,8 +6,17 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-function AlertDialog({ children, title, contentText, open, handleCancel, handleConfirm, confirmLabel }) {
+interface Props {
+  children: React.ReactNode,
+  title: string,
+  contentText: string,
+  open: boolean,
+  handleCancel: () => void,
+  handleConfirm: () => void,
+  confirmLabel: string
+}
 
+const AlertDialog = ({ children, title, contentText, open, handleCancel, handleConfirm, confirmLabel }: Props): React.ReactElement => {
   return (
     <div>
       <Dialog
@@ -18,7 +27,7 @@ function AlertDialog({ children, title, contentText, open, handleCancel, handleC
       >
         <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText>
             {contentText}
           </DialogContentText>
           {children}
