@@ -1,6 +1,4 @@
-//Uncomment all the code once the code is written for Organizations tab
-
-
+//Remove this test from IgnoteTestFiles once the code is written
 
 const inputLabels = {
   organizations: 'Organizations',
@@ -25,12 +23,8 @@ describe('Login with Valid VT Credentials', function() {
 
       const assertSearchBoxValidValueResults = (input)=>{
         cy.findByLabelText(inputLabels.search).clear().type(input)
-
-        const resultsTable = cy.findByRole('table')
-        const correctRow = resultsTable.findByText(input) 
-        cy.contains(correctRow)     
-        
-        
+        cy.get('table').find('td').contains(input).parent().as('row')        
+              
       }    
 
       const assertSearchBoxInValidValueResults = (input)=>{
