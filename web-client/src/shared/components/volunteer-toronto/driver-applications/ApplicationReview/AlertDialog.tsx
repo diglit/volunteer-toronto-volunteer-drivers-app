@@ -16,7 +16,15 @@ interface Props {
   confirmLabel: string
 }
 
-const AlertDialog = ({ children, title, contentText, open, handleCancel, handleConfirm, confirmLabel }: Props): React.ReactElement => {
+const AlertDialog = ({
+  children,
+  title = '',
+  contentText = '',
+  open,
+  handleCancel,
+  handleConfirm,
+  confirmLabel = 'confirm'
+}: Props): React.ReactElement => {
   return (
     <div>
       <Dialog
@@ -36,7 +44,7 @@ const AlertDialog = ({ children, title, contentText, open, handleCancel, handleC
           <Button onClick={handleCancel} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleConfirm} color="primary" autoFocus>
+          <Button variant="contained" onClick={handleConfirm} color="primary" autoFocus>
             {confirmLabel}
           </Button>
         </DialogActions>
@@ -46,3 +54,9 @@ const AlertDialog = ({ children, title, contentText, open, handleCancel, handleC
 }
 
 export default AlertDialog
+
+AlertDialog.defaultProps = {
+  title : '',
+  contentText : '',
+  confirmLabel : 'confirm'
+}

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link'
 import { RootState } from 'shared/redux';
-import { Table, TableBody, TableHead, TableCell, TableContainer, TableRow, Paper, TablePagination, Button } from '@material-ui/core'
+import { Table, TableBody, TableHead, TableCell, TableContainer, TableRow, Paper, TablePagination, Button, Backdrop, CircularProgress, LinearProgress } from '@material-ui/core'
 import { fetchApplications } from 'shared/redux/volunnteer-toronto/driverApplications';
 import './index.module.scss'
 
@@ -31,14 +31,16 @@ const ApplicationList = (): React.ReactElement => {
         setPage(0);
     };
 
+    const { applicationList, loading } = useSelector((state: RootState) => state.driverApplication);
+
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(fetchApplications())
-    }, [])
+        if (loading !== 'succeeded')
+            dispatch(fetchApplications())
+    }, [loading])
 
-    const applications = useSelector((state: RootState) => state.driverApplication.applicationList);
-    const rows = applications.map(a => {
+    const rows = applicationList.map(a => {
         return {
             id: a.id,
             name: `${a.application.lastName}, ${a.application.firstName}`,
@@ -48,57 +50,62 @@ const ApplicationList = (): React.ReactElement => {
     });
 
     return (
-            <Paper className='root'>
-                <TableContainer className={'container'}>
-                    <Table stickyHeader aria-label="sticky table">
-                        <TableHead>
-                            <TableRow>
-                                {columns.map((column) => (
-                                    <TableCell
-                                        key={column.field}
-                                        align={column.align}
-                                        style={{ minWidth: column.minWidth }}
-                                    >
-                                        {column.label}
+        <Paper className='root'>
+            {loading === 'failed' &&
+                <p style={{ color: 'red' }}>Loading failed</p>
+            }
+            {loading === 'pending' &&
+                <LinearProgress />
+            }
+            <TableContainer className={'container'}>
+                <Table stickyHeader aria-label="sticky table">
+                    <TableHead>
+                        <TableRow>
+                            {columns.map((column) => (
+                                <TableCell
+                                    key={column.field}
+                                    align={column.align}
+                                    style={{ minWidth: column.minWidth }}
+                                >
+                                    {column.label}
+                                </TableCell>
+                            ))}
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                            return (
+                                <TableRow hover role="checkbox" tabIndex={-1} key={row.id} >
+
+                                    <TableCell key='name' align='left' style={row['viewed'] ? {} : { fontWeight: 'bold' }}>
+                                        {row['name']}
                                     </TableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                                return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.id} >
 
-                                        <TableCell key='name' align='left' style={row['viewed'] ? {} : { fontWeight: 'bold' }}>
-                                            {row['name']}
-                                        </TableCell>
+                                    <TableCell key='applicationDate' align='left' style={row['viewed'] ? {} : { fontWeight: 'bold' }}>
+                                        {row['applicationDate']}
+                                    </TableCell>
 
-                                        <TableCell key='applicationDate' align='left' style={row['viewed'] ? {} : { fontWeight: 'bold' }}>
-                                            {row['applicationDate']}
-                                        </TableCell>
-
-                                        <TableCell key='review' align='right'>
-                                            <Link href={`/volunteer-toronto/applications/${row['id']}`}>
-                                                <Button variant="outlined" color="primary">Review Application</Button>
-                                            </Link>
-                                        </TableCell>
-                                        
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
-                    component="div"
-                    count={rows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                />
-            </Paper>
+                                    <TableCell key='review' align='right'>
+                                        <Link href={`/volunteer-toronto/applications/${row['id']}`}>
+                                            <Button variant="outlined" color="primary">Review Application</Button>
+                                        </Link>
+                                    </TableCell>
+                                </TableRow>
+                            );
+                        })}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <TablePagination
+                rowsPerPageOptions={[10, 25, 100]}
+                component="div"
+                count={rows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+        </Paper>
     )
 }
 

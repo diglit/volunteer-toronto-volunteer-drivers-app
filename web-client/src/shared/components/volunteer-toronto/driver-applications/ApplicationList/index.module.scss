@@ -4,3 +4,8 @@
 .container {
     max-height: 440;
 }
+
+.backdrop {
+    z-index: 9999;
+    color: #fff;
+}

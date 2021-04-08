@@ -12,7 +12,7 @@ const Applications: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Voluteer Toronto Applications</title>
+        <title>Voluteer Toronto Driver Applications</title>
       </Head>
       <Container>
         <ApplicationReview id={parseInt(id as string)} />
