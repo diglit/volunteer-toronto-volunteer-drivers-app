@@ -1,0 +1,48 @@
+{
+  "applications": [
+    {
+      "id": 1,
+      "application": {
+        "lastName": "Smith",
+        "firstName": "John"
+      },
+      "rejected": false,
+      "approved": false,
+      "comment": "wrewre",
+      "applicationDate": "2021-2-30"
+    },
+    {
+      "id": 2,
+      "application": {
+        "lastName": "Smith",
+        "firstName": "Alice"
+      },
+      "rejected": false,
+      "approved": false,
+      "comment": "",
+      "applicationDate": "2021-3-30"
+    },
+    {
+      "id": 3,
+      "application": {
+        "lastName": "Smith",
+        "firstName": "Bob"
+      },
+      "rejected": true,
+      "approved": false,
+      "comment": "balbdla",
+      "applicationDate": "2021-4-30"
+    },
+    {
+      "id": 4,
+      "application": {
+        "lastName": "Smith",
+        "firstName": "Cathy"
+      },
+      "rejected": false,
+      "approved": true,
+      "comment": "",
+      "applicationDate": "2021-4-30"
+    }
+  ]
+}
