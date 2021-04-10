@@ -43,7 +43,9 @@ const MembersTable:React.FunctionComponent = ()=>{
                     <TableCell>{member.name}</TableCell>
                 </TableRow>
             ))
-            : <Typography>No Member to show</Typography>
+            : <TableRow>
+                    <Typography>No Member to show</Typography>
+                </TableRow>
             }
         </TableBody>
         }
