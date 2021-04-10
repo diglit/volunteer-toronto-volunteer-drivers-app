@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node merge.js && json-server --watch temp-db.json -p 4000"
+    "start": "node merge.js && node index.js"
   },
   "author": "",
   "license": "ISC",
