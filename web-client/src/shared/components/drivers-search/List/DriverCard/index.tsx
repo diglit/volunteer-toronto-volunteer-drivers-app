@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Driver } from '../../../../redux/driversSearch/index';
+
+//Popup Functionality
+import Modal from 'react-modal';
+
 // Material UI Imports
 import { Card, CardContent, Typography } from '@material-ui/core';
 
@@ -17,6 +21,9 @@ export const DriverCard = ({ driverInfo }: DriverCardProps): JSX.Element => {
         {item}, 
       </span>
     ))
+    
+    //For displaying and hiding the Popup
+    const [modalIsOpen, setModalIsOpen] = useState(false)
   
   return (
     <Card>
@@ -26,7 +33,23 @@ export const DriverCard = ({ driverInfo }: DriverCardProps): JSX.Element => {
             {driverInfo.name}
           </span>
         </Typography>
-
+        {/* Added a placeholder button for the Email icon since it has not been added to the component */}
+        <Typography>
+          <button onClick={() => setModalIsOpen(true)}>Placeholder for Email Icon</button>
+        </Typography>
+        {/* Added a placeholder for the Card component since it has not bee created (#83) */}
+        <Typography>
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={() => setModalIsOpen(false)}
+            ariaHideApp={false}
+          >
+            Placeholder for Card Content
+            <div>
+              <button onClick={() => setModalIsOpen(false)}>Close</button>
+            </div>
+          </Modal>
+        </Typography>
         <Typography>
           Licence Class: 
           <span role="licenceClass">
