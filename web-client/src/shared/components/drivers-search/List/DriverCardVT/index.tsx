@@ -31,7 +31,7 @@ export const DriverCardVT = ({ driverInfo }: DriverCardProps): JSX.Element => {
           </span>
         </Typography>
         <Button onClick={viewProfileHandle}>View Full Profile</Button>
-        {viewProfile && <DriverFullProfile driverInfo={driverInfo} />}
+        {viewProfile && <DriverFullProfile />}
       </CardContent>
     </Card>
   );
