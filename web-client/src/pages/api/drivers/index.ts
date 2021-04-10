@@ -15,7 +15,7 @@ const mockDrivers = [
     riskComfortLevel: ['Contactless Deliveries', 'Low Risk', 'High Risk'],
   },
   {
-    id: 1,
+    id: 2,
     name: 'Pam Lutz',
     email: '',
     licenceClass: ['A', 'G'],

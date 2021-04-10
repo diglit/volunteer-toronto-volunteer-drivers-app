@@ -96,6 +96,7 @@ export const {
   setFilters,
 } = driversSearchSlice.actions;
 
+// TODO: returned reponse is not correct, need to check the filter function
 export const fetchDrivers = (filterRequest: FilterRequest): AppThunk => {
   return async (dispatch) => {
     dispatch(setLoading(true));
