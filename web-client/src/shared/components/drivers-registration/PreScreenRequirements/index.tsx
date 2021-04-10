@@ -6,14 +6,12 @@ import * as yup from 'yup';
 /** MUI */
 import { Container, Button, Grid } from '@material-ui/core';
 /** redux */
-import { PreScreen } from 'shared/redux/driverRegistration';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/index'
-
-import FormInput from './FormInput'
+import { PreScreen } from '../../../redux/driversRegistration';
 
 import { policeRecordsCheckOptionsLabel, policeRecordsCheckTypeLabel, drivingAbstractOptionsLabel, LicenseAndVehicleLabel, LicenseClasses } from './label';
-
+import FormInput from '../FormInput';
 
 const schema = yup.object().shape({
   policeRecordsCheckOptions: yup.string().required(),
@@ -32,6 +30,7 @@ const schema = yup.object().shape({
     then: yup.string().required()
   }),
   LicenseAndVehicle: yup.object().shape({
+    haveVan: yup.boolean(),
     haveCar: yup.boolean(),
     haveGLicense: yup.boolean(),
     have1MInsurance: yup.boolean(),

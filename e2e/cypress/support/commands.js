@@ -1,3 +1,12 @@
+import '@testing-library/cypress/add-commands';
+
+Cypress.Commands.add('login', (email, password) => {
+    cy.visit('/signin')
+    cy.findByLabelText('Username').type(email)
+    cy.findByLabelText('Password').type(password)
+    cy.findAllByText('Sign In').last().click()
+});
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
