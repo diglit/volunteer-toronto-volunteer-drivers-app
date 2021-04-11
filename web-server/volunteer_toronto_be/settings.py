@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "driving.apps.DrivingConfig",
     "drf_yasg",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
@@ -85,7 +86,9 @@ WSGI_APPLICATION = "volunteer_toronto_be.wsgi.application"
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
+    "default": dj_database_url.config(conn_max_age=600, ssl_require=False)
+    if os.getenv("DATABASE_URL")
+    else {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": os.getenv("POSTGRES_DB"),
         "USER": os.getenv("POSTGRES_USER"),

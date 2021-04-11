@@ -56,7 +56,7 @@ https://react-hook-form.com/
 
 ## Tests
 
-For testing, we're using jest with testing-library (react version). Unlike other testing libraries, it's very opinionated. 
+For testing, we're using jest with testing-library (react version). Unlike other testing libraries, it's very opinionated.
 
 Generally, I would *avoid* using classnames to find elements, as they're more likely to change. I also find that it's helpful to load as much of the app as possible, which means we're doing mostly integration tests as opposed to unit tests.
 
@@ -66,7 +66,7 @@ https://testing-library.com/docs/guide-which-query/
 
 ## Redux
 
-I think the guys working on redux toolkit know what's up, so lean heavily on their helper functions. 
+I think the guys working on redux toolkit know what's up, so lean heavily on their helper functions.
 
 Namely createSlice
 
@@ -116,6 +116,33 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
+### Running the backend locally
+
+First, install [docker](https://docs.docker.com/get-docker/) and docker-compose. On Windows and MacOS, Docker Desktop will also install docker-compose, for linux you'll need to [install docker-compose seperately](https://docs.docker.com/compose/install/)
+If you're on linux, you'll also need to add your user to the docker group and log out / back in:
+
+```
+# If you're on linux:
+$ sudo usermod -aG docker $USER
+```
+
+If you've never run the backend before, create the .env file:
+```
+$ cd web-server
+$ cp temp.env.dev .env.dev
+```
+
+You should then be able to cd into the web-server directory and run the backend and a DB through docker:
+
+```
+$ cd web-server
+$ docker-compose up
+```
+
+This will start up a database and the backend at [http://0.0.0.0:8000/](http://0.0.0.0:8000/). You can visit that URL and you will see a DRF page displaying all the endpoints. There is currently just the drivers endpoint at [http://0.0.0.0:8000/drivers/](http://0.0.0.0:8000/drivers) - you can go to that URL and get a view of all the driver data currently in the DB as well as a form to put in new data.
+
+Swagger is available at [http://0.0.0.0:8000/swagger/](http://0.0.0.0:8000/swagger/)
+
 ## Authors
 
 Leigh Silverstein \
@@ -124,5 +151,5 @@ Wendy Chen \
 Chris Cottier\
 Yinyin Lu \
 Cayman Heng \
-Haris Ahmad 
+Haris Ahmad
 Swati Dixit
