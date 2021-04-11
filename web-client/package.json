@@ -14,7 +14,8 @@
     "lint:css": "stylelint '**/*.ts'",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test-all": "npm-run-all lint type-check test"
+    "test-all": "npm-run-all lint type-check test",
+    "server": "json-server -p 3001 --watch db.json"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.0.0-rc.1",
@@ -56,6 +57,7 @@
     "eslint-plugin-react": "^7.21.5",
     "husky": "^4.3.0",
     "jest": "^26.6.3",
+    "json-server": "^0.16.3",
     "msw": "^0.25.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",

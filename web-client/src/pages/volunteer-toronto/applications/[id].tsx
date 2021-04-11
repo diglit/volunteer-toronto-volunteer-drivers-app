@@ -3,7 +3,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { Container } from '@material-ui/core'
 import Head from 'next/head'
-import ApplicationReview from '../../../shared/components/driver-applications/ApplicationReview'
+import ApplicationReview from '../../../shared/components/volunteer-toronto/driver-applications/ApplicationReview'
 
 const Applications: NextPage = () => {
   const router = useRouter()
@@ -12,7 +12,7 @@ const Applications: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Voluteer Toronto Applications</title>
+        <title>Voluteer Toronto Driver Applications</title>
       </Head>
       <Container>
         <ApplicationReview id={parseInt(id as string)} />
