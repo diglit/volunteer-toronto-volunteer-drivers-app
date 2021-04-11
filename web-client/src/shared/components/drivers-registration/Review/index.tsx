@@ -32,32 +32,32 @@ const ReviewSection = (): React.ReactElement => {
   const licenses = Object.keys(LicenseAndVehicle) as licenseAndVehicle[];
   const agreements = Object.keys(agreementOptions) as agreement[];
 
-  const availableDatesAndTimes = [...TIMES.map( time => ({
+  const availableDatesAndTimes = TIMES.map( time => ({
     time: time,
-    Sunday: availableDates.filter(ele => ele.date === 'Sunday')[0].availableTimes.includes(time),
-    Monday: availableDates.filter(ele => ele.date === 'Monday')[0].availableTimes.includes(time),
-    Tuesday: availableDates.filter(ele => ele.date === 'Tuesday')[0].availableTimes.includes(time),
-    Wednesday: availableDates.filter(ele => ele.date === 'Wednesday')[0].availableTimes.includes(time),
-    Thursday: availableDates.filter(ele => ele.date === 'Thursday')[0].availableTimes.includes(time),
-    Friday: availableDates.filter(ele => ele.date === 'Friday')[0].availableTimes.includes(time),
-    Saturday: availableDates.filter(ele => ele.date === 'Saturday')[0].availableTimes.includes(time)
-  }))];
+    Sunday: availableDates.find(ele => ele.date === 'Sunday')?.availableTimes?.includes(time),
+    Monday: availableDates.find(ele => ele.date === 'Monday')?.availableTimes?.includes(time),
+    Tuesday: availableDates.find(ele => ele.date === 'Tuesday')?.availableTimes?.includes(time),
+    Wednesday: availableDates.find(ele => ele.date === 'Wednesday')?.availableTimes?.includes(time),
+    Thursday: availableDates.find(ele => ele.date === 'Thursday')?.availableTimes?.includes(time),
+    Friday: availableDates.find(ele => ele.date === 'Friday')?.availableTimes?.includes(time),
+    Saturday: availableDates.find(ele => ele.date === 'Saturday')?.availableTimes?.includes(time)
+  }));
 
-  const checkedLicenseAndVehicles = [...licenses.map(license => {
+  const checkedLicenseAndVehicles = licenses.map(license => {
     return {
       name: license,
       checked: LicenseAndVehicle[license],
-      label: LicenseAndVehicleLabel.filter(label => label.name === license)[0].label
+      label: LicenseAndVehicleLabel.find(label => label.name === license)?.label
     }
-  })];
+  });
 
-  const checkedAgreements = [...agreements.map(agreement => {
+  const checkedAgreements = agreements.map(agreement => {
     return {
       name: agreement,
       checked: agreementOptions[agreement],
-      label: agreementLabel.filter(label => label.name === agreement)[0].label
+      label: agreementLabel.find(label => label.name === agreement)?.label
     }
-  })];
+  });
 
   return (
     <div>

@@ -7,13 +7,13 @@ import { Table, TableBody, TableCell, TableRow, TableHead, TableContainer, Check
 
 type DatesRow = {
   time: Time,
-  Sunday: boolean,
-  Monday: boolean,
-  Tuesday: boolean,
-  Wednesday: boolean,
-  Thursday: boolean,
-  Friday: boolean,
-  Saturday: boolean
+  Sunday?: boolean,
+  Monday?: boolean,
+  Tuesday?: boolean,
+  Wednesday?: boolean,
+  Thursday?: boolean,
+  Friday?: boolean,
+  Saturday?: boolean
 }
 
 type DatesTable = {
