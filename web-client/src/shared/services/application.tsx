@@ -1,6 +1,7 @@
 import { AppListItem } from "shared/redux/driverApplications";
 
-const url = '/api/applications'
+const host = process.env.NEXT_PUBLIC_API_SERVER_URL;
+const url = `${host}/api/applications`
 
 const getAll = async (): Promise<AppListItem[]> => {
     const res = await fetch(url, {

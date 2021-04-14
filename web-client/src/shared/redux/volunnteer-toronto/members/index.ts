@@ -47,7 +47,8 @@ export const fetchMembers = ():MemberThunk =>{
     return async (dispatch)=>{
         dispatch(setLoading(true))
         try{
-            const res = await fetch('/api/vtmembers')
+            const host = process.env.NEXT_PUBLIC_API_SERVER_URL
+            const res = await fetch(`${host}/api/vtmembers`)
             const members = await res.json()
             dispatch(setMembers(members.data))
             dispatch(setFilteredMembers(members.data))
@@ -65,7 +66,8 @@ export const deleteMember = (userId: string): MemberThunk=>{
     return async (dispatch)=>{
         dispatch(setLoading(true))
         try{
-            const res = await fetch('http://localhost:3000/api/vtmembers/delete', {
+            const host = process.env.NEXT_PUBLIC_API_SERVER_URL
+            const res = await fetch(`${host}/api/vtmembers/delete`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body:JSON.stringify({id:userId})
