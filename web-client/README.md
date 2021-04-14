@@ -116,6 +116,14 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
+### Running the mock data server
+
+```bash
+npm run mock
+```
+
+This starts a local server on port 8080 that serves mock data in JSON format. For example, to get a list of drivers, query `http://localhost:8080/drivers`.
+
 ### Running the backend locally
 
 First, install [docker](https://docs.docker.com/get-docker/) and docker-compose. On Windows and MacOS, Docker Desktop will also install docker-compose, for linux you'll need to [install docker-compose seperately](https://docs.docker.com/compose/install/)

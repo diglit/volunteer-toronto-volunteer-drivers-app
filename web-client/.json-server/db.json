@@ -1,0 +1,96 @@
+{
+    "drivers": [
+        {
+            "id": 1,
+            "name": "Pam Lutz",
+            "email": "",
+            "licenceClass": [
+                "A",
+                "G"
+            ],
+            "language": [
+                "English",
+                "French"
+            ],
+            "vehicleType": "Truck",
+            "policeCheck": "Last 12 months",
+            "drivingAbstract": "Last 12 months",
+            "willingToLift": "Up to 50lbs",
+            "packingAndSorting": "Yes",
+            "riskComfortLevel": [
+                "Contactless Deliveries",
+                "Low Risk",
+                "High Risk"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Pam Lutz",
+            "email": "",
+            "licenceClass": [
+                "A",
+                "G"
+            ],
+            "language": [
+                "English",
+                "French"
+            ],
+            "vehicleType": "Truck",
+            "policeCheck": "Last 12 months",
+            "drivingAbstract": "Last 12 months",
+            "willingToLift": "Up to 50lbs",
+            "packingAndSorting": "Yes",
+            "riskComfortLevel": [
+                "Contactless Deliveries",
+                "Low Risk",
+                "High Risk"
+            ]
+        }
+    ],
+    "applications": [
+        {
+            "id": 5664,
+            "application": {
+                "lastName": "Smith",
+                "firstName": "John"
+            },
+            "rejected": false,
+            "approved": false,
+            "comment": "",
+            "applicationDate": "2021-3-30"
+        },
+        {
+            "id": 255,
+            "application": {
+                "lastName": "John",
+                "firstName": "Smith"
+            },
+            "rejected": false,
+            "approved": false,
+            "comment": "",
+            "applicationDate": "2021-3-30"
+        }
+    ],
+    "members": [
+        {
+            "id": "1",
+            "name": "Pam",
+            "jobTitle": "Senior Manager"
+        },
+        {
+            "id": "2",
+            "name": "Bam",
+            "jobTitle": "Senior Manager"
+        },
+        {
+            "id": "3",
+            "name": "Sam",
+            "jobTitle": "Senior Manager"
+        },
+        {
+            "id": "4",
+            "name": "Henry Ford",
+            "jobTitle": "Senior Manager"
+        }
+    ]
+}
