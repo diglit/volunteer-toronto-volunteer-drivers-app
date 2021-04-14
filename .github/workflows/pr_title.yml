@@ -1,0 +1,16 @@
+name: 'PRTitle'
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+jobs:
+  verify_linked_issue:
+    runs-on: ubuntu-latest
+    name: Ensure Pull Request has a correct title.
+    steps:
+      - uses: deepakputhraya/action-pr-title@master
+        with:
+          regex: '(feature|hotfix|release)\/([0-9])+' # Regex the title should match.
+          prefix_case_sensitive: false # title prefix are case insensitive
+          min_length: 5 # Min length of the title
+          max_length: 20 # Max length of the title
+          github_token: ${{ github.token }} # Default: ${{ github.token }}
