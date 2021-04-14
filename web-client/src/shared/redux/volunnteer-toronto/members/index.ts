@@ -47,7 +47,6 @@ export const fetchMembers = ():MemberThunk =>{
     return async (dispatch)=>{
         dispatch(setLoading(true))
         try{
-            const host = process.env.NEXT_PUBLIC_API_SERVER_URL
             const res = await fetch('/api/vtmembers')
             const members = await res.json()
             dispatch(setMembers(members.data))
