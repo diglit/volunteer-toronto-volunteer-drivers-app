@@ -1,5 +1,6 @@
 import { Factory } from 'fishery';
 import { PersonalInfo } from 'shared/redux/driversRegistration';
+import { DriverApplication } from 'shared/redux/volunnteer-toronto/driverApplications';
 import { Driver } from '../redux/driversSearch/index';
 
 // mock driver information
@@ -31,4 +32,16 @@ export const PersonalInfoInputFactory = Factory.define<PersonalInfo>(()=>({
       other: true,
   },
   languageOther: 'Arabic',
+}))
+
+export const DriverApplicationFactory = Factory.define<DriverApplication>(({ sequence })=> ({
+    id: sequence,
+    application: {
+        lastName: 'Smith',
+        firstName: 'John',
+    },
+    rejected: false,
+    approved: false,
+    comment: '',
+    applicationDate: '2021-3-30'
 }))

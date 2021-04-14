@@ -1,11 +1,10 @@
-import ApplicationService from "../../services/application";
+import ApplicationService from "../../../services/application";
 import {
     createSlice,
-    PayloadAction,
     createAsyncThunk
 } from '@reduxjs/toolkit';
 
-export interface AppListItem {
+export interface DriverApplication {
     id: number,
     application: {
         //TODO: combine data from driver registeration 
@@ -19,27 +18,27 @@ export interface AppListItem {
 }
 
 interface AppState {
-    applicationList: AppListItem[],
+    applicationList: DriverApplication[],
     loading: 'idle' | 'pending' | 'succeeded' | 'failed'
 }
 
 export const fetchApplications = createAsyncThunk(
     'driverApplication/fetchApplications',
-    /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-    async (data, thunkAPI) => { 
+    async () => {
         const response = await ApplicationService.getAll()
         return response
     }
 )
 
-//TODO: update the application status
-// export const updateApplications = createAsyncThunk(
-//     'driverApplication/fetchApplications',
-//     async (id, thunkAPI: ThunkAPI) => {
-//         const response = await ApplicationService.updateById(id)
-//         return response
-//     }
-// )
+interface UpdateProps { id: number, newApplication: DriverApplication }
+
+export const updateApplications = createAsyncThunk(
+    'driverApplication/updateApplications',
+    async ({ id, newApplication }: UpdateProps) => {
+        const resData = await ApplicationService.updateById(id, newApplication)
+        return resData
+    }
+)
 
 const driverApplicationSlice = createSlice({
     name: 'driverApplication',
@@ -48,23 +47,6 @@ const driverApplicationSlice = createSlice({
         loading: 'idle',
     } as AppState,
     reducers: {
-        applicationLoading: (state) => {
-            if (state.loading === 'idle') {
-                state.loading = 'pending'
-            }
-        },
-        applicationReceived: (state, { payload }: PayloadAction<AppListItem[]>) => {
-            if (state.loading === 'pending') {
-                state.loading = 'succeeded'
-                state.applicationList = payload
-            }
-        },
-        setApprove: (state, { payload }: PayloadAction<AppListItem[]>) => {
-            state.applicationList = payload
-        },
-        setReject: (state, { payload }: PayloadAction<AppListItem[]>) => {
-            state.applicationList = payload
-        },
     },
     extraReducers:
         (builder) => {
@@ -81,16 +63,26 @@ const driverApplicationSlice = createSlice({
                     }
                 })
                 .addCase(fetchApplications.rejected, (state) => {
+                    if (state.loading === 'pending') {
+                        state.loading = 'failed'
+                    }
+                })
+                .addCase(updateApplications.pending, (state) => {
+                    state.loading = 'pending'
+                })
+                .addCase(updateApplications.fulfilled, (state, { payload }) => {
+                    if (state.loading === 'pending') {
+                        state.loading = 'succeeded'
+                        const newList = state.applicationList.map(a => (a.id === payload.id) ? payload : a)
+                        state.applicationList = newList
+                    }
+                })
+                .addCase(updateApplications.rejected, (state) => {
                     state.loading = 'failed'
                 })
         }
 });
 
-export const {
-    applicationLoading,
-    applicationReceived,
-    setReject,
-    setApprove
-} = driverApplicationSlice.actions;
+export const { } = driverApplicationSlice.actions;
 
 export default driverApplicationSlice;
