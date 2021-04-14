@@ -30,8 +30,7 @@ RUN apt-get update \
   # Cleaning cache:
   && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* \
   && pip install "poetry==$POETRY_VERSION" && poetry --version \
-  && pip install psycopg2 \
-  && pip install django-filter
+  && pip install psycopg2
 
 # set work directory
 WORKDIR /code
