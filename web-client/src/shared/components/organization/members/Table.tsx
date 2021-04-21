@@ -35,7 +35,14 @@ const MembersTable:React.FunctionComponent = ()=>{
             </TableRow>
         </TableHead>
         {loading
-        ? <CircularProgress />
+        ? <TableBody>
+            <TableRow>
+                <TableCell>
+                    <CircularProgress />
+                </TableCell>
+            </TableRow>
+        </TableBody>
+
         : <TableBody>
             {members.length > 0 
             ? members.map(member=>(
@@ -43,8 +50,11 @@ const MembersTable:React.FunctionComponent = ()=>{
                     <TableCell>{member.name}</TableCell>
                 </TableRow>
             ))
+            
             : <TableRow>
-                    <Typography>No Member to show</Typography>
+                    <TableCell>
+                        <Typography>No member to show</Typography>
+                    </TableCell>
                 </TableRow>
             }
         </TableBody>
