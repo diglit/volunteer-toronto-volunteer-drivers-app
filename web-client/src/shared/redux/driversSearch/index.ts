@@ -96,11 +96,13 @@ export const {
   setFilters,
 } = driversSearchSlice.actions;
 
+// TODO: returned reponse is not correct, need to check the filter function
 export const fetchDrivers = (filterRequest: FilterRequest): AppThunk => {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
-      const response = await fetch('http://localhost:3000/api/drivers', {
+      const host = process.env.NEXT_PUBLIC_API_SERVER_URL;
+      const response = await fetch(`${host}/api/drivers`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

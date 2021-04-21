@@ -26,7 +26,12 @@ interface AgreementPorps {
     onSubmit: (data: Agreement) => void,
 }
 
-
+export const agreementLabel: CheckboxLabel[] = [
+    { name: 'agreement1', label: 'I understand the Volunteer Toronto will provide my information to the non-profit organization that best matches my profile' },
+    { name: 'agreement2', label: 'I understand that I will still be required to complete screening steps outlined by the organization I am reffered to' },
+    { name: 'agreement3', label: 'I expect to receive contact from my matched organization within 2 weeks' },
+    { name: 'agreement4', label: 'I agree to complete a follow-up evaluation of my experience in this Matching Program' },
+];
 
 const AgreementSection = ({ onSubmit }: AgreementPorps): React.ReactElement => {
     const agreement = useSelector((state: RootState) => state.driversRegistration.agreement)
@@ -37,13 +42,6 @@ const AgreementSection = ({ onSubmit }: AgreementPorps): React.ReactElement => {
         resolver: yupResolver(schema),
         defaultValues: agreement
     });
-
-    const agreementLabel: CheckboxLabel[] = [
-        { name: 'agreement1', label: 'I understand the Volunteer Toronto will provide my information to the non-profit organization that best matches my profile' },
-        { name: 'agreement2', label: 'I understand that I will still be required to complete screening steps outlined by the organization I am reffered to' },
-        { name: 'agreement3', label: 'I expect to receive contact from my matched organization within 2 weeks' },
-        { name: 'agreement4', label: 'I agree to complete a follow-up evaluation of my experience in this Matching Program' },
-    ]
 
     return (
         <Container maxWidth="sm">
