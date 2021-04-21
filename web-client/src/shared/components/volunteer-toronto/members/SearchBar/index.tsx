@@ -8,7 +8,6 @@ const SearchBar: React.FunctionComponent = ()=>{
     const dispatch = useDispatch()
 
     const filterUsersByName = (e:React.ChangeEvent<HTMLInputElement>)=>{
-        console.log(e.target.value)
         dispatch(filterMembers(e.target.value))
     }
 
@@ -17,6 +16,7 @@ const SearchBar: React.FunctionComponent = ()=>{
             <TextField 
                 variant = "outlined"
                 placeholder = "Search"
+                inputProps={{'aria-label':"Search"}}
                 color="primary"
                 onChange={filterUsersByName}
             />

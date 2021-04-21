@@ -56,7 +56,7 @@ const MemberTable:React.FunctionComponent = ()=>{
                 ))
                 : <TableRow>
                     <TableCell>
-                        <Typography>No Member to show</Typography>
+                        <Typography>No member to show</Typography>
                     </TableCell>
                 </TableRow>
                 }
