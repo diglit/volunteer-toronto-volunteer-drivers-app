@@ -44,7 +44,7 @@ const MembersTable:React.FunctionComponent = ()=>{
         </TableBody>
 
         : <TableBody>
-            {members.length > 0 
+            {members && members.length > 0 
             ? members.map(member=>(
                 <TableRow key={member.id}>
                     <TableCell>{member.name}</TableCell>
