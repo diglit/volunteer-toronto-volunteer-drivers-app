@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Driver } from '../../../../redux/driversSearch/index';
-import Popup from "../../Popup"
+import MessagingPopup from "../../MessagingPopup"
 // Material UI Imports
 import { Button, Card, CardContent, Typography } from '@material-ui/core';
 
@@ -31,7 +31,7 @@ export const DriverCard = ({ driverInfo }: DriverCardProps): JSX.Element => {
           </span>
         </Typography>
         <Button variant="contained" color="primary" onClick={() => setOpenPopup(true)}>Email</Button>
-        <Popup
+        <MessagingPopup
           openPopup={openPopup}
           setOpenPopup={setOpenPopup}
         />

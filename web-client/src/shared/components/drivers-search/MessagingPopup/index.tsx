@@ -6,7 +6,7 @@ interface PopupProps {
     setOpenPopup: (arg0: boolean) => void;
 }
 
-export const Popup = ({ openPopup, setOpenPopup }: PopupProps): JSX.Element => {
+export const MessagingPopup = ({ openPopup, setOpenPopup }: PopupProps): JSX.Element => {
     return (
         <Dialog open={openPopup}>
             <DialogTitle>
@@ -20,4 +20,4 @@ export const Popup = ({ openPopup, setOpenPopup }: PopupProps): JSX.Element => {
     )
 }
 
-export default Popup;
+export default MessagingPopup;
