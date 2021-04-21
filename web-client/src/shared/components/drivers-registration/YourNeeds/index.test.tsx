@@ -5,19 +5,7 @@ import React from 'react';
 import YourNeeds from './index';
 
 import * as Redux from 'react-redux';
-import { Community, AvailableDate, DeliveryType } from '../../../redux/driversRegistration/yourNeeds/index';
-
-const mockCommunities: Community[] = ['Downtown Toronto', 'North York East (East of Yonge)'];
-const mockAvailableTimes: AvailableDate[] = [
-  {date: 'Sunday', availableTimes: ['10 AM']}, 
-  {date: 'Monday', availableTimes: []},
-  {date: 'Tuesday', availableTimes: []},
-  {date: 'Wednesday', availableTimes: []}, 
-  {date: 'Thursday', availableTimes: []}, 
-  {date: 'Friday', availableTimes: []},  
-  {date: 'Saturday', availableTimes: []}
-];
-const mockDeliveryTypes: DeliveryType[] = ['Contact-less Delivery'];
+import { YourNeedsInfoFactory } from '../../../test-utils/factories';
 
 const spyOnSelector = jest.spyOn(Redux, 'useSelector');
 
@@ -29,11 +17,7 @@ test('should render Personal Info slide first.', () => {
   spyOnSelector.mockImplementation((arg) => {
     const mockState = {
       driversRegistration: {
-        yourNeeds: {
-          communities: mockCommunities,
-          availableDates: mockAvailableTimes,
-          typesOfDelivery: mockDeliveryTypes
-        }
+        yourNeeds: YourNeedsInfoFactory.build()
       }
     };
     return arg(mockState);
