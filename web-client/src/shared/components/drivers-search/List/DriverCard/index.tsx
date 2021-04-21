@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Driver } from '../../../../redux/driversSearch/index';
 import Popup from "../../Popup"
 // Material UI Imports
-import { Card, CardContent, Typography } from '@material-ui/core';
+import { Button, Card, CardContent, Typography } from '@material-ui/core';
 
 type DriverCardProps = {
   driverInfo: Driver;
@@ -11,17 +11,17 @@ type DriverCardProps = {
 
 export const DriverCard = ({ driverInfo }: DriverCardProps): JSX.Element => {
 
-  const riskComforlLevelSpanList 
+  const riskComforlLevelSpanList
     = driverInfo
-    .riskComfortLevel
-    .map(item => (
-      <span key={item} role="riskComfortItem">
-        {item}, 
-      </span>
-    ))
+      .riskComfortLevel
+      .map(item => (
+        <span key={item} role="riskComfortItem">
+          {item},
+        </span>
+      ))
 
   const [openPopup, setOpenPopup] = useState(false)
-  
+
   return (
     <Card>
       <CardContent>
@@ -30,48 +30,48 @@ export const DriverCard = ({ driverInfo }: DriverCardProps): JSX.Element => {
             {driverInfo.name}
           </span>
         </Typography>
-        <button onClick = {() => setOpenPopup(true)}>Email</button>
-        <Popup 
-          openPopup = {openPopup}
-          setOpenPopup = {setOpenPopup}  
+        <Button variant="contained" color="primary" onClick={() => setOpenPopup(true)}>Email</Button>
+        <Popup
+          openPopup={openPopup}
+          setOpenPopup={setOpenPopup}
         />
         <Typography>
-          Licence Class: 
+          Licence Class:
           <span role="licenceClass">
             {driverInfo.licenceClass}
           </span>
         </Typography>
 
         <Typography>
-          Vehicle Type: 
+          Vehicle Type:
           <span role="vehicleType">
             {driverInfo.vehicleType}
           </span>
         </Typography>
 
         <Typography>
-          Police Check: 
+          Police Check:
           <span role="policeCheck">
             {driverInfo.policeCheck}
           </span>
         </Typography>
 
         <Typography>
-          Driving Abstract: 
+          Driving Abstract:
           <span role="drivingAbstract">
             {driverInfo.drivingAbstract}
           </span>
         </Typography>
 
         <Typography>
-          Willing to Lift: 
+          Willing to Lift:
           <span role="willingToLift">
             {driverInfo.willingToLift}
           </span>
         </Typography>
 
-        <Typography> 
-          Packing and Sorting: 
+        <Typography>
+          Packing and Sorting:
           <span role="packingAndSorting">
             {driverInfo.packingAndSorting}
           </span>
