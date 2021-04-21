@@ -2,7 +2,9 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core'
 import React from 'react'
 
-const ConfirmDeleteDialog = (props:{open:boolean, onClose():void , onAgree():void})=>{
+interface PropTypes {open:boolean, onClose():void , onAgree():void}
+
+const ConfirmDeleteDialog: React.FunctionComponent<PropTypes> = (props:PropTypes)=>{
     return (
         <Dialog
             open={props.open}

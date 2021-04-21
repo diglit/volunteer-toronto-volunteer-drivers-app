@@ -1,16 +1,14 @@
-
-import VtUsers from 'pages/volunteer-toronto/members'
+import React from 'react'
 import {render, screen, fireEvent} from '@testing-library/react'
 import UserEvents from '@testing-library/user-event'
 import Members from '.';
 import { Provider } from 'react-redux';
 import { store } from 'shared/redux';
-import * as MemberSlice from 'shared/redux/volunnteer-toronto/members'
 import MockMembers from 'pages/api/vtmembers/mockMember'
 import fetchMock from 'jest-fetch-mock'
 
 describe('VT: Users', () => {
-    const spyFetch = (data:MemberSlice.MembersListItem[])=>{
+    const spyFetch = ()=>{
         fetchMock.enableMocks()
 
         fetchMock.mockResponse(async (req)=>{
@@ -39,7 +37,7 @@ describe('VT: Users', () => {
     )
 
     beforeEach(()=>{
-        spyFetch(MockMembers.getMembers())
+        spyFetch()
         renderComponent()
     })    
 
