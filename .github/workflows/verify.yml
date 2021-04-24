@@ -1,4 +1,4 @@
-name: 'PRTitle'
+name: 'PR'
 on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
@@ -18,8 +18,3 @@ jobs:
         with:
           regex: '^(feature|release|hotfix)\/[1-9]([0-9])*$' # Regex the branch should match. This example enforces grouping
           ignore: master,develop # Ignore exactly matching branch names from convention
-      - uses: hattan/verify-linked-issue-action@v1.1.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          message: 'Build Error! No linked issue found. Please link an issue to this pull request'
