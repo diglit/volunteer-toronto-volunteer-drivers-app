@@ -27,12 +27,12 @@ jobs:
           script: |
             const prntLabelRegex = /^prnt-.*/;
 
-            const issue = await github.issues.get({
+            const labels = await github.issues.listLabelsOnIssue({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
             });
-            const prntLabels = issue.labels.filter(label=>prntLabelRegex.test(label.name))
+            const prntLabels = labels.filter(label=>prntLabelRegex.test(label.name))
             if(prntLabels.length === 1){
               const branchNumber = target.split('/')[1]
               const parentNumber = prntLabels[0].name.split('-')[1]
