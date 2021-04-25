@@ -43,7 +43,7 @@ jobs:
                 const branchNumber = target.split('/')[1]
                 const parentNumber = prntLabels[0].name.split('-')[1]
                 if(branchNumber !== parentNumber){
-                    core.setFailed(`You are attempt to merge into the wrong branch. Change the pull request so that it is set to merge to feature/${parentNumber}`. If the branch does not exist, create and push it.);
+                    core.setFailed(`You are attempting to merge into the wrong branch. Change the pull request so that it is set to merge to feature/${parentNumber}`. If the branch does not exist, create and push it.);
                 }
             }
       - uses: actions/github-script@v4
