@@ -43,9 +43,27 @@ jobs:
                 const branchNumber = target.split('/')[1]
                 const parentNumber = prntLabels[0].name.split('-')[1]
                 if(branchNumber !== parentNumber){
-                    core.setFailed(`You are attempt to merge into the wrong branch. Change the pull request so that it is set to merge to feature/${parentNumber}`);
+                    core.setFailed(`You are attempt to merge into the wrong branch. Change the pull request so that it is set to merge to feature/${parentNumber}`. If the branch does not exist, create and push it.);
                 }
             }
+      - uses: actions/github-script@v4
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const {data: issue} = await github.issues.get({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+            });
+            const issueNumber = issue.title.split('/')[1]
 
-
-        
+            const {data: issues} = await github.issues.listForRepo({
+                labels: `prnt-${issueNumber}`,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'open'
+            });
+            
+            if(issues.length){
+                core.setFailed(`The issue you are working on has child issues that are not closed yet. Those child tickets must be closed (completed) before you can merge this ticket. Their titles are:\n- ${issues.map(issue=>`${issue.title} | ${issue.number} | ${issue.html_url}`).join('\n- ')}.`);
+            }
