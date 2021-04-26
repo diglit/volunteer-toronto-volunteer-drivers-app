@@ -1,0 +1,19 @@
+name: 'PR'
+on:
+  pull_request:
+    types: [closed]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    name: Actions on closed.
+    steps:
+      - uses: actions/github-script@v4
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.update({
+              issue_number: context.issue.title.split('/')[1],
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'closed'
+            })
