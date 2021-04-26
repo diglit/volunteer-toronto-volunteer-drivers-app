@@ -4,26 +4,9 @@ import UserEvents from '@testing-library/user-event'
 import Members from '.';
 import { Provider } from 'react-redux';
 import { store } from 'shared/redux';
-import MockMembers from 'pages/api/vtmembers/mockMember'
-import fetchMock from 'jest-fetch-mock'
+import spyFetch from '../../../test-utils/spyFetch'
 
 describe('VT: Users', () => {
-    const spyFetch = ()=>{
-        fetchMock.enableMocks()
-
-        fetchMock.mockResponse(async (req)=>{
-            if(req.url === "http://localhost:3000/api/vtmembers")
-            return JSON.stringify( {data:MockMembers.getMembers()} )
-
-            if(req.url === "http://localhost:3000/api/vtmembers/delete"){
-                const members = MockMembers.getMembers()
-                return JSON.stringify( {data: members.shift() })
-            }
-
-            return Promise.reject(new Error('wrong url'))
-        })
-    }
-
     const renderComponent = ()=>{
         render(
             <Provider store={store}>
