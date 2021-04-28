@@ -2,10 +2,10 @@
 import React from 'react'
 import Head from 'next/head'
 import {NextPage} from 'next'
-import {Container} from '@material-ui/core'
-import SearchBar from '../../shared/components/volunteerTorontoMembers/SearchBar'
-import Btns from '../../shared/components/volunteerTorontoMembers/Btns'
-import MemberTable from '../../shared/components/volunteerTorontoMembers/MemberTable'
+import {Box, Container} from '@material-ui/core'
+import SearchBar from '../../shared/components/volunteer-toronto/members/SearchBar'
+import Btns from '../../shared/components/volunteer-toronto/members/Btns'
+import MemberTable from '../../shared/components/volunteer-toronto/members/MemberTable'
 
 const VolunteerTorontoMembers: NextPage = ()=>{
     return (
@@ -14,8 +14,10 @@ const VolunteerTorontoMembers: NextPage = ()=>{
                 <title>Voluteer Toronto Members</title>
             </Head>
             <Container>
-                <SearchBar />
-                <Btns />
+                <Box display="flex" justifyContent="space-between" alignItems="center">
+                    <SearchBar />
+                    <Btns />
+                </Box>
                 <MemberTable />
             </Container>
         </>

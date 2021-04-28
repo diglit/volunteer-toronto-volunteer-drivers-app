@@ -15,7 +15,7 @@ const policeRecordsCheckTypeLabel = [
 ]
 
 const drivingAbstractOptionsLabel = [
-    'I have a clear drving abstract completed within the last 6 months',
+    'I have a clear driving abstract completed within the last 6 months',
     'I have a clear driving abstract completed within the last 12 months',
     'I am willing to complete a drving abstract in order to volunteer as a drvier',
     'I am NOT willing to complete a driving abstract in order to volunteer as a driver'
@@ -32,4 +32,3 @@ const LicenseAndVehicleLabel: CheckboxLabel[] = [
 const LicenseClasses = ['None', 'A', 'B', 'C', 'D', 'E', 'F', 'G1', 'G2', 'M', 'M with L condition', 'M1', 'M2', 'M2 with L condition']
 
 export { policeRecordsCheckOptionsLabel, policeRecordsCheckTypeLabel, drivingAbstractOptionsLabel, LicenseAndVehicleLabel, LicenseClasses }
-// module.exports=
