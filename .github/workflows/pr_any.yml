@@ -19,33 +19,33 @@ jobs:
         with:
           regex: '^(feature|release|hotfix)\/[1-9]([0-9])*$' # Regex the branch should match. This example enforces grouping
           ignore: master,develop # Ignore exactly matching branch names from convention
-      - uses: actions/github-script@v4
-        env:
-          target: GITHUB_BASE_REF
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            const { target } = process.env;
-            const prntLabelRegex = /^prnt-.*/;
-            const {data: issue} = await github.issues.get({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-            });
-            const issueNumber = issue.title.split('/')[1]
-            const {data: labels} = await github.issues.listLabelsOnIssue({
-                issue_number: issueNumber,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-            });
-            const prntLabels = labels.filter(label=>prntLabelRegex.test(label.name))
-            if(prntLabels.length === 1){
-                const branchNumber = target.split('/')[1]
-                const parentNumber = prntLabels[0].name.split('-')[1]
-                if(branchNumber !== parentNumber){
-                    core.setFailed(`You are attempting to merge into the wrong branch. Change the pull request so that it is set to merge to feature/${parentNumber}`. If the branch does not exist, create and push it.);
-                }
-            }
+      # - uses: actions/github-script@v4
+      #   env:
+      #     target: GITHUB_BASE_REF
+      #   with:
+      #     github-token: ${{secrets.GITHUB_TOKEN}}
+      #     script: |
+      #       const { target } = process.env;
+      #       const prntLabelRegex = /^prnt-.*/;
+      #       const {data: issue} = await github.issues.get({
+      #           issue_number: context.issue.number,
+      #           owner: context.repo.owner,
+      #           repo: context.repo.repo,
+      #       });
+      #       const issueNumber = issue.title.split('/')[1]
+      #       const {data: labels} = await github.issues.listLabelsOnIssue({
+      #           issue_number: issueNumber,
+      #           owner: context.repo.owner,
+      #           repo: context.repo.repo,
+      #       });
+      #       const prntLabels = labels.filter(label=>prntLabelRegex.test(label.name))
+      #       if(prntLabels.length === 1){
+      #           const branchNumber = target.split('/')[1]
+      #           const parentNumber = prntLabels[0].name.split('-')[1]
+      #           if(branchNumber !== parentNumber){
+      #               core.setFailed(`You are attempting to merge into the wrong branch. Change the pull request so that it is set to merge to feature/${parentNumber}`. If the branch does not exist, create and push it.);
+      #           }
+      #       }
       - uses: actions/github-script@v4
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
