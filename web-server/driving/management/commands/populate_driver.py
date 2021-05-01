@@ -98,13 +98,13 @@ class Command(BaseCommand):
                     if row:
                         data = {}
                         data["name"] = row[0]
-                        data["status"] = bool(row[1])
+                        data["status"] = self.switch(driver_status,row[1])
                         data["email"] = row[2]
                         data["advisor_name"] = row[4]
                         data["languages"] = row[5]
                         data["organization_referral"] = row[6]
                         data["second_match"] = row[7]
-                        data["community"] = bool(row[8])
+                        data["community"] = self.switch(communities,row[8])
                         data["other"] = row[9]
                         data["contactless"] = bool(row[11])
                         data["high_risk_contact"] = bool(row[12])
