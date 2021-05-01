@@ -3,6 +3,7 @@ name = "volunteer_toronto_be"
 version = "0.1.0"
 description = ""
 authors = ["Erik Derohanian <erik@erik-j.de>"]
+license = "GPL-3.0-only"
 
 [tool.poetry.dependencies]
 python = "^3.9"
