@@ -34,8 +34,7 @@ schema_view = get_schema_view(
             "responses of the API endpoints.",
         terms_of_service="",
         contact=openapi.Contact(email="info@diglit.com"),
-        license=openapi.License(name="SAP Individual Contributor License Agreement"),
-            #https://gist.github.com/CLAassistant/bd1ea8ec8aa0357414e8
+        license=openapi.License(name="GPLv3"),
     ),
    public=True,
    permission_classes=[permissions.AllowAny],
