@@ -41,6 +41,10 @@ describe('VT: Users', () => {
         renderComponent()
     })    
 
+    afterAll(()=>{
+        fetchMock.dontMock()
+    })
+
     it('should have member "Pam" in table', async ()=>{
         expect(await screen.findByText('Pam')).toBeInTheDocument()
     })
