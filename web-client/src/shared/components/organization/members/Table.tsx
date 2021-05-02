@@ -15,7 +15,6 @@ import {
     Box,
     CircularProgress,
     Typography,
-    Container
 } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -29,40 +28,38 @@ const MembersTable:React.FunctionComponent = ()=>{
     },[])
 
     return (
-        <Container>
-            <Table>
-        <TableHead>
-            <TableRow>
-                <TableCell><Box fontWeight="bold">Name</Box></TableCell>
-            </TableRow>
-        </TableHead>
-        {loading
-        ? <TableBody>
-            <TableRow>
-                <TableCell>
-                    <CircularProgress />
-                </TableCell>
-            </TableRow>
-        </TableBody>
-
-        : <TableBody>
-            {members && members.length > 0 
-            ? members.map(member=>(
-                <TableRow key={member.id}>
-                    <TableCell>{member.name}</TableCell>
+        <Table>
+            <TableHead>
+                <TableRow>
+                    <TableCell><Box fontWeight="bold">Name</Box></TableCell>
                 </TableRow>
-            ))
-            
-            : <TableRow>
+            </TableHead>
+            {loading
+            ? <TableBody>
+                <TableRow>
                     <TableCell>
-                        <Typography>No member to show</Typography>
+                        <CircularProgress />
                     </TableCell>
                 </TableRow>
+            </TableBody>
+
+            : <TableBody>
+                {members && members.length > 0 
+                ? members.map(member=>(
+                    <TableRow key={member.id}>
+                        <TableCell>{member.name}</TableCell>
+                    </TableRow>
+                ))
+                
+                : <TableRow>
+                        <TableCell>
+                            <Typography>No member to show</Typography>
+                        </TableCell>
+                    </TableRow>
+                }
+            </TableBody>
             }
-        </TableBody>
-        }
-    </Table>
-        </Container>
+        </Table>
     )
 }
 
