@@ -4,7 +4,7 @@ import UserEvents from '@testing-library/user-event'
 import Members from '.';
 import { Provider } from 'react-redux';
 import { store } from 'shared/redux';
-import spyFetch from '../../../test-utils/spyFetch'
+import {spyFetch, dontMock} from '../../../test-utils/spyFetch'
 
 describe('VT: Users', () => {
     const renderComponent = ()=>{
@@ -23,6 +23,10 @@ describe('VT: Users', () => {
         spyFetch()
         renderComponent()
     })    
+
+    afterAll(()=>{
+        dontMock()
+    })
 
     it('should have member "Pam" in table', async ()=>{
         expect(await screen.findByText('Pam')).toBeInTheDocument()

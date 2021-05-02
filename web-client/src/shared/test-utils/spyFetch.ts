@@ -1,7 +1,7 @@
 import fetchMock from 'jest-fetch-mock'
 import MockMembers from 'pages/api/vtmembers/mockMember'
 
-const spyFetch = ():void=>{
+export const spyFetch = ():void=>{
     fetchMock.enableMocks()
 
     fetchMock.mockResponse(async (req)=>{
@@ -26,6 +26,10 @@ const spyFetch = ():void=>{
 
         return Promise.reject(new Error('wrong url'))
     })
+}
+
+export const dontMock = ():void=>{
+    fetchMock.dontMock()
 }
 
 export default spyFetch

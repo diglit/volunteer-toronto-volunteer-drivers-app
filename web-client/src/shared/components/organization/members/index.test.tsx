@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import React from 'react'
 import { Provider } from 'react-redux'
 import { store } from 'shared/redux'
-import spyFetch from '../../../test-utils/spyFetch'
+import {spyFetch, dontMock} from '../../../test-utils/spyFetch'
 import {MemberTable} from './index'
 import fetchMock from 'jest-fetch-mock'
 
@@ -19,6 +19,10 @@ describe('Organization Table', () => {
     beforeAll(()=>{
         spyFetch()
         renderComponent()
+    })
+
+    afterAll(()=>{
+        dontMock()
     })
 
     it('should show Members if server returns members list', async ()=>{
