@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: deepakputhraya/action-pr-title@master
         with:
-          regex: '([a-z])+\/([0-9])+' # Regex the title should match.
+          regex: '([a-z])+\/(Sub|SUB|sub)?([0-9])+' # Regex the title should match.
           allowed_prefixes: 'feature,hotfix,release'
           prefix_case_sensitive: false # title prefix are case insensitive
           min_length: 5 # Min length of the title
@@ -17,7 +17,7 @@ jobs:
           github_token: ${{ github.token }} # Default: ${{ github.token }}
       - uses: deepakputhraya/action-branch-name@master
         with:
-          regex: '^(feature|release|hotfix)\/[1-9]([0-9])*$' # Regex the branch should match. This example enforces grouping
+          regex: '^(feature|release|hotfix)\/(SUB|Sub|sub)?[1-9]([0-9])*$' # Regex the branch should match. This example enforces grouping
           ignore: master,develop # Ignore exactly matching branch names from convention
       - uses: actions/github-script@v4
         env:
@@ -25,6 +25,13 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
+            const getIssueNumber = (title)=>{
+                let issueNumber = title.split('/')[1]
+                if(issueNumber[0].toUpperCase === 'S'){
+                    issueNumber = issueNumber.slice(3)
+                }
+                return issueNumber;
+            }
             const { target } = process.env;
             const prntLabelRegex = /^prnt-.*/;
             const {data: issue} = await github.issues.get({
@@ -32,7 +39,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
             });
-            const issueNumber = issue.title.split('/')[1]
+            const issueNumber = getIssueNumber(issue.title)
             const {data: labels} = await github.issues.listLabelsOnIssue({
                 issue_number: issueNumber,
                 owner: context.repo.owner,
@@ -40,10 +47,10 @@ jobs:
             });
             const prntLabels = labels.filter(label=>prntLabelRegex.test(label.name))
             if(prntLabels.length === 1){
-                const branchNumber = target.split('/')[1]
+                const branchNumber = getIssueNumber(target)
                 const parentNumber = prntLabels[0].name.split('-')[1]
                 if(branchNumber !== parentNumber){
-                    core.setFailed(`You are attempting to merge into the wrong branch. Change the pull request so that it is set to merge to feature/${parentNumber}`. If the branch does not exist, create and push it.);
+                    core.setFailed(`You are attempting to merge into the wrong branch. Change the pull request so that it is set to merge to feature/${parentNumber}.`);
                 }
             }
       - uses: actions/github-script@v4
