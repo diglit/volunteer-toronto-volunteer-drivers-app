@@ -14,7 +14,8 @@ import {
     TableRow,
     Box,
     CircularProgress,
-    Typography
+    Typography,
+    Container
 } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -28,7 +29,8 @@ const MembersTable:React.FunctionComponent = ()=>{
     },[])
 
     return (
-        <Table>
+        <Container>
+            <Table>
         <TableHead>
             <TableRow>
                 <TableCell><Box fontWeight="bold">Name</Box></TableCell>
@@ -60,6 +62,7 @@ const MembersTable:React.FunctionComponent = ()=>{
         </TableBody>
         }
     </Table>
+        </Container>
     )
 }
 
