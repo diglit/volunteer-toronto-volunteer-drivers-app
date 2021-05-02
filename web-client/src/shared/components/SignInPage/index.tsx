@@ -114,7 +114,7 @@ const SignInPage: NextPage = () => {
             </Grid>
             <Grid item xs={12}>
               <Typography>
-                <Link href="/signup">
+                <Link href="/drivers-registration">
                   Apply to Drive!
                 </Link>
               </Typography>
