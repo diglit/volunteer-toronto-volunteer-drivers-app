@@ -13,23 +13,24 @@ interface DashNavProps {
 const DashNav:React.FunctionComponent<DashNavProps> = (props: DashNavProps)=>{
     const router = useRouter()
     const {components} = props
-
-    useEffect(()=>{
-        const isMatch = findSlugMatchingCmp()
-        
-        if(router.query.route && !isMatch)
-        router.push('/404')
-
-    },[router])
+    const currentRoute = router.query.route
 
     const findSlugMatchingCmp = ()=>components.find(
         (cmp, i) =>{
             cmp.value = i
-            return cmp.slug === router.query.route
+            return cmp.slug === currentRoute
         } 
     )
 
     const cmp = findSlugMatchingCmp()
+    
+    useEffect(()=>{
+        const isMatch = cmp
+        
+        if(currentRoute && !isMatch)
+        router.push('/404')
+
+    },[router])
 
     const changeRouteTo = (slug:string)=>{
         const withoutSlugPath = router.asPath.split(`/${cmp?.slug}`)[0]
