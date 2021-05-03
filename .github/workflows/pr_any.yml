@@ -27,7 +27,7 @@ jobs:
           script: |
             const getIssueNumber = (title)=>{
                 let issueNumber = title.split('/')[1]
-                if(issueNumber[0].toUpperCase === 'S'){
+                if(issueNumber[0].toUpperCase() === 'S'){
                     issueNumber = issueNumber.slice(3)
                 }
                 return issueNumber;
