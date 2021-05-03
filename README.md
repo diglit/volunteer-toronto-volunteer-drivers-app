@@ -68,7 +68,12 @@ You can use what ever you want here to run shell scripts. It can be your operati
 
 ## Git Structure
 
-We're going to be using (gitflow)[https://github.com/nvie/gitflow] structure for creating branches and merging. We'll be creating all of our branches off of develop.
+We're going to be using (gitflow)[https://github.com/nvie/gitflow] structure for creating branches and merging.
+
+One slight difference from gitflow is that we create subfeatures, so if you're interested in using a gitflow cli, this one supports subfeatures: https://github.com/petervanderdoes/gitflow-avh
+
+The way we differentiate tickets (issues) that are subfeatures from features is through a ticket's label. The labels feature and shared are feature issues. The label subfeature is a subfeature issue.
+
 ```
 git checkout develop
 ``` 
@@ -76,7 +81,12 @@ git checkout develop
 When we want to start working on a ticket
 ```
 git checkout develop
+and
+# for feature tickets
 git checkout -b feature/10     (where 10 is the issue number)
+or
+# for subfeature tickets
+git checkout -b feature/sub10     (where 10 is the issue number)
 ```
 
 Once the feature is completed, you add to branch
@@ -87,11 +97,15 @@ git push
 ```
 *#number refers to ticket number*
 
-And then go to https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/pulls and create pull request
+And then go to https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/pulls and create pull request.
 
-Make sure the pull request passes all required tests
+Features are merged into develop
 
-## Deployents
+Subfeatures are merged into their parent (the issue that it is blocking, which should be available in the meta data)
+
+Make sure the pull request passes all required tests if it's being merged into develop or a feature branch.
+
+## Deployments
 
 ### DEV
 Backend: http://vt-volunteer-drivers-app.herokuapp.com

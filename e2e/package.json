@@ -12,7 +12,7 @@
     "url": "git+https://github.com/diglit/volunteer-toronto-volunteer-drivers-app.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "GPL-3.0-only",
   "bugs": {
     "url": "https://github.com/diglit/volunteer-toronto-volunteer-drivers-app/issues"
   },
