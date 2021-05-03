@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import {Tab, Tabs} from '@material-ui/core'
 import {useRouter} from 'next/router'
 

@@ -7,8 +7,7 @@ import {MemberTable} from 'shared/components/organization/members'
 import Header from 'shared/components/layout/Header'
 import DriversSearch from '../drivers-search'
 import {
-    Container,
-    Typography
+    Container
 } from '@material-ui/core'
 
 const Dashboard: NextPage = ()=>{
