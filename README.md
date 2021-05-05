@@ -116,8 +116,61 @@ One thing I like to setup is git autocomplete to make it easier to switch branch
 
 Mac zsh: https://oliverspryn.medium.com/adding-git-completion-to-zsh-60f3b0e7ffbc
 
-## Coding Principles
+### Coding Principles
 
 Don't make your code too DRY: https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction
 
 Code Review: Best Practices: https://medium.com/palantir/code-review-best-practices-19e02780015f
+
+## Ticket Structure
+
+The labels and names for tickets (github issues) we use have very specific meanings. Please read the following descriptions below, as it will save you from having to redo work properly.
+
+ *A quick note. Normally, a developer works on a feature in its entirety, but at DigLit we break the work down into subfeatures. The reason for this is because we need to be able to quickly approve code, and we need prevent as much as possible code from going stale.
+
+### Feature
+
+A feature is an addition to the software code. It may be user facing, it may be entirely internal. When a feature is completed, its related code is merged into the develop branch. All tickets stem from feature tickets. All tickets that are not 
+features are subfeature tickets
+
+### Subfeatures
+#### Use Case
+
+These tickets involve writing the steps that a user may take with respect to interacting with a new feature. Use case tickets are for user facing features. These use cases are written using the cucumber gherkin syntax.
+
+#### E2E
+
+These tickets involve writing the accompanying cucumber cypress tests for the above Use Case tickets.
+#### Skeleton
+
+The skeleton ticket is a minimalist representation of the development code needed to be written to complete a ticket. It involves the creation of files, and the creation of any significant functions or methods necessary to complete the feature. The skeleton does not involve writing functional code. Any functions created must can only include the naming and static typing of the arguments, and a mock return value (if the function calls for one). Any functions that require significant modifications should include the following tag:
+
+````
+// TODO-1234
+// A description of the task
+````
+
+Where 1234 is the Development ticket number (which is discussed below).
+
+#### Development
+
+A development ticket is the writing of the code to complete the feature. If a skeleton ticket precedes it, it should implement the skeleton code. It should implement any functions that were created in the skeleton, and any todo items that were created in the skeleton. The development ticket is also responsible for ensuring that any tests that were created in the Use Case ticket pass, and any tests written in an accompanying Unit Test (discussed below) ticket passes.
+
+#### Unit Test
+
+These tickets are for writing the unit tests that accompany the development code.
+
+### Overall Structure
+```
+Feature
+|
+|__Development
+   |
+   |__E2E
+   |  |
+   |  |__Use Case
+   |
+   |__Unit Test
+      |
+      |__Skeleton
+```
