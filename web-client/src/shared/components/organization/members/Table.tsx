@@ -35,16 +35,26 @@ const MembersTable:React.FunctionComponent = ()=>{
             </TableRow>
         </TableHead>
         {loading
-        ? <CircularProgress />
+        ? <TableBody>
+            <TableRow>
+                <TableCell>
+                    <CircularProgress />
+                </TableCell>
+            </TableRow>
+        </TableBody>
+
         : <TableBody>
-            {members.length > 0 
+            {members && members.length > 0 
             ? members.map(member=>(
                 <TableRow key={member.id}>
                     <TableCell>{member.name}</TableCell>
                 </TableRow>
             ))
+            
             : <TableRow>
-                    <Typography>No Member to show</Typography>
+                    <TableCell>
+                        <Typography>No member to show</Typography>
+                    </TableCell>
                 </TableRow>
             }
         </TableBody>
