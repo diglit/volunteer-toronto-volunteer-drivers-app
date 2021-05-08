@@ -1,0 +1,30 @@
+on:
+    issues:
+        types: [opened, labeled]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v4
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const {data: labels} = await github.issues.listLabelsOnIssue({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+            });
+            const feature = labels.find(label=>label.name==='feature');
+            if(!feature) return null;
+            const { exec } = require("child_process");
+            exec(`git checkout develop; git config user.name github-actions; git config user.email github-actions@github.com; git checkout -b feature/${context.issue.number}; git push`, (error, stdout, stderr) => {
+                if (error) {
+                    core.setFailed(`error: ${error.message}`);
+                    return;
+                }
+                if (stderr) {
+                    core.setFailed(`stderr: ${stderr}`);
+                    return;
+                }
+                core.info(stdout)
+            });
