@@ -1,0 +1,17 @@
+
+.header{
+    margin-top: 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.profile{
+    img{
+        height: 3em;
+        width: 3em;
+        background-color: rgb(202, 202, 202);
+        border-radius: 50%;
+        text-align: center;
+        margin-bottom: 0.3em;
+    }
+}

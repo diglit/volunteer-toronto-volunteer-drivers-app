@@ -14,7 +14,7 @@ import {
     TableRow,
     Box,
     CircularProgress,
-    Typography
+    Typography,
 } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -29,27 +29,37 @@ const MembersTable:React.FunctionComponent = ()=>{
 
     return (
         <Table>
-        <TableHead>
-            <TableRow>
-                <TableCell><Box fontWeight="bold">Name</Box></TableCell>
-            </TableRow>
-        </TableHead>
-        {loading
-        ? <CircularProgress />
-        : <TableBody>
-            {members.length > 0 
-            ? members.map(member=>(
-                <TableRow key={member.id}>
-                    <TableCell>{member.name}</TableCell>
+            <TableHead>
+                <TableRow>
+                    <TableCell><Box fontWeight="bold">Name</Box></TableCell>
                 </TableRow>
-            ))
-            : <TableRow>
-                    <Typography>No Member to show</Typography>
+            </TableHead>
+            {loading
+            ? <TableBody>
+                <TableRow>
+                    <TableCell>
+                        <CircularProgress />
+                    </TableCell>
                 </TableRow>
+            </TableBody>
+
+            : <TableBody>
+                {members && members.length > 0 
+                ? members.map(member=>(
+                    <TableRow key={member.id}>
+                        <TableCell>{member.name}</TableCell>
+                    </TableRow>
+                ))
+                
+                : <TableRow>
+                        <TableCell>
+                            <Typography>No member to show</Typography>
+                        </TableCell>
+                    </TableRow>
+                }
+            </TableBody>
             }
-        </TableBody>
-        }
-    </Table>
+        </Table>
     )
 }
 
