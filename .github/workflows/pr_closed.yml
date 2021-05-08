@@ -11,8 +11,16 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
+            const {data: issue} = await github.issues.get({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+            });
+            const re = /[a-z]+\/[a-z]*([0-9]+)/i
+            const match = re.exec(issue.title);
+            if(!match) return core.setFailed('Bad issue title');
             github.issues.update({
-              issue_number: context.issue.title.split('/')[1],
+              issue_number: match[1],
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'closed'
