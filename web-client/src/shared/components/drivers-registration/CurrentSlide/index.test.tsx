@@ -6,7 +6,7 @@ import CurrentSlide from './index';
 
 describe('Current Slide', () => {
   test('should render Personal Info slide first.', () => {
-    const { getByText } = render(<Provider store={store}><CurrentSlide currentSlide={1} /></Provider>);
+    const { getByText } = render(<Provider store={store}><CurrentSlide /></Provider>);
 
     const firstNameLabel = getByText('First Name');
 

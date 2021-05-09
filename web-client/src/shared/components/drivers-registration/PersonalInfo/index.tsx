@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 /** MUI */
-import { Container, Button, Grid } from '@material-ui/core';
+import { Button, Box } from '@material-ui/core';
 /** redux */
 import { PersonalInfo } from '../../../redux/driversRegistration';
 import { useSelector } from 'react-redux';
@@ -25,7 +25,7 @@ const schema = yup.object().shape({
     firstName: yup.string().required(errorMessages.required),
     lastName: yup.string().required(errorMessages.required),
     emailAddress: yup.string().email(errorMessages.email).required(errorMessages.required),
-    phoneNumber: yup.string().matches(/^\d*$/, {message:errorMessages.phone.type}).required(errorMessages.required).length(10,errorMessages.phone.length),
+    phoneNumber: yup.string().matches(/^\d*$/, { message: errorMessages.phone.type }).required(errorMessages.required).length(10, errorMessages.phone.length),
     languagesSpoken: yup.object({
         english: yup.boolean(),
         french: yup.boolean(),
@@ -35,12 +35,12 @@ const schema = yup.object().shape({
         chinese: yup.boolean(),
         other: yup.boolean(),
     })
-    .test('OK', 'Please select at least one language', lan => (lan.english||lan.french||lan.tagalog||lan.portuguese||lan.spanish||lan.chinese||lan.other) as boolean),
+        .test('OK', 'Please select at least one language', lan => (lan.english || lan.french || lan.tagalog || lan.portuguese || lan.spanish || lan.chinese || lan.other) as boolean),
     languageOther: yup.string()
-    .when('languagesSpoken', {
-        is: (value: { other: boolean; }) => value.other,
-        then: yup.string().required(errorMessages.required),
-      }),
+        .when('languagesSpoken', {
+            is: (value: { other: boolean; }) => value.other,
+            then: yup.string().required(errorMessages.required),
+        }),
 });
 
 interface personalInfoPorps {
@@ -72,84 +72,83 @@ const PersonalInfoSection = ({ onSubmit }: personalInfoPorps): React.ReactElemen
     ]
 
     return (
-        <Container maxWidth="sm">
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Grid container spacing={4}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <Box display='flex'>
+                <Box m={3}>
+                    <FormInput
+                        formType='textInput'
+                        error={errors.firstName}
+                        control={control}
+                        labels={'first-name'}
+                        formLabel='First Name'
+                        name='firstName'
+                    />
+                </Box>
 
-                    <Grid item >
-                        <FormInput
-                            formType='textInput'
-                            error={errors.firstName}
-                            control={control}
-                            labels={'first-name'}
-                            formLabel='First Name'
-                            name='firstName'
-                        />
-                    </Grid>
+                <Box m={3}>
+                    <FormInput
+                        formType='textInput'
+                        error={errors.lastName}
+                        control={control}
+                        labels={'last-name'}
+                        formLabel='Last Name'
+                        name='lastName'
+                    />
+                </Box>
+            </Box>
 
-                    <Grid item >
-                        <FormInput
-                            formType='textInput'
-                            error={errors.lastName}
-                            control={control}
-                            labels={'last-name'}
-                            formLabel='Last Name'
-                            name='lastName'
-                        />
-                    </Grid>
+            <Box display='flex'>
+                <Box m={3}>
+                    <FormInput
+                        formType='textInput'
+                        error={errors.emailAddress}
+                        control={control}
+                        labels={'email'}
+                        formLabel='Email Address'
+                        name='emailAddress'
+                    />
+                </Box>
 
-                    <Grid item >
-                        <FormInput
-                            formType='textInput'
-                            error={errors.emailAddress}
-                            control={control}
-                            labels={'email'}
-                            formLabel='Email Address'
-                            name='emailAddress'
-                        />
-                    </Grid>
+                <Box m={3}>
+                    <FormInput
+                        formType='textInput'
+                        error={errors.phoneNumber}
+                        control={control}
+                        labels={'phone-number'}
+                        formLabel='Phone Number'
+                        name='phoneNumber'
+                    />
+                </Box>
+            </Box>
 
-                    <Grid item >
-                        <FormInput
-                            formType='textInput'
-                            error={errors.phoneNumber}
-                            control={control}
-                            labels={'phone-number'}
-                            formLabel='Phone Number'
-                            name='phoneNumber'
-                        />
-                    </Grid>
+            <Box m={3}>
+                <FormInput
+                    formType='checkbox'
+                    error={errors.languagesSpoken}
+                    labels={languageLabel}
+                    control={control}
+                    formLabel='Language Spoken'
+                    name='languagesSpoken'
+                />
+            </Box>
 
-                    <Grid item>
-                        <FormInput
-                            formType='checkbox'
-                            error={errors.languagesSpoken}
-                            labels={languageLabel}
-                            control={control}
-                            formLabel='Language Spoken'
-                            name='languagesSpoken'
-                        />
-                    </Grid>
+            {otherLanguage &&
+                <Box m={3}>
+                    <FormInput
+                        formType='textInput'
+                        error={errors.languageOther}
+                        control={control}
+                        labels={'other-language'}
+                        formLabel='Other Language'
+                        name='languageOther'
+                    />
+                </Box>
+            }
 
-                    {otherLanguage &&
-                        <Grid item >
-                            <FormInput
-                                formType='textInput'
-                                error={errors.languageOther}
-                                control={control}
-                                labels={'other-language'}
-                                formLabel='Other Language'
-                                name='languageOther'
-                            />
-                        </Grid>
-                    }
-                </Grid>
-
-                <Grid>
-                    <Button type="submit" variant="contained">SAVE</Button>
-                </Grid>
-            </form>
-        </Container>
+            <Box m={3}>
+                <Button type="submit" variant="contained">SAVE</Button>
+            </Box>
+        </form >
     );
 };
 

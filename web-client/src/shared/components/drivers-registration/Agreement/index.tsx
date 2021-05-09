@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 /** MUI */
-import { Container, Button, Grid } from '@material-ui/core';
+import { Button, Box } from '@material-ui/core';
 /** redux */
 import { Agreement } from '../../../redux/driversRegistration';
 import { useSelector } from 'react-redux';
@@ -36,7 +36,6 @@ export const agreementLabel: CheckboxLabel[] = [
 const AgreementSection = ({ onSubmit }: AgreementPorps): React.ReactElement => {
     const agreement = useSelector((state: RootState) => state.driversRegistration.agreement)
 
-
     /* React hook form */
     const { control, handleSubmit, errors } = useForm({
         resolver: yupResolver(schema),
@@ -44,39 +43,33 @@ const AgreementSection = ({ onSubmit }: AgreementPorps): React.ReactElement => {
     });
 
     return (
-        <Container maxWidth="sm">
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Grid container spacing={4}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <Box m={3}>
+                <FormInput
+                    formType='checkbox'
+                    error={errors.agreementOptions}
+                    labels={agreementLabel}
+                    control={control}
+                    formLabel='Please confirm the following:'
+                    name='agreementOptions'
+                />
+            </Box>
 
-                    <Grid item>
-                        <FormInput
-                            formType='checkbox'
-                            error={errors.agreementOptions}
-                            labels={agreementLabel}
-                            control={control}
-                            formLabel='Please confirm the following:'
-                            name='agreementOptions'
-                        />
-                    </Grid>
+            <Box m={3} >
+                <FormInput
+                    formType='textInput'
+                    error={errors.signiture}
+                    control={control}
+                    labels={[]}
+                    formLabel='Print name as signature'
+                    name='signiture'
+                />
+            </Box>
 
-                    <Grid item >
-                        <FormInput
-                            formType='textInput'
-                            error={errors.signiture}
-                            control={control}
-                            labels={[]}
-                            formLabel='Print name as signature'
-                            name='signiture'
-                        />
-                    </Grid>
-
-                    <Grid item>
-                        <Button id="saveAgreement" type="submit" variant="contained">SAVE</Button>
-                    </Grid>
-
-                </Grid>
-            </form>
-        </Container>
+            <Box m={3}>
+                <Button id="saveAgreement" type="submit" variant="contained">SAVE</Button>
+            </Box>
+        </form>
     );
 };
 

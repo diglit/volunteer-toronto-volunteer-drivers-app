@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 /** MUI */
-import { Container, Button, Grid } from '@material-ui/core';
+import { Button, Box } from '@material-ui/core';
 /** redux */
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/index'
@@ -58,102 +58,96 @@ const PreScreenRequirements = ({ onSubmit }: PreScreenPorps): React.ReactElement
   const drivingAbstract = watch('drivingAbstractOptions')
 
   return (
-    <Container maxWidth="sm">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={4}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Box m={3}>
+        <FormInput
+          formType='radio'
+          error={errors.policeRecordsCheckOptions}
+          labels={policeRecordsCheckOptionsLabel}
+          control={control}
+          formLabel='Police Records Check Requirements'
+          name='policeRecordsCheckOptions'
+        />
+      </Box >
 
-          <Grid item >
+      {policeCheck.includes('I have') && (
+        <>
+          <Box m={3}>
             <FormInput
-              formType='radio'
-              error={errors.policeRecordsCheckOptions}
-              labels={policeRecordsCheckOptionsLabel}
+              formType='dateInput'
+              error={errors.policeRecordsCheckDate}
               control={control}
-              formLabel='Police Records Check Requirements'
-              name='policeRecordsCheckOptions'
+              labels={[]}
+              formLabel='Please indicate the date and type of check completed'
+              name='policeRecordsCheckDate'
             />
-          </Grid>
+          </Box >
 
-          {policeCheck.includes('I have') && (
-            <>
-              <Grid item >
-                <FormInput
-                  formType='dateInput'
-                  error={errors.policeRecordsCheckDate}
-                  control={control}
-                  labels={[]}
-                  formLabel='Please indicate the date and type of check completed'
-                  name='policeRecordsCheckDate'
-                />
-              </Grid>
-
-              <Grid item >
-                <FormInput
-                  formType='select'
-                  error={errors.policeRecordsCheckType}
-                  labels={policeRecordsCheckTypeLabel}
-                  control={control}
-                  formLabel='Indicate the type of check here.'
-                  name='policeRecordsCheckType'
-                />
-              </Grid>
-            </>
-          )}
-
-          <Grid item >
-            <FormInput
-              formType='radio'
-              error={errors.drivingAbstractOptions}
-              labels={drivingAbstractOptionsLabel}
-              control={control}
-              formLabel='Driving Abstract Options'
-              name='drivingAbstractOptions'
-            />
-          </Grid>
-
-          {drivingAbstract.includes('I have') && (
-            <>
-              <Grid item >
-                <FormInput
-                  formType='dateInput'
-                  error={errors.drivingAbstractDate}
-                  control={control}
-                  labels={[]}
-                  formLabel='Please indicate the date and type of check completed'
-                  name='drivingAbstractDate'
-                />
-              </Grid>
-            </>
-          )}
-
-          <Grid item>
-            <FormInput
-              formType='checkbox'
-              error={errors.LicenseAndVehicle}
-              labels={LicenseAndVehicleLabel}
-              control={control}
-              formLabel='Vehicle/License Requirements (Choose all that apply)'
-              name='LicenseAndVehicle'
-            />
-          </Grid>
-
-          <Grid item >
+          <Box m={3}>
             <FormInput
               formType='select'
-              error={errors.LicenseClasses}
-              labels={LicenseClasses}
+              error={errors.policeRecordsCheckType}
+              labels={policeRecordsCheckTypeLabel}
               control={control}
-              formLabel='Please indicate other license classes here.'
-              name='LicenseClasses'
+              formLabel='Indicate the type of check here.'
+              name='policeRecordsCheckType'
             />
-          </Grid>
+          </Box >
+        </>
+      )}
 
-          <Grid item>
-            <Button id="savePrescreen" type="submit" variant="contained">SAVE</Button>
-          </Grid>
+      <Box m={3}>
+        <FormInput
+          formType='radio'
+          error={errors.drivingAbstractOptions}
+          labels={drivingAbstractOptionsLabel}
+          control={control}
+          formLabel='Driving Abstract Options'
+          name='drivingAbstractOptions'
+        />
+      </Box >
 
-        </Grid>
-      </form>
-    </Container>
+      {drivingAbstract.includes('I have') && (
+        <>
+          <Box m={3}>
+            <FormInput
+              formType='dateInput'
+              error={errors.drivingAbstractDate}
+              control={control}
+              labels={[]}
+              formLabel='Please indicate the date and type of check completed'
+              name='drivingAbstractDate'
+            />
+          </Box >
+        </>
+      )}
+
+      <Box m={3}>
+        <FormInput
+          formType='checkbox'
+          error={errors.LicenseAndVehicle}
+          labels={LicenseAndVehicleLabel}
+          control={control}
+          formLabel='Vehicle/License Requirements (Choose all that apply)'
+          name='LicenseAndVehicle'
+        />
+      </Box >
+
+      <Box m={3}>
+        <FormInput
+          formType='select'
+          error={errors.LicenseClasses}
+          labels={LicenseClasses}
+          control={control}
+          formLabel='Please indicate other license classes here.'
+          name='LicenseClasses'
+        />
+      </Box >
+
+      <Box m={3}>
+        <Button id="savePrescreen" type="submit" variant="contained">SAVE</Button>
+      </Box>
+    </form>
   );
 };
 
