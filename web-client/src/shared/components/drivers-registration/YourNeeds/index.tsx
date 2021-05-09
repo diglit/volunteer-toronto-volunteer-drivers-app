@@ -6,7 +6,7 @@ import { RootState } from '../../../redux/index';
 import { Community, YourNeeds, Time, DeliveryType, Date, COMMUNITYNAME, DATES, TIMES, DELIVERTYPES } from '../../../redux/driversRegistration/yourNeeds/index';
 import { saveYourNeeds } from '../../../redux/driversRegistration/index';
 
-import { FormLabel, FormControl, FormGroup, FormControlLabel, Checkbox, Button, Typography } from '@material-ui/core';
+import { FormLabel, FormControl, FormGroup, FormControlLabel, Checkbox, Button, Box } from '@material-ui/core';
 
 const YourNeedsSection = (): JSX.Element => {
 
@@ -15,7 +15,7 @@ const YourNeedsSection = (): JSX.Element => {
   const typesOfDelivery = useSelector((state: RootState) => state.driversRegistration.yourNeeds.typesOfDelivery);
 
   // Community state contains two attributes: name and selected
-  const [communityState, setCommunityState] = useState(COMMUNITYNAME.map( community => {
+  const [communityState, setCommunityState] = useState(COMMUNITYNAME.map(community => {
     if (communities.includes(community)) {
       return ({
         name: community,
@@ -28,7 +28,7 @@ const YourNeedsSection = (): JSX.Element => {
   }));
 
   // Available dates state contains boolean value of every date for each time
-  const [availableDatesState, setAvailableDatesState] = useState([...TIMES.map( time => ({
+  const [availableDatesState, setAvailableDatesState] = useState([...TIMES.map(time => ({
     time: time,
     Sunday: availableDates.filter(ele => ele.date === 'Sunday')[0].availableTimes.includes(time),
     Monday: availableDates.filter(ele => ele.date === 'Monday')[0].availableTimes.includes(time),
@@ -40,7 +40,7 @@ const YourNeedsSection = (): JSX.Element => {
   }))]);
 
   // Delivery type state contains two attributes: name and selected
-  const [typesOfDeliveryState, setTypesOfDeliveryState] = useState(DELIVERTYPES.map( delivery => {
+  const [typesOfDeliveryState, setTypesOfDeliveryState] = useState(DELIVERTYPES.map(delivery => {
     if (typesOfDelivery.includes(delivery)) {
       return ({
         name: delivery,
@@ -70,8 +70,8 @@ const YourNeedsSection = (): JSX.Element => {
   };
 
   const handleTimeSelect = (date: Date, time: Time) => {
-    const newAvailableDates = availableDatesState.map( dateTime => {
-      if(dateTime.time === time) {
+    const newAvailableDates = availableDatesState.map(dateTime => {
+      if (dateTime.time === time) {
         const newDateTime = dateTime;
         newDateTime[date] = !dateTime[date];
         return newDateTime;
@@ -95,14 +95,14 @@ const YourNeedsSection = (): JSX.Element => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const selectedCommunities: Community[] = communityState.filter(community => community.selected === true).map( community => community.name);
+    const selectedCommunities: Community[] = communityState.filter(community => community.selected === true).map(community => community.name);
     const selectedDates = [...DATES.map(date => (
       {
-        date: date, 
+        date: date,
         availableTimes: availableDatesState.filter(ele => ele[date]).map(ele => ele.time)
       }
     ))];
-    const selectedDeliveryTypes: DeliveryType[] = typesOfDeliveryState.filter(delivery => delivery.selected === true).map( delivery => delivery.name);
+    const selectedDeliveryTypes: DeliveryType[] = typesOfDeliveryState.filter(delivery => delivery.selected === true).map(delivery => delivery.name);
 
     const yourNeedsData: YourNeeds = {
       communities: selectedCommunities,
@@ -125,44 +125,53 @@ const YourNeedsSection = (): JSX.Element => {
   return (
     <div>
       <div className="needs-communities">
-        <Typography variant="h4">Your Needs</Typography>
         <form onSubmit={handleSubmit}>
           <FormControl>
-            <FormLabel>I want to deliver in these communities (select all the apply)</FormLabel>
-            <FormGroup>
-              {communityState.map(community => 
-                <FormControlLabel 
-                  control={
-                    <Checkbox checked={community.selected} onChange={() => handleCommunitySelect(community.name)} name={community.name} />
-                  } 
-                  label={community.name} 
-                  key={community.name}
-                />
-              )}
-            </FormGroup>
 
-            <FormLabel>I am available to deliver (select all that apply)</FormLabel>
-            <FormGroup>
-              <AvailableDatesTable tableRows={availableDatesState} handleTimeSelect={handleTimeSelect} />
-            </FormGroup>
+            <Box m={3}>
+              <FormLabel>I want to deliver in these communities (select all the apply)</FormLabel>
+              <FormGroup>
+                {communityState.map(community =>
+                  <FormControlLabel
+                    control={
+                      <Checkbox checked={community.selected} onChange={() => handleCommunitySelect(community.name)} name={community.name} />
+                    }
+                    label={community.name}
+                    key={community.name}
+                  />
+                )}
+              </FormGroup>
+            </Box>
 
-            <FormLabel>I am comfortable with (choose all that apply):</FormLabel>
-            <FormGroup>
-              {typesOfDeliveryState.map(delivery => 
-                <FormControlLabel 
-                  control={
-                    <Checkbox checked={delivery.selected} onChange={() => handleDeliverySelect(delivery.name)} name={delivery.name} />
-                  } 
-                  label={delivery.name} 
-                  key={delivery.name}
-                />
-              )}
-            </FormGroup>
+            <Box m={3}>
+              <FormLabel>I am available to deliver (select all that apply)</FormLabel>
+              <FormGroup>
+                <AvailableDatesTable tableRows={availableDatesState} handleTimeSelect={handleTimeSelect} />
+              </FormGroup>
+            </Box>
+
+            <Box m={3}>
+
+              <FormLabel>I am comfortable with (choose all that apply):</FormLabel>
+              <FormGroup>
+                {typesOfDeliveryState.map(delivery =>
+                  <FormControlLabel
+                    control={
+                      <Checkbox checked={delivery.selected} onChange={() => handleDeliverySelect(delivery.name)} name={delivery.name} />
+                    }
+                    label={delivery.name}
+                    key={delivery.name}
+                  />
+                )}
+              </FormGroup>
+            </Box>
 
             {/* This button here is used to test if the states in redux store have been updated correctly. Will move it when we apply the local storage */}
-            <Button type='submit'>Save</Button>
+            <Box m={3}>
+              <Button type='submit'>Save</Button>
+            </Box>
           </FormControl>
-          
+
         </form>
         <div>
           <p>{validateError}</p>

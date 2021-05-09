@@ -5,39 +5,36 @@ import NextDocument, {
   Main,
   NextScript,
 } from 'next/document';
-import React from 'react';
-import { ServerStyleSheet } from 'styled-components';
+import React, { ReactNodeArray } from 'react';
+import { ServerStyleSheets } from '@material-ui/styles'; // works with @material-ui/core/styles, if you prefer to use it.
+
 
 export default class Document extends NextDocument {
   static async getInitialProps(
     ctx: DocumentContext,
   ): Promise<{
-    styles: JSX.Element;
+    styles: ReactNodeArray,
     html: string;
     head?: (JSX.Element | null)[] | undefined;
   }> {
-    const sheet = new ServerStyleSheet();
+    const sheets = new ServerStyleSheets();
     const originalRenderPage = ctx.renderPage;
 
     try {
       ctx.renderPage = () =>
         originalRenderPage({
           enhanceApp: (App) => (props) =>
-            sheet.collectStyles(<App {...props} />),
+            sheets.collect(<App {...props} />),
         });
 
       const initialProps = await NextDocument.getInitialProps(ctx);
       return {
         ...initialProps,
-        styles: (
-          <>
-            {initialProps.styles}
-            {sheet.getStyleElement()}
-          </>
-        ),
+        // Styles fragment is rendered after the app and page rendering finish.
+        styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
       };
     } finally {
-      sheet.seal();
+      // sheets.seal();
     }
   }
 

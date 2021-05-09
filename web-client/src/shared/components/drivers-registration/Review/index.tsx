@@ -8,7 +8,7 @@ import { COMMUNITYNAME, TIMES, DELIVERTYPES } from '../../../redux/driversRegist
 import { policeRecordsCheckOptionsLabel, drivingAbstractOptionsLabel, LicenseAndVehicleLabel } from '../PreScreenRequirements/label';
 import { agreementLabel } from '../Agreement/index';
 
-import { Typography, TextField, FormControlLabel, Checkbox } from '@material-ui/core';
+import { Typography, TextField, FormControlLabel, Checkbox, Box } from '@material-ui/core';
 
 const ReviewSection = (): React.ReactElement => {
 
@@ -18,13 +18,13 @@ const ReviewSection = (): React.ReactElement => {
   const { communities, availableDates, typesOfDelivery } = useSelector(
     (state: RootState) => state.driversRegistration.yourNeeds
   );
-  const { policeRecordsCheckOptions, 
-          policeRecordsCheckDate, 
-          policeRecordsCheckType, 
-          drivingAbstractOptions, 
-          drivingAbstractDate, 
-          LicenseAndVehicle, 
-          LicenseClasses } = useSelector((state: RootState) => state.driversRegistration.preScreen);
+  const { policeRecordsCheckOptions,
+    policeRecordsCheckDate,
+    policeRecordsCheckType,
+    drivingAbstractOptions,
+    drivingAbstractDate,
+    LicenseAndVehicle,
+    LicenseClasses } = useSelector((state: RootState) => state.driversRegistration.preScreen);
 
   const { agreementOptions, signiture } = useSelector((state: RootState) => state.driversRegistration.agreement);
 
@@ -32,7 +32,7 @@ const ReviewSection = (): React.ReactElement => {
   const licenses = Object.keys(LicenseAndVehicle) as licenseAndVehicle[];
   const agreements = Object.keys(agreementOptions) as agreement[];
 
-  const availableDatesAndTimes = TIMES.map( time => ({
+  const availableDatesAndTimes = TIMES.map(time => ({
     time: time,
     Sunday: availableDates.find(ele => ele.date === 'Sunday')?.availableTimes?.includes(time),
     Monday: availableDates.find(ele => ele.date === 'Monday')?.availableTimes?.includes(time),
@@ -63,7 +63,7 @@ const ReviewSection = (): React.ReactElement => {
     <div>
       <Typography>Please confirm all the following information is correct</Typography>
 
-      <div>
+      <Box m={3}>
         <Typography variant='h5'>Personal Info</Typography>
         <div>
           <TextField disabled id="firstName" label="First Name" defaultValue={firstName} />
@@ -74,28 +74,28 @@ const ReviewSection = (): React.ReactElement => {
 
         <div>
           <Typography>Language Spoken</Typography>
-          { languages.map((language) => {
-            if ( languagesSpoken[language] === true) {
+          {languages.map((language) => {
+            if (languagesSpoken[language] === true) {
               return <FormControlLabel disabled control={<Checkbox checked name={language} />} label={language[0] + language.slice(1)} key={language} />
             } else {
               return <FormControlLabel disabled control={<Checkbox name={language} />} label={language[0] + language.slice(1)} key={language} />
             }
           })}
 
-          { languagesSpoken.other? 
-            <TextField disabled id="other language" defaultValue={languageOther} /> 
-            : 
+          {languagesSpoken.other ?
+            <TextField disabled id="other language" defaultValue={languageOther} />
+            :
             null
           }
         </div>
-      </div>
+      </Box>
 
-      <div>
+      <Box m={3}>
         <Typography variant='h5'>Your Needs</Typography>
 
         <div>
           <Typography>I want to deliver in these communities:</Typography>
-          { COMMUNITYNAME.map(community => {
+          {COMMUNITYNAME.map(community => {
             if (communities.includes(community)) {
               return <FormControlLabel disabled control={<Checkbox checked name={community} />} label={community} key={community} />
             } else {
@@ -111,7 +111,7 @@ const ReviewSection = (): React.ReactElement => {
 
         <div>
           <Typography>I am comfortable with (choose all that apply):</Typography>
-          { DELIVERTYPES.map(type => {
+          {DELIVERTYPES.map(type => {
             if (typesOfDelivery.includes(type)) {
               return <FormControlLabel disabled control={<Checkbox checked name={type} />} label={type} key={type} />
             } else {
@@ -119,14 +119,14 @@ const ReviewSection = (): React.ReactElement => {
             }
           })}
         </div>
-      </div>
+      </Box>
 
-      <div>
+      <Box m={3}>
         <Typography variant='h5'>Pre-Screen Requirements</Typography>
 
         <div>
           <Typography>Police Records Check Requirements (choose all that apply)</Typography>
-          { policeRecordsCheckOptionsLabel.map(check => {
+          {policeRecordsCheckOptionsLabel.map(check => {
             if (check === policeRecordsCheckOptions) {
               return <FormControlLabel disabled control={<Checkbox checked name={check} />} label={check} key={check} />
             } else {
@@ -140,10 +140,10 @@ const ReviewSection = (): React.ReactElement => {
           <TextField id="date" type="date" defaultValue={policeRecordsCheckDate} disabled />
           <TextField id="police records check type" defaultValue={policeRecordsCheckType} disabled />
         </div>
-        
+
         <div>
           <Typography>Driving Abstract Requirements (choose all that apply) </Typography>
-          { drivingAbstractOptionsLabel.map(requirement => {
+          {drivingAbstractOptionsLabel.map(requirement => {
             if (requirement === drivingAbstractOptions) {
               return <FormControlLabel disabled control={<Checkbox checked name={requirement} />} label={requirement} key={requirement} />
             } else {
@@ -159,7 +159,7 @@ const ReviewSection = (): React.ReactElement => {
 
         <div>
           <Typography>Vehicle/License Requirements (choose all that apply)</Typography>
-          { checkedLicenseAndVehicles.map(license => {
+          {checkedLicenseAndVehicles.map(license => {
             if (license.checked) {
               return <FormControlLabel disabled control={<Checkbox checked name={license.label} />} label={license.label} key={license.label} />
             } else {
@@ -172,13 +172,13 @@ const ReviewSection = (): React.ReactElement => {
             <TextField id="license class" defaultValue={LicenseClasses} disabled />
           </div>
         </div>
-      </div>
+      </Box>
 
-      <div>
+      <Box m={3}>
         <Typography variant='h5'>Agreements</Typography>
         <div>
           <Typography>Please confirm the following:</Typography>
-          { checkedAgreements.map(agreement => {
+          {checkedAgreements.map(agreement => {
             if (agreement.checked) {
               return <FormControlLabel disabled control={<Checkbox checked name={agreement.name} />} label={agreement.label} key={agreement.name} />
             } else {
@@ -188,7 +188,7 @@ const ReviewSection = (): React.ReactElement => {
         </div>
 
         <TextField id="signiture" label='signature' defaultValue={signiture} disabled />
-      </div>
+      </Box>
 
     </div>
   );
